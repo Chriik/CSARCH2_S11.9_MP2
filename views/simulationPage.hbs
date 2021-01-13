@@ -17,29 +17,202 @@
 </head>
 
 <body>
-   <section class="Form">
-       <div class="container">
-           <div class="row">
-               <div class="col-lg-5">
-                   <form>
-                       <div class="form-row">
-                           <div class="col-lg-5">
-                               <input type="email" placeholder="Email" class="form-control">
-                           </div>
-                       </div>
-                   </form>
-               </div>
-               <div class="col-lg-7">
-                    <form>
-                        <div class="form-row">
-                            <div class="col-lg-7">
-                                <input type="password" placeholder="Password" class="form-control">
-                            </div>
-                        </div>
-                    </form>
-               </div>
-           </div>
-       </div>
-    </section>
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #3F51B5;">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <a class="navbar-brand" href="#">CacheMe</a>
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Simpleton</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Sequential</a>
+          </li>
+        </ul>
+      </div>
+    </div>  
+  </nav>
+  <div class="container-fluid h-100">
+    <div class="row h-100" style="background-color: green;">
+      <div class="col-md-5 align-items-center justify-content-center" style="background-color: red;">
+        <div class="form-row justify-content-center align-items-center">
+          <div class="form-group col-4">
+              <label for="formGroup1">Word size</label>
+              <input type="number" class="form-control form-control-sm">
+          </div>
+          <div class="form-group col-4">
+              <label for="formGroup1">Unit</label>
+              <input class="form-control form-control-sm" id="disabledInput" type="text" placeholder="bits" disabled>
+          </div>
+        </div>
+        <div class="form-row justify-content-center align-items-center">
+          <div class="form-group col-4">
+              <label for="formGroup1">Block size</label>
+              <input type="number" class="form-control form-control-sm">
+          </div>
+          <div class="form-group col-4">
+              <label for="formGroup1">Unit</label>
+              <input class="form-control form-control-sm" id="disabledInput" type="text" placeholder="words" disabled>
+          </div>
+        </div>
+        <div class="form-row justify-content-center align-items-center">
+          <div class="form-group col-4">
+              <label for="formGroup1">Set size</label>
+              <input type="number" class="form-control form-control-sm">
+          </div>
+          <div class="form-group col-4">
+              <label for="formGroup1">Unit</label>
+              <input class="form-control form-control-sm" id="disabledInput" type="text" placeholder="blocks" disabled>
+          </div>
+        </div>
+      
+        <div class="form-row justify-content-center align-items-center">
+          <div class="form-group col-4">
+              <label for="formGroup1">Cache size</label>
+              <input type="number" class="form-control form-control-sm">
+          </div>
+          <div class="form-group col-4">
+              <label for="formGroup1">Unit</label>
+              <select id="disabledSelect" class="form-control form-control-sm">
+                  <option>blocks</option>
+                  <option>words</option>
+              </select>
+          </div>
+        </div>
+    
+        <div class="form-row justify-content-center align-items-center">
+          <div class="form-group col-4">
+              <label for="formGroup1">Memory size</label>
+              <input type="number" class="form-control form-control-sm">
+          </div>
+          <div class="form-group col-4">
+              <label for="formGroup1">Unit</label>
+              <select id="disabledSelect" class="form-control form-control-sm">
+                  <option>blocks</option>
+                  <option>words</option>
+              </select>
+          </div>
+        </div>
+
+        <div class="form-row justify-content-center align-items-center">
+          <div class="form-group col-4">
+              <label for="formGroup1">System</label>
+              <select id="disabledSelect" class="form-control form-control-sm">
+                  <option>Decimal</option>
+                  <option>Hexadecimal</option>
+              </select>
+          </div>
+          <div class="form-group col-4">
+              <label for="formGroup1">Input type</label>
+              <select id="disabledSelect" class="form-control form-control-sm">
+                  <option>blocks</option>
+                  <option>addresses</option>
+              </select>
+          </div>
+        </div>
+        
+        <div class="form-row justify-content-center align-items-center">
+          <div class="form-group col-8">
+              <label for="exampleFormControlTextarea1">Query sequence</label>
+              <textarea class="form-control form-control-sm" id="exampleFormControlTextarea1" rows="3"></textarea>
+          </div>
+        </div>
+
+        <div class="form-row justify-content-center align-items-center">
+          <button type="button" class="btn btn-primary">Primary</button>
+        </div>
+      </div>
+      <div class="col-7 align-items-center justify-content-center" style="background-color: blue;">
+        
+        <div class="row align-items-center justify-content-center">
+          <div class="col-9">
+            <div class="card">
+              <div class="card-header">Cache results</div>
+              <div class="card-body">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th scope="col">Set</th>
+                      <th colspan="3"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">0</th>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">1</th>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">2</th>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">3</th>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="row card-footer text-muted">
+                <div class="form-group col-4">
+                  <label for="formGroup1">Cache misses</label>
+                  <input type="number" class="form-control form-control-sm">
+                </div>
+                <div class="form-group col-4">
+                  <label for="formGroup1">Cache hits</label>
+                  <input type="number" class="form-control form-control-sm">
+                </div>
+                <div class="form-group col-4">
+                  <label for="formGroup1">Total queries</label>
+                  <input type="number" class="form-control form-control-sm">
+                </div>
+              </div>
+              <div class="row card-footer text-muted">
+                <div class="form-group col-4">
+                  <label for="formGroup1">Miss penalty</label>
+                  <input type="number" class="form-control form-control-sm">
+                </div>
+                <div class="form-group col-4">
+                  <label for="formGroup1">Average access time</label>
+                  <input type="number" class="form-control form-control-sm">
+                </div>
+                <div class="form-group col-4">
+                  <label for="formGroup1">Total access time</label>
+                  <input type="number" class="form-control form-control-sm">
+                </div>
+              </div>
+              
+            </div>
+            <div class="form-row justify-content-center align-items-center">
+              <button type="button" class="btn btn-primary">Primary</button>
+            </div>
+          </div>
+          
+        </div>
+        
+        
+      </div> <!--RIGHT PANEL-->
+      
+      
+    </div> <!-- MAIN ROW -->
+
+
+      
+  </div> <!-- MAIN CONTAINER-->
+
 </body>
 </html>
