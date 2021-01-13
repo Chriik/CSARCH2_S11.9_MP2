@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" style="height:100%;">
 
 <head>
     <meta charset="utf-8">
@@ -16,7 +16,7 @@
     <title>BSA MRU</title>
 </head>
 
-<body>
+<body style="height:100%;">
   <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #3F51B5;">
     <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,47 +36,47 @@
     </div>  
   </nav>
   <div class="container-fluid h-100">
-    <div class="row h-100" style="background-color: green;">
-      <div class="col-md-5 align-items-center justify-content-center pt-5" style="background-color: red;">
+    <div class="row h-100">
+      <div class="col-5 align-items-center justify-content-center pt-5">
         <div class="form-row justify-content-center align-items-center">
           <div class="form-group col-4">
-              <label for="formGroup1">Word size</label>
+              <label for="wordSize">Word size</label>
               <input type="number" class="form-control form-control-sm">
           </div>
           <div class="form-group col-4">
-              <label for="formGroup1">Unit</label>
+              <label for="wordSizeUnit">Unit</label>
               <input class="form-control form-control-sm" id="disabledInput" type="text" placeholder="bits" disabled>
           </div>
         </div>
         <div class="form-row justify-content-center align-items-center">
           <div class="form-group col-4">
-              <label for="formGroup1">Block size</label>
+              <label for="blockSize">Block size</label>
               <input type="number" class="form-control form-control-sm">
           </div>
           <div class="form-group col-4">
-              <label for="formGroup1">Unit</label>
+              <label for="blockSizeUnit">Unit</label>
               <input class="form-control form-control-sm" id="disabledInput" type="text" placeholder="words" disabled>
           </div>
         </div>
         <div class="form-row justify-content-center align-items-center">
           <div class="form-group col-4">
-              <label for="formGroup1">Set size</label>
+              <label for="setSize">Set size</label>
               <input type="number" class="form-control form-control-sm">
           </div>
           <div class="form-group col-4">
-              <label for="formGroup1">Unit</label>
+              <label for="setSizeUnit">Unit</label>
               <input class="form-control form-control-sm" id="disabledInput" type="text" placeholder="blocks" disabled>
           </div>
         </div>
       
         <div class="form-row justify-content-center align-items-center">
           <div class="form-group col-4">
-              <label for="formGroup1">Cache size</label>
+              <label for="cacheSize">Cache size</label>
               <input type="number" class="form-control form-control-sm">
           </div>
           <div class="form-group col-4">
-              <label for="formGroup1">Unit</label>
-              <select id="disabledSelect" class="form-control form-control-sm">
+              <label for="cacheSizeUnit">Unit</label>
+              <select id="cacheSizeUnitSelect" class="form-control form-control-sm">
                   <option>blocks</option>
                   <option>words</option>
               </select>
@@ -85,12 +85,12 @@
     
         <div class="form-row justify-content-center align-items-center">
           <div class="form-group col-4">
-              <label for="formGroup1">Memory size</label>
+              <label for="memorySizeUnit">Memory size</label>
               <input type="number" class="form-control form-control-sm">
           </div>
           <div class="form-group col-4">
               <label for="formGroup1">Unit</label>
-              <select id="disabledSelect" class="form-control form-control-sm">
+              <select id="memorySizeUnitSelect" class="form-control form-control-sm">
                   <option>blocks</option>
                   <option>words</option>
               </select>
@@ -125,7 +125,7 @@
           <button type="button" class="btn btn-primary">Primary</button>
         </div>
       </div>
-      <div class="col-7 align-items-center justify-content-center" style="background-color: blue;">
+      <div class="col-7 align-items-center justify-content-center pt-5" style="background-color: #fafafa;">
         
         <div class="row align-items-center justify-content-center">
           <div class="col-9">
@@ -197,9 +197,7 @@
               </div>
               
             </div>
-            <div class="form-row justify-content-center align-items-center">
-              <button type="button" class="btn btn-primary">Primary</button>
-            </div>
+            
           </div>
           
         </div>
