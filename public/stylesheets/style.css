@@ -71,3 +71,7 @@ body, .modal-footer {
   color: #3F51B5;
   border-color: #3F51B5;
 }
+
+.modal-header, .modal-footer {
+	border: none; 
+}
