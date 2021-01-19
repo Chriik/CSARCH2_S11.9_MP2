@@ -1,0 +1,77 @@
+@charset "UTF-8";
+/* CSS Document */
+.dark-primary-color    { background: #303F9F; }
+.default-primary-color { background: #3F51B5; }
+.accent-color          { background: #FF9800; }
+
+body, .modal-footer {
+	font-family: 'Nunito', sans-serif;
+	font-weight: 400;
+}
+
+#nav-link-user-guide {
+	color: #303F9F!important;
+}
+
+#navbar-brand-cache, #jumbotron-text-highlight {
+	color: #FF9800;
+	font-weight: 700;
+}
+
+#navbar-brand-me {
+	color: #303F9F;
+	font-weight: 800;
+}
+
+.dropdown:hover>.dropdown-menu {
+  display: block;
+}
+
+.jumbotron {
+	background-color: transparent;
+}
+
+.display-4 {
+	font-weight: 800;
+}
+
+.btn {
+	border-radius: 10px;
+}
+.btn-primary {
+	background-color: #3F51B5;
+	border: none;
+	
+}
+
+.btn-primary:hover {
+	background-color: #303F9F;
+	border: none;
+	text-decoration: none!important;
+}
+
+.btn-secondary {
+	color: #3F51B5;
+}
+
+.btn-secondary:hover, a:hover {
+	color: #303F9F;
+	text-decoration: underline!important;
+}
+
+.btn-secondary,.btn-secondary:hover {
+	background-color: transparent;
+    border-color: transparent;
+	font-weight: 700;
+}
+
+
+	
+.btn-outline-secondary {
+  color: #3F51B5;
+  border-color: #3F51B5;
+}
+
+.form-check-inline {
+	margin: 10px;
+}

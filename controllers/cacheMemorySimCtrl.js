@@ -1,5 +1,5 @@
 const cacheMemorySimCtrl = {
-    viewSimulationPage: (req, res) => res.render('simulationPage'),
+    viewHomePage: (req, res) => res.render('HomePage'),
 };
 
 module.exports = cacheMemorySimCtrl;
