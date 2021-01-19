@@ -62,16 +62,12 @@ body, .modal-footer {
 .btn-secondary,.btn-secondary:hover {
 	background-color: transparent;
     border-color: transparent;
-	font-weight: 700;
 }
 
-
-	
+#jumbotron-btn {
+	font-weight: 700;
+}
 .btn-outline-secondary {
   color: #3F51B5;
   border-color: #3F51B5;
-}
-
-.form-check-inline {
-	margin: 10px;
 }
