@@ -4,9 +4,10 @@
 .default-primary-color { background: #3F51B5; }
 .accent-color          { background: #FF9800; }
 
-body, .modal-footer {
+body, .modal-footer, .display-4 {
 	font-family: 'Nunito', sans-serif;
 	font-weight: 400;
+	color: #212121; 
 }
 
 #nav-link-user-guide {
