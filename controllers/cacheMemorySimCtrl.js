@@ -36,7 +36,7 @@ const cacheMemorySimCtrl = {
             cacheSize = cacheSize / blockSize; 
         }
 
-        if (memorySizeUnit === 'block') {
+        if (memorySizeUnit === 'words') {
             memorySize = memorySize / blockSize;
         }
 
@@ -105,12 +105,21 @@ const cacheMemorySimCtrl = {
             }
         }
 
-        //let missPenalty = cacheAccessTime + memoryAccessTime * ? + cacheAccessTime;
-       
+        let total = cacheHit + cacheMiss;
+        let hitRate = cacheHit / total,
+            missRate = cacheMiss / total;
 
+        let missPenalty = cacheAccessTime + memoryAccessTime * blockSize + cacheAccessTime,
+            totalAccessTime = cacheHit * blockSize * cacheAccessTime + cacheMiss * blockSize * memoryAccessTime + cacheMiss * cacheAccessTime;
+
+        let aveAccessTime = hitRate * cacheAccessTime + missRate * missPenalty;
+       
         console.log(cacheMemory);
         console.log(cacheHit);
         console.log(cacheMiss);
+        console.log(missPenalty);
+        console.log(totalAccessTime);
+        console.log(aveAccessTime);
 
     },
 };
