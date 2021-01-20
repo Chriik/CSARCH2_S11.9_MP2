@@ -1,7 +1,12 @@
+const fs = require('fs');
+
 const { makeCache } = require('../modules/cacheFunc');
 
 const cacheAccessTime = 1;
 const memoryAccessTime = 10;
+
+// For outputing in text file
+let total, hitRate, missRate, missPenalty, totalAccessTime, aveAccessTime;
 
 const cacheMemorySimCtrl = {
     viewHomePage: (req, res) => res.render('HomePage'),
@@ -22,7 +27,7 @@ const cacheMemorySimCtrl = {
             cacheSizeUnit = 'block',  // block or words
             memorySize = 128,
             memorySizeUnit = 'block', // block or words
-            system = 'decimal',         // hexa or decimal
+            // system = 'decimal',         // hexa or decimal
             systemInput = 'blocks',    // blocks or addresses 
             firstUpper = 1   
             firstLower = 1,
@@ -30,6 +35,8 @@ const cacheMemorySimCtrl = {
             secondUpper = 67,
             secondLower = 0,
             secondTime = 10;
+
+        // TODO: first round of error checking (check if divisible by 2) (or check nlng using express validator)
 
         //converting et al
         if (cacheSizeUnit === 'words') {
@@ -40,17 +47,23 @@ const cacheMemorySimCtrl = {
             memorySize = memorySize / blockSize;
         }
 
+        // if addresses convert, else blocks mean remain the same
         if (systemInput === 'addresses') {
-            if (system === 'decimal') {
+            // convert first loop
+            let numberOfBlocks = (firstUpper - firstLower + 1)/blockSize; // number of blocks to ACCESS
 
-            } else if (system === 'hexadecimal') {
+            // update values
+            firstUpper = firstLower + numberOfBlocks - 1;
 
-            }
+            // convert second loop
+            numberOfBlocks = (secondUpper - secondLower + 1)/blockSize;
 
+            // update values
+            secondUpper = secondLower + numberOfBlocks - 1;
         }
-
-
-        // Error Trap + add also cacheSize >= setSize
+        
+        
+        // TODO: Error Trap + add also cacheSize >= setSize
         /**
          * Error checking:
             the "simulation input" should be within the MM memory size. Meaning if MM has 128 blocks. But input mention block 130. Then, error trap/check.
@@ -105,14 +118,14 @@ const cacheMemorySimCtrl = {
             }
         }
 
-        let total = cacheHit + cacheMiss;
-        let hitRate = cacheHit / total,
-            missRate = cacheMiss / total;
+        total = cacheHit + cacheMiss;
+        hitRate = cacheHit / total;
+        missRate = cacheMiss / total;
 
-        let missPenalty = cacheAccessTime + memoryAccessTime * blockSize + cacheAccessTime,
-            totalAccessTime = cacheHit * blockSize * cacheAccessTime + cacheMiss * blockSize * memoryAccessTime + cacheMiss * cacheAccessTime;
+        missPenalty = cacheAccessTime + memoryAccessTime * blockSize + cacheAccessTime;
+        totalAccessTime = cacheHit * blockSize * cacheAccessTime + cacheMiss * blockSize * memoryAccessTime + cacheMiss * cacheAccessTime;
 
-        let aveAccessTime = hitRate * cacheAccessTime + missRate * missPenalty;
+        aveAccessTime = hitRate * cacheAccessTime + missRate * missPenalty;
        
         console.log(cacheMemory);
         console.log(cacheHit);
@@ -120,6 +133,15 @@ const cacheMemorySimCtrl = {
         console.log(missPenalty);
         console.log(totalAccessTime);
         console.log(aveAccessTime);
+
+        // TODO: output text
+        // var fs = require('fs');
+        // var stream = fs.createWriteStream("my_file.txt");
+        //     stream.once('open', function(fd) {
+        //     stream.write("My first row\n");
+        //     stream.write("My second row\n");
+        //     stream.end();
+        // });
 
     },
 };
