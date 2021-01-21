@@ -6,10 +6,14 @@ const cacheAccessTime = 1;
 const memoryAccessTime = 10;
 
 // For outputing in text file
-let total, hitRate, missRate, missPenalty, totalAccessTime, aveAccessTime;
+let total, cacheMiss, cacheHit, missPenalty, totalAccessTime, aveAccessTime;
 
 const cacheMemorySimCtrl = {
     viewHomePage: (req, res) => res.render('HomePage'),
+
+    viewSimpletonPage: (req, res) => res.render('SingletonPage'),
+
+    viewSequentialPage: (req, res) => res.render('SequentialPage'),
 
     /**
      * Letter B 
@@ -77,8 +81,8 @@ const cacheMemorySimCtrl = {
         var cacheMemory = makeCache(numSets);
 
         // outputs
-        let cacheHit = 0,
-            cacheMiss = 0;
+        cacheHit = 0;
+        cacheMiss = 0;
 
         // first loop
         for (j=0; j<firstTime; j++){
@@ -119,8 +123,9 @@ const cacheMemorySimCtrl = {
         }
 
         total = cacheHit + cacheMiss;
-        hitRate = cacheHit / total;
-        missRate = cacheMiss / total;
+
+        let hitRate = cacheHit / total,
+            missRate = cacheMiss / total;
 
         missPenalty = cacheAccessTime + memoryAccessTime * blockSize + cacheAccessTime;
         totalAccessTime = cacheHit * blockSize * cacheAccessTime + cacheMiss * blockSize * memoryAccessTime + cacheMiss * cacheAccessTime;
