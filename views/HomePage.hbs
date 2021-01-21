@@ -20,7 +20,7 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg"> <a class="navbar-brand" href="#"><span id="navbar-brand-cache">CACHE</span><span id="navbar-brand-me">ME</span></a>
+<nav class="navbar navbar-expand-lg"> <a class="navbar-brand" href="/"><span id="navbar-brand-cache">CACHE</span><span id="navbar-brand-me">ME</span></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
@@ -28,7 +28,7 @@
     <ul class="nav navbar-nav navbar-right">
       <a class="nav-link px-4" id="nav-link-user-guide" href="#">User guide</a>
       <li class="nav-item dropdown"> <a class="nav-link btn btn-primary dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Simulate </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown"> <a class="dropdown-item" href="#">Simpleton</a> <a class="dropdown-item" href="#">Sequential</a> </div>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown"> <a class="dropdown-item" href="/simpleton">Simpleton</a> <a class="dropdown-item" href="/sequential">Sequential</a> </div>
       </li>
     </ul>
   </div>
@@ -49,18 +49,18 @@
 		<div class="modal-body">
           <div class="form-check text-left"> 
             <label>
-              <input type="radio" name="RadioGroup1" value="radio" id="RadioGroup1_0">
-              Singleton</label>
+              <input type="radio" name="choiceRadio" value="simpleton" id="Simpleton">
+              Simpleton</label>
             <br>
             <label>
-              <input type="radio" name="RadioGroup1" value="radio" id="RadioGroup1_1">
+              <input type="radio" name="choiceRadio" value="sequential" id="Sequential">
               Sequential</label>
             <br>
           </div>
         </div>
         <div class="modal-footer"> 
 			<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        	<button type="button" class="btn btn-primary">Start</button>
+        	<button type="button" class="btn btn-primary" id="startButton">Start</button>
       	</div>
       </div>
     </div>
@@ -74,6 +74,7 @@
 </div>
 {{!-FIXME: to be deleted in the future}}
 <script type="text/javascript" src="/javascripts/cacheSimulation.js"></script>
+<script type="text/javascript" src="/javascripts/connectPage.js"></script>
 {{!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> --}}
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>

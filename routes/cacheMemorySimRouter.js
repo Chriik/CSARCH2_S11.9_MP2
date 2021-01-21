@@ -3,9 +3,9 @@ const router = express();
 const ctrl = require('../controllers/cacheMemorySimCtrl');
 
 router.get('/', ctrl.viewHomePage);
-router.post('/TwoLoops', ctrl.postTwoLoops);
+router.get('/sequential', ctrl.viewSequentialPage);
+router.get('/simpleton', ctrl.viewSimpletonPage);
 
-// For easy viewing of sequential page (delete if u want)
-router.get('/sequential', (req, res) => res.render('SequentialPage'));
+router.post('/TwoLoops', ctrl.postTwoLoops);
 
 module.exports = router;
