@@ -8,6 +8,10 @@ const cacheFunc = {
             };
         }
         return cache;
+    },
+
+    checkDivisibleBy2: (number) => {
+        return number % 2 === 0;
     }
 };
 

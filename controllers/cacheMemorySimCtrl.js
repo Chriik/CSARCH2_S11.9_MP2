@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 
 const { makeCache } = require('../modules/cacheFunc');
 
@@ -41,6 +42,7 @@ const cacheMemorySimCtrl = {
             secondTime = 10;
 
         // TODO: first round of error checking (check if divisible by 2) (or check nlng using express validator)
+        // TODO: check also if firstUpper > firstLower
 
         //converting et al
         if (cacheSizeUnit === 'words') {
@@ -66,16 +68,17 @@ const cacheMemorySimCtrl = {
             secondUpper = secondLower + numberOfBlocks - 1;
         }
         
-        
-        // TODO: Error Trap + add also cacheSize >= setSize
-        /**
-         * Error checking:
-            the "simulation input" should be within the MM memory size. Meaning if MM has 128 blocks. But input mention block 130. Then, error trap/check.
-         */
-        
-        //For block and memory
+        // error checking
+        if (setSize > cacheSize) {
+            console.log('error');
+            // render error message
+        }
 
-
+        if (firstUpper > memorySize || firstLower > memorySize || secondUpper > memorySize || secondLower > memorySize) {
+            console.log('error');
+            // render error message
+        }
+        
         // init array
         let numSets = cacheSize / setSize; 
         var cacheMemory = makeCache(numSets);
@@ -139,15 +142,31 @@ const cacheMemorySimCtrl = {
         console.log(totalAccessTime);
         console.log(aveAccessTime);
 
-        // TODO: output text
-        // var fs = require('fs');
-        // var stream = fs.createWriteStream("my_file.txt");
-        //     stream.once('open', function(fd) {
-        //     stream.write("My first row\n");
-        //     stream.write("My second row\n");
-        //     stream.end();
-        // });
+        // output text file TODO: add res.download if there is a link already
+        let filepath = path.join(__dirname, '../outputs', 'output_result.txt');
 
+        // converting cache to string
+        let tempCache = cacheMemory;
+
+        let lengths = tempCache.map(item => item.cache);
+        
+        tempCache = '';
+        for (i=0; i<numSets; i++)
+            tempCache += `Set ${i}       ${lengths[i].join(',    ')}\n`;
+
+        let stream = fs.createWriteStream(filepath);
+            stream.once('open', function(fd) {
+                stream.write(`Cache Hits: ${cacheHit}\n`);
+                stream.write(`Cache Misses: ${cacheMiss}\n`);
+                stream.write(`Total Queries: ${total}\n\n`);
+                stream.write(`Miss Penalty: ${missPenalty}\n`);
+                stream.write(`Average Access Time: ${aveAccessTime}\n`);
+                stream.write(`Total Access Time: ${totalAccessTime}\n\n`);
+                stream.write(`Snapshot of Cache Memory:\n`);
+                stream.write(`---------------------------------------------------\n`);
+                stream.write(`${tempCache}`);
+            stream.end();
+        });
     },
 };
 
