@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;1,200;1,300;1,400;1,600;1,700;1,800&family=Roboto:ital,wght@0,100;0,300;1,100;1,300&display=swap" rel="stylesheet">
     <!-- Custom Styles -->
     <link href="/stylesheets/style.css" rel="stylesheet">
     <!-- JQuery --->
@@ -17,149 +20,120 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg"> <a class="navbar-brand" href="/"><span id="navbar-brand-cache">CACHE</span><span id="navbar-brand-me">ME</span></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <a class="nav-link px-4" id="nav-link-user-guide" href="#">User guide</a>
-      <li class="nav-item dropdown"> <a class="nav-link btn btn-primary dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Simulate </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown"> <a class="dropdown-item" href="/simpleton">Simpleton</a> <a class="dropdown-item" href="/sequential">Sequential</a> </div>
-      </li>
-    </ul>
-  </div>
-</nav>
-
+  <nav class="navbar navbar-expand-lg"> <a class="navbar-brand" href="/"><span id="navbar-brand-cache">CACHE</span><span id="navbar-brand-me">ME</span></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <a class="nav-link px-4" id="nav-link-user-guide" href="#">User guide</a>
+        <li class="nav-item dropdown"> <a class="nav-link btn btn-primary dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Simulate </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown"> <a class="dropdown-item" href="/simpleton">Simpleton</a> <a class="dropdown-item" href="/sequential">Sequential</a> </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
 <div class="container-fluid p-3">
-	<h1 class="text-center">Sequential BSA Simulator</h1>
+	<h1 class="text-center">Simpleton BSA Simulator</h1>
     <div class="row pt-4 pb-4">
-      <div class="col-5 align-items-center justify-content-center left">
-        <div class="form-row align-items-center justify-content-center">
-          <div class="form-group col-4">
-              <label for="wordSize">Word size</label>
-              <input type="number" class="form-control form-control-sm">
-          </div>
-          <div class="form-group col-4">
-              <label for="wordSizeUnit">Unit</label>
-              <input class="form-control form-control-sm" type="text" placeholder="bits" disabled>
+      <div class="col-5">
+        <h4>Configuration</h4>
+        <label for="basic-url">Word size</label>
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="" aria-label="Word size" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <span class="input-group-text" id="basic-addon2">bits</span>
           </div>
         </div>
-        <div class="form-row align-items-center justify-content-center">
-          <div class="form-group col-4">
-              <label for="blockSize">Block size</label>
-              <input type="number" class="form-control form-control-sm">
-          </div>
-          <div class="form-group col-4">
-              <label for="blockSizeUnit">Unit</label>
-              <input class="form-control form-control-sm" type="text" placeholder="words" disabled>
+        <label for="basic-url">Block size</label>
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="" aria-label="Block size" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <span class="input-group-text" id="basic-addon2">words</span>
           </div>
         </div>
-        <div class="form-row align-items-center justify-content-center ">
-          <div class="form-group col-4">
-              <label for="setSize">Set size</label>
-              <input type="number" class="form-control form-control-sm">
-          </div>
-          <div class="form-group col-4">
-              <label for="setSizeUnit">Unit</label>
-              <input class="form-control form-control-sm" id="disabledInput" type="text" placeholder="blocks" disabled>
+        <label for="basic-url">Set size</label>
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="" aria-label="Set size" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <span class="input-group-text" id="basic-addon2">blocks</span>
           </div>
         </div>
-      
-        <div class="form-row align-items-center justify-content-center ">
-          <div class="form-group col-4">
-              <label for="cacheSize">Cache size</label>
-              <input type="number" class="form-control form-control-sm">
-          </div>
-          <div class="form-group col-4">
-              <label for="cacheSizeUnit">Unit</label>
-              <select id="cacheSizeUnitSelect" class="form-control form-control-sm">
-                  <option>blocks</option>
-                  <option>words</option>
-              </select>
+        <label for="basic-url">Cache size</label>
+        <div class="input-group">
+          <input type="text" class="form-control" aria-label="Text input with dropdown button">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">blocks</button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">blocks</a>
+              <a class="dropdown-item" href="#">addresses</a>
+            </div>
           </div>
         </div>
-    
-        <div class="form-row align-items-center justify-content-center ">
-          <div class="form-group col-4">
-              <label for="memorySizeUnit">Memory size</label>
-              <input type="number" class="form-control form-control-sm">
-          </div>
-          <div class="form-group col-4">
-              <label for="formGroup1">Unit</label>
-              <select id="memorySizeUnitSelect" class="form-control form-control-sm">
-                  <option>blocks</option>
-                  <option>words</option>
-              </select>
+        <label for="basic-url">Memory size</label>
+        <div class="input-group">
+          <input type="text" class="form-control" aria-label="Text input with dropdown button">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">blocks</button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">blocks</a>
+              <a class="dropdown-item" href="#">addresses</a>
+            </div>
           </div>
         </div>
+        <label for="basic-url">Cache access time</label>
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="" aria-label="Word size" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <span class="input-group-text" id="basic-addon2">ns</span>
+          </div>
+        </div>
+        <label for="basic-url">Memory access time</label>
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="" aria-label="Word size" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <span class="input-group-text" id="basic-addon2">ns</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlSelect1">Input type</label>
+          <select class="form-control" id="exampleFormControlSelect1">
+            <option>blocks</option>
+            <option>addresses</option>
+          </select>
+        </div>
+        <h4>Task A</h4>
+        <label>Range</label>
+        <div class="form-group">
+			    <input type="number" class="form-control">
+        </div>
+        <div class="form-group">
+			    <input type="number" class="form-control">
+        </div>
+        <label>Number of loops</label>
+        <div class="form-group">
+			    <input type="number" class="form-control">
+        </div>
+        <h4>Task B</h4>
+        <label>Range</label>
+        <div class="form-group">
+			    <input type="number" class="form-control">
+        </div>
+        <div class="form-group">
+			    <input type="number" class="form-control">
+        </div>
+        <label>Number of loops</label>
+        <div class="form-group">
+			    <input type="number" class="form-control">
+        </div>
+        <div class="btn-group-justified">
+          <button type="button" class="btn btn-primary">Simulate</button>
+          <button type="button" class="btn btn-outline-secondary">Save to file</button>
+			  </div>
+      </div> <!--END OF LEFT -->
 
-        <div class="form-row align-items-center justify-content-center ">
-          <div class="form-group col-4">
-              <label for="formGroup1">System</label>
-              <select id="disabledSelect" class="form-control form-control-sm">
-                  <option>Decimal</option>
-                  <option>Hexadecimal</option>
-              </select>
-          </div>
-          <div class="form-group col-4">
-              <label for="formGroup1">Input type</label>
-              <select class="form-control form-control-sm">
-                  <option>blocks</option>
-                  <option>addresses</option>
-              </select>
-          </div>
-        </div>
-		  <div class="form-row"> <h6>Task A</h6> </div>
-		
-        <div class="form-row align-items-center justify-content-center ">
-		  
-          <div class="form-group col-4">
-			  
-              <input type="number" class="form-control form-control-sm">
-          </div>
-		  <p>to</p>
-		  <div class="form-group col-4">
-              <input type="number" class="form-control form-control-sm">
-          </div>
-        </div>
-			
-        <div class="form-row align-items-center justify-content-center ">
-          <div class="form-group col-8">
-              <label for="exampleFormControlTextarea1">Query sequence</label>
-              <textarea class="form-control form-control-sm" id="exampleFormControlTextarea1" rows="3"></textarea>
-          </div>
-        </div>
-		<div class="form-row"> <h6>Task B</h6> </div>
-		
-        <div class="form-row align-items-center justify-content-center ">
-		  
-          <div class="form-group col-4">
-			  
-              <input type="number" class="form-control form-control-sm">
-          </div>
-		  <p>to</p>
-		  <div class="form-group col-4">
-              <input type="number" class="form-control form-control-sm">
-          </div>
-        </div>
-			
-        <div class="form-row align-items-center justify-content-center ">
-          <div class="form-group col-8">
-              <label for="exampleFormControlTextarea1">Query sequence</label>
-              <textarea class="form-control form-control-sm" rows="3"></textarea>
-          </div>
-        </div>
-        <div class="form-row align-items-center justify-content-center ">
-			<div class="btn-group-justified">
-				<button type="button" class="btn btn-primary">Simulate</button>
-				<button type="button" class="btn btn-outline-secondary">Save to file</button>
-			</div>
-        </div>
-      </div>
-      <div class="col-7 align-items-center justify-content-center">
-        
-        <div class="row align-items-center justify-content-center">
+      <div class="col-7">
+        <div class="row">
           <div class="col-10">
             <div class="card">
               <div class="card-header">Cache results</div>

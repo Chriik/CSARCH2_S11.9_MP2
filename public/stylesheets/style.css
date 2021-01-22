@@ -4,10 +4,15 @@
 .default-primary-color { background: #3F51B5; }
 .accent-color          { background: #FF9800; }
 
-body, .modal-footer, .display-4 {
+@charset "UTF-8";
+/* CSS Document */
+.dark-primary-color    { background: #303F9F; }
+.default-primary-color { background: #3F51B5; }
+.accent-color          { background: #FF9800; }
+
+body, .modal-footer {
 	font-family: 'Nunito', sans-serif;
 	font-weight: 400;
-	color: #212121; 
 }
 
 #nav-link-user-guide {
@@ -23,6 +28,7 @@ body, .modal-footer, .display-4 {
 	color: #303F9F;
 	font-weight: 800;
 }
+
 
 .dropdown:hover>.dropdown-menu {
   display: block;
@@ -41,13 +47,13 @@ body, .modal-footer, .display-4 {
 }
 .btn-primary {
 	background-color: #3F51B5;
-	border: none;
+	border: none!important;
 	
 }
 
 .btn-primary:hover {
 	background-color: #303F9F;
-	border: none;
+	border: none!important;
 	text-decoration: none!important;
 }
 
@@ -75,4 +81,18 @@ body, .modal-footer, .display-4 {
 
 .modal-header, .modal-footer {
 	border: none; 
+}
+
+.card-footer {
+	border: none;
+}
+
+.card-footer-margin {
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+.left {
+	border-right: solid 2px;
+	border-right-color: #DCDCDC;
 }
