@@ -96,3 +96,7 @@ body, .modal-footer {
 	border-right: solid 2px;
 	border-right-color: #DCDCDC;
 }
+
+.form-control[readonly] {
+	background-color: inherit;
+}
