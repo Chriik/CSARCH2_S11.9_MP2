@@ -2,6 +2,9 @@ $(document).ready(function() {
     // FIXME: to be deleted in the future!
     $.post ('/TwoLoops');
 
+    //Disable "Save to File" Button
+    $('#saveToFileButton').prop('disabled', true);
+
 });
 
 // For adding additional tasks
@@ -48,12 +51,12 @@ $('#simulateButton').on("click", function() {
     // A Task object has attributes: lowerRange, upperRange, loopCount
     let tasks = getArrayOfTasks();
 
-    // TODO include other inputs to send to server
+    // TODO: include other inputs to send to server
     $.post('/', {
             tasks: tasks
 
         }, function(data) {
-
+            console.log("something")
         }
     );
 
@@ -76,6 +79,29 @@ function getArrayOfTasks () {
     }
     return tasks;
 }
+
+// For clearing all inputs (RESET)
+$('#resetButton').on("click", function () {
+    // Reset input type dropdown
+    let options = $('#inputType option').map(function() { return this.value; }).get();
+    $('#inputType').val(options[0]);
+
+    $('#wordSize').val('');
+    $('#blockSize').val('');
+    $('#setSize').val('');
+    $('#cacheSize').val('');
+    $('#cacheTime').val('');
+    $('#memorySize').val('');
+    $('#memoryTime').val('');
+
+    // Clear all Task inputs
+    $('.lower-range').each(function () { this.value = ''; });
+    $('.upper-range').each(function () { this.value = ''; });
+    $('.loop-count').each(function () { this.value = ''; });
+
+    // TODO: reset dropdown for cache size and memory size
+
+});
 
 
 
