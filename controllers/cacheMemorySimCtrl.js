@@ -34,7 +34,7 @@ const cacheMemorySimCtrl = {
             memorySizeUnit = 'block', // block or words
             // system = 'decimal',         // hexa or decimal
             systemInput = 'blocks',    // blocks or addresses 
-            firstUpper = 1   
+            firstUpper = 1,
             firstLower = 1,
             firstTime = 10,
             secondUpper = 67,
@@ -155,7 +155,7 @@ const cacheMemorySimCtrl = {
             tempCache += `Set ${i}       ${lengths[i].join(',    ')}\n`;
 
         let stream = fs.createWriteStream(filepath);
-            stream.once('open', function(fd) {
+        stream.once('open', function(fd) {
                 stream.write(`Cache Hits: ${cacheHit}\n`);
                 stream.write(`Cache Misses: ${cacheMiss}\n`);
                 stream.write(`Total Queries: ${total}\n\n`);
@@ -165,8 +165,18 @@ const cacheMemorySimCtrl = {
                 stream.write(`Snapshot of Cache Memory:\n`);
                 stream.write(`---------------------------------------------------\n`);
                 stream.write(`${tempCache}`);
-            stream.end();
+                stream.end();
         });
+
+        res.send({
+            cacheMemory: cacheMemory,
+            cacheHit: cacheHit,
+            cacheMiss: cacheMiss,
+            missPenalty: missPenalty,
+            totalAccessTime: totalAccessTime,
+            aveAccessTime: aveAccessTime
+        });
+
     },
 };
 

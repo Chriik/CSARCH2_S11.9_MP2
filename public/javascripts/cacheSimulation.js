@@ -48,15 +48,45 @@ $('#removeTaskButton').on("click", function() {
 // AJAX post
 $('#simulateButton').on("click", function() {
 
+    // Get all inputs
     // A Task object has attributes: lowerRange, upperRange, loopCount
     let tasks = getArrayOfTasks();
+    let inputType = $('#inputType').val();
+    let wordSize = $('#wordSize').val();
+    let blockSize = $('#blockSize').val();
+    let setSize = $('#setSize').val();
+    let cacheSize = $('#cacheSize').val();
+    let cacheAccessTime = $('#cacheTime').val();
+    let memorySize = $('#memorySize').val();
+    let memoryAccessTime = $('#memoryTime').val();
+    let cacheSizeDropdown = 'TODO';
+    let memorySizeDropdown = 'TODO';
+
+    // TODO: validate? error trap inputs?
+    // pass
 
     // TODO: include other inputs to send to server
-    $.post('/', {
-            tasks: tasks
+    $.post('/TwoLoops', {
+            tasks: tasks,
+            inputType: inputType,
+            wordSize: wordSize,
+            blockSize: blockSize,
+            setSize: setSize,
+            cacheSize: cacheSize,
+            cacheAccessTime: cacheAccessTime,
+            memorySize: memorySize,
+            memoryAccessTime: memoryAccessTime
 
         }, function(data) {
-            console.log("something")
+            // Show results
+            loadCacheTable(data.cacheMemory)
+            $('#cacheMisses').val(data.cacheMiss);
+            $('#cacheHits').val(data.cacheHit);
+            $('#totalQueries').val(data.cacheHit + data.cacheMiss);
+            $('#missPenalty').val(data.missPenalty);
+            $('#averageTime').val(data.aveAccessTime);
+            $('#totalTime').val(data.totalAccessTime);
+
         }
     );
 
@@ -80,7 +110,7 @@ function getArrayOfTasks () {
     return tasks;
 }
 
-// For clearing all inputs (RESET)
+// For clearing all inputs and outputs (RESET)
 $('#resetButton').on("click", function () {
     // Reset input type dropdown
     let options = $('#inputType option').map(function() { return this.value; }).get();
@@ -99,9 +129,53 @@ $('#resetButton').on("click", function () {
     $('.upper-range').each(function () { this.value = ''; });
     $('.loop-count').each(function () { this.value = ''; });
 
+    // Clear results/cache table
+    $('#cacheTable').remove();
+    $('#cacheMisses').val('');
+    $('#cacheHits').val('');
+    $('#totalQueries').val('');
+    $('#missPenalty').val('');
+    $('#averageTime').val('');
+    $('#totalTime').val('');
+
+    // Show dummy table
+    $('#dummyTable').show();
+
     // TODO: reset dropdown for cache size and memory size
+    // pass
 
 });
+
+// Renders Cache Memory to table
+function loadCacheTable (cacheMemory) {
+    // Hide the Dummy table (for reset purposes!)
+    $('#dummyTable').hide();
+
+    // Create new table showing cache memory
+    let table = $(`<table class="table table-bordered" id="cacheTable">
+                        <thead>
+                            <tr>
+                                <th scope="col">Set</th>
+                                <th colspan="${cacheMemory[0].cache.length}"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                        </tbody>
+                    </table>`
+    );
+
+    for (let i = 0; i < cacheMemory.length; i++) {
+        let row = $(`<tr><th scope="row">${i}</th></tr>`);
+
+        for (let j = 0; j < cacheMemory[0].cache.length; j++) {
+            row.append(`<td>${cacheMemory[i].cache[j]}</td>`);
+        }
+        table.append(row);
+    }
+
+    // Append table to <div> tableHolder
+    $('#tableHolder').append(table);
+}
 
 
 
