@@ -45,6 +45,15 @@
           <option>addresses</option>
         </select>
       </div>
+
+      <label for="querySequence">Query sequence</label>
+      <div class="input-group pb-2">
+          <input type="text" class="form-control is-invalid" id="querySequence" placeholder="Must be separated with spaces" aria-label="querySequence">               
+      </div>
+      <div class="row ml-2 pb-3">
+        <small id="wordError" class="text-danger input-error">Missing input</small>
+      </div>
+
       <label for="wordSize">Word size</label>
       <div class="input-group pb-2">
           <input type="text" class="form-control is-invalid" id="wordSize" aria-label="wordSize">
@@ -57,7 +66,7 @@
         </div>
       
 
-        <label for="blockSize">Block size</label>
+      <label for="blockSize">Block size</label>
         <div class="input-group pb-2">
           <input type="text" class="form-control is-invalid" id="blockSize" aria-label="blockSize">
           <div class="input-group-append">
@@ -82,9 +91,11 @@
 
     <div class="col-6">
       <label for="cacheSize">Cache size</label>
+      
         <div class="input-group pb-2">
           <input type="text" class="form-control is-invalid" id="cacheSize" aria-label="cacheSize">
           <div class="input-group-append">
+            
             <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">blocks</button>
             <div class="dropdown-menu">
               <a class="dropdown-item" href="#">blocks</a>
@@ -227,7 +238,7 @@
       <button class="btn btn-primary btn-lg">Save to file</button>
     </div>
   </div>
-</div> <!-- MAIN CONTAINER-->
+</div> <!-- MAIN -fluid-->
   <script type="text/javascript" src="/javascripts/cacheSimulation.js"></script>
 </body>
 </html>
