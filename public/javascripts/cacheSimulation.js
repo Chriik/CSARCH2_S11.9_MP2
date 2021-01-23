@@ -5,8 +5,8 @@ $(document).ready(function() {
 });
 
 // For adding additional tasks
-$('#addTask').on("click", function() {
-    let currentNumberOfTasks = $('.task-group').length
+$('#addTaskButton').on("click", function() {
+    let currentNumberOfTasks = $('.task-group').length;
     let nextTaskNumber = currentNumberOfTasks + 1;
 
     let taskGroup =
@@ -14,30 +14,68 @@ $('#addTask').on("click", function() {
               <div class="row"><h3>Task ${nextTaskNumber}</h3></div>
               <div class="row">
                   <div class="form-group col-4">
-                      <label for="lowerRange">Lower Range</label>
-                      <input type="number" class="form-control form-control-sm" id="lowerRange">
+                      <label for="lowerRange-${nextTaskNumber}">Lower Range</label>
+                      <input type="number" class="form-control form-control-sm lower-range" id="lowerRange-${nextTaskNumber}">
                   </div>
-    
+
                   <div class="form-group col-4">
-                      <label for="upperRange">Upper Range</label>
-                      <input type="number" class="form-control form-control-sm" id="upperRange">
+                      <label for="upperRange-${nextTaskNumber}">Upper Range</label>
+                      <input type="number" class="form-control form-control-sm upper-range" id="lowerRange-${nextTaskNumber}">
                   </div>
-    
+
                   <div class="form-group col-4">
-                      <label for="loopCount">Loop count</label>
-                      <input type="number" class="form-control form-control-sm" id="loopCount">
+                      <label for="loopCount-${nextTaskNumber}">Loop count</label>
+                      <input type="number" class="form-control form-control-sm loop-count" id="lowerRange-${nextTaskNumber}">
                   </div>
               </div>
          </div>`;
 
-    $('#taskList').append(taskGroup)
+    $('#taskList').append(taskGroup);
 });
 
 // For removing task (removes the last task on the taskList)
-$('#removeTask').on("click", function() {
-    let currentNumberOfTasks = $('.task-group').length
+$('#removeTaskButton').on("click", function() {
+    let currentNumberOfTasks = $('.task-group').length;
 
     if (currentNumberOfTasks > 1) {
         $('.task-group').last().remove();
     }
 });
+
+// AJAX post
+$('#simulateButton').on("click", function() {
+
+    // A Task object has attributes: lowerRange, upperRange, loopCount
+    let tasks = getArrayOfTasks();
+
+    // TODO include other inputs to send to server
+    $.post('/', {
+            tasks: tasks
+
+        }, function(data) {
+
+        }
+    );
+
+});
+
+// Returns array containing Task objects
+function getArrayOfTasks () {
+    let currentNumberOfTasks = $('.task-group').length;
+    let lowerRangeArray = $('.lower-range').map(function() { return this.value; }).get();
+    let upperRangeArray = $('.upper-range').map(function() { return this.value; }).get();
+    let loopCountArray = $('.loop-count').map(function() { return this.value; }).get();
+    let tasks = [];
+
+    for (let i = 0; i < currentNumberOfTasks; i++) {
+        tasks.push({
+            lowerRange: lowerRangeArray[i],
+            upperRange: upperRangeArray[i],
+            loopCount: loopCountArray[i]
+        });
+    }
+    return tasks;
+}
+
+
+
