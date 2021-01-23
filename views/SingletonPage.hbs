@@ -33,182 +33,201 @@
       </ul>
     </div>
   </nav>
+
   <div class="container-fluid p-3 h-100">
-  <div class="row justify-content-center align-items-center h-100"> 
     <h1 class="text-center">Simpleton BSA Simulator</h1>
-    <div class="col-10 h-75">
-      <div class="card">
-        <div class="card-header">Configuration</div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-6">
-              <label for="wordSize">Word size</label>
-              <div class="input-group pb-2">
-                <input type="text" class="form-control" id="wordSize" aria-label="wordSize">
-                <div class="input-group-append">
-                  <span class="input-group-text">bits</span>
-                </div>
-              </div>
+  <div class="row p-5"> 
+    <div class="col-6">
+      <div class="form-group pb-2">
+        <label for="inputType">Input type</label>
+        <select class="form-control" id="inputType">
+          <option>blocks</option>
+          <option>addresses</option>
+        </select>
+      </div>
+      <label for="wordSize">Word size</label>
+      <div class="input-group pb-2">
+          <input type="text" class="form-control is-invalid" id="wordSize" aria-label="wordSize">
+          <div class="input-group-append">
+            <span class="input-group-text">bits</span>
+          </div>                
+        </div>
+        <div class="row ml-2 pb-3">
+          <small id="wordError" class="text-danger input-error">Missing input</small>
+        </div>
+      
 
-              <label for="blockSize">Block size</label>
-              <div class="input-group pb-2">
-                <input type="text" class="form-control" id="blockSize" aria-label="blockSize">
-                <div class="input-group-append">
-                  <span class="input-group-text">words</span>
-                </div>
-              </div>
-              
-              <label for="setSize">Set size</label>
-              <div class="input-group pb-2">
-                <input type="text" class="form-control" id="setSize" aria-label="setSize">
-                <div class="input-group-append">
-                  <span class="input-group-text">blocks</span>
-                </div>
-              </div>
+        <label for="blockSize">Block size</label>
+        <div class="input-group pb-2">
+          <input type="text" class="form-control is-invalid" id="blockSize" aria-label="blockSize">
+          <div class="input-group-append">
+            <span class="input-group-text">words</span>
+          </div>
+        </div>
+        <div class="row ml-2 pb-3">
+          <small id="blockError" class="text-danger input-error">Missing input</small>
+        </div>
 
-              <label for="cacheSize">Cache size</label>
-              <div class="input-group pb-2">
-                <input type="text" class="form-control" id="cacheSize" aria-label="cacheSize">
-                <div class="input-group-append">
-                  <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">blocks</button>
-                  <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">blocks</a>
-                    <a class="dropdown-item" href="#">addresses</a>
-                  </div>
-                </div>
-              </div>
+        <label for="setSize">Set size</label>
+        <div class="input-group pb-2">
+          <input type="text" class="form-control is-invalid" id="setSize" aria-label="setSize">
+          <div class="input-group-append">
+            <span class="input-group-text">blocks</span>
+          </div>
+        </div>
+        <div class="row ml-2 pb-3">
+          <small id="setError" class="text-danger input-error">Missing input</small>
+        </div>
+    </div>
 
-              <label for="memorySize">Memory size</label>
-              <div class="input-group pb-2">
-                <input type="text" class="form-control" id="memorySize" aria-label="memorySize">
-                <div class="input-group-append">
-                  <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">blocks</button>
-                  <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">blocks</a>
-                    <a class="dropdown-item" href="#">addresses</a>
-                  </div>
-                </div>
-              </div>
+    <div class="col-6">
+      <label for="cacheSize">Cache size</label>
+        <div class="input-group pb-2">
+          <input type="text" class="form-control is-invalid" id="cacheSize" aria-label="cacheSize">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">blocks</button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">blocks</a>
+              <a class="dropdown-item" href="#">addresses</a>
             </div>
+          </div>
+        </div>
+        <div class="row ml-2 pb-3">
+          <small id="cacheError" class="text-danger input-error">Missing input</small>
+        </div>
 
-            <div class="col-6">
-              <label for="cacheTime">Cache access time</label>
-              <div class="input-group pb-2">
-                <input type="text" class="form-control" id="cacheTime" aria-label="cacheTime">
-                <div class="input-group-append">
-                  <span class="input-group-text" id="basic-addon2">nanoseconds (ns)</span>
-                </div>
-              </div>
+      <label for="cacheTime">Cache access time</label>
+        <div class="input-group pb-2">
+          <input type="text" class="form-control is-invalid" id="cacheTime" aria-label="cacheTime">
+          <div class="input-group-append">
+            <span class="input-group-text">ns</span>
+          </div>
+        </div>
+        <div class="row ml-2 pb-3">
+          <small id="setError" class="text-danger input-error">Missing input</small>
+        </div>
+        <label for="memorySize">Memory size</label>
+        <div class="input-group pb-2">
+          <input type="text" class="form-control is-invalid" id="memorySize" aria-label="memorySize">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">blocks</button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">blocks</a>
+              <a class="dropdown-item" href="#">addresses</a>
+            </div>
+          </div>
+        </div>
+        <div class="row ml-2 pb-3">
+          <small id="memoryError" class="text-danger input-error">Missing input</small>
+        </div>
 
-              <label for="memoryTime">Memory access time</label>
-              <div class="input-group pb-2">
-                <input type="text" class="form-control" id="memoryTime" aria-label="memoryTime">
-                <div class="input-group-append">
-                  <span class="input-group-text" id="basic-addon2">nanoseconds (ns)</span>
-                </div>
-              </div>
+      <label for="memoryTime">Memory access time</label>
+        <div class="input-group pb-2">
+          <input type="text" class="form-control is-invalid" id="memoryTime" aria-label="memoryTime">
+          <div class="input-group-append">
+            <span class="input-group-text">ns</span>
+          </div>
+        </div>
+        <div class="row ml-2 pb-3">
+          <small id="setError" class="text-danger input-error">Missing input</small>
+        </div>
+    </div> <!-- END OF COL 2 -->
+    <div class="row">
+      <button class="btn btn-secondary btn-lg">Reset</button>
+      <button class="btn btn-primary btn-lg">Simulate</button>
+    </div>
+  </div> <!-- ROW -->
 
-              <label for="inputType">Input type</label>
-              <div class="input-group pb-2">
-                <select class="form-control" id="inputType">
-                  <option>blocks</option>
-                  <option>addresses</option>
-                </select>
-              </div>
-              <label for="querySequence">Query sequence</label>
-              <div class="input-group pb-2">
-                <input type="text" class="form-control" id="querySequence" aria-label="querySequence">
-              </div>
-              
-            </div> <!-- second col -->
-          </div> <!-- card row -->
-        </div> <!-- card body -->
+  <div class="row justify-content-center">
+    <div class="col-12 pl-5 pr-5">
+      <h1 class="text-center">Cache Results</h1>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Set</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+          <tbody>
+            <tr>
+              <th scope="row">0</th>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <th scope="row">1</th>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
 
-        <div class="card-footer text-right card-footer-margin">
-          <button type="button" class="btn btn-secondary btn-lg">Reset</button>
-          <button type="button" class="btn btn-primary btn-lg">Simulate</button>
-        </div> <!-- card footer-->
-
-      </div> <!-- card --> 
-    </div> <!-- col -->
-    </div> 
     
-    <div class="row justify-content-center align-items-center h-100">
-      <div class="col-10 h-75">
-        <div class="card">
-            <div class="card-header">Cache table</div>
-              <div class="card-body">
-                <div class="row justify-content-center align-items-center">
-                  <div class="col-8">
-                    <table class="table table-bordered">
-                      <thead>
-                        <tr>
-                          <th scope="col">Set</th>
-                          <th colspan="3"></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <th scope="row">0</th>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                        </tr>
-                        <tr>
-                          <th scope="row">1</th>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                        </tr>
-                        <tr>
-                          <th scope="row">2</th>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                        </tr>
-                        <tr>
-                          <th scope="row">3</th>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-                
-              </div>  <!-- card body -->
-            
-            <div class="row card-footer text-muted card-footer-margin">
-              <div class="form-group col-4">
-                <label for="cacheMiss">Cache misses</label>
-                <input type="text" class="form-control form-control-sm" id="cacheMiss">
-              </div>
-              <div class="form-group col-4">
-                <label for="cacheHit">Cache hits</label>
-                <input type="text" class="form-control form-control-sm" id="cacheHit">
-              </div>
-              <div class="form-group col-4">
-                <label for="totalQueries">Total queries</label>
-                <input type="text" class="form-control form-control-sm" id="totalQueries">
-              </div>
-              <div class="form-group col-4">
-                <label for="missPenalty">Miss penalty</label>
-                <input type="text" class="form-control form-control-sm" id="missPenalty">
-              </div>
-              <div class="form-group col-4">
-                <label for="averageAccessTime">Average access time (ns)</label>
-                <input type="text" class="form-control form-control-sm" id="averageAccessTime">
-              </div>
-              <div class="form-group col-4">
-                <label for="totalAccessTime">Total access time (ns)</label>
-                <input type="text" class="form-control form-control-sm" id="totalAccessTime">
-              </div>
-            </div>
-        </div> <!-- card -->
-      </div> <!-- col -->
-    </div> <!-- row-->  
-  </div> <!-- MAIN CONTAINER-->
+    
+
+  </div> <!-- OUTPUT ROW -->
+  <div class="col-12 pl-5 pr-5 pt-3 pb-3">
+    <div class="row text-muted">
+      <div class="form-group col-4">
+        <label for="cacheMisses">Cache misses</label>
+        <input type="text" class="form-control form-control-sm" id="cacheMisses">
+      </div>
+
+      <div class="form-group col-4">
+        <label for="cacheHits">Cache hits</label>
+        <input type="text" class="form-control form-control-sm" id="cacheHits">
+      </div>
+
+      <div class="form-group col-4">
+        <label for="totalQueries">Total queries</label>
+        <input type="text" class="form-control form-control-sm" id="totalQueries">
+      </div>
+    </div>
+
+    <div class="row text-muted">
+      <div class="form-group col-4">
+        <label for="missPenalty">Miss penalty</label>
+        <input type="text" class="form-control form-control-sm" id="missPenalty">
+      </div>
+      <div class="form-group col-4">
+        <label for="averageTime">Average access time</label>
+        <div class="input-group pb-2">
+          <input type="text" class="form-control form-control-sm" id="cacheTime" aria-label="averageTime">
+          <div class="input-group-append">
+            <span class="input-group-text">ns</span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group col-4">
+        <label for="totalTime">Total access time</label>
+        <div class="input-group pb-2">
+          <input type="text" class="form-control form-control-sm" id="cacheTime" aria-label="totalTime">
+          <div class="input-group-append">
+            <span class="input-group-text">ns</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <button class="btn btn-primary btn-lg">Save to file</button>
+    </div>
+  </div>
+</div> <!-- MAIN CONTAINER-->
   <script type="text/javascript" src="/javascripts/cacheSimulation.js"></script>
 </body>
 </html>
