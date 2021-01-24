@@ -195,33 +195,63 @@ const cacheMemorySimCtrl = {
         memorySize = parseInt(memorySize);
         memoryAccessTime = parseInt(memoryAccessTime);
 
-        console.log(querySequence);
+        //#TODO: DELETE 
+        cacheSizeDropdown = 'words';
+        memorySizeDropdown = 'words';
+
+        //conversion 
+        if (cacheSizeDropdown === 'words') {
+            cacheSize = cacheSize / blockSize;
+        }
+
+        if (memorySizeDropdown === 'words') {
+            memorySize = memorySize / blockSize;
+        }
+
+        //console.log(querySequence);
+
+        numSets = cacheSize / setSize;
+        //for the MRU cache thingy
+        cacheMemory = makeCache(numSets);
+
+        const totalBits = Math.log2(memorySize);
+        const wordField = Math.log2(blockSize);
+        const setField = Math.log2(numSets);
+        const tagField = totalBits - wordField - setField;
+        console.log(`Tag = ${tagField}, Set = ${setField}, Word = ${wordField}`);
 
         //separate for query sequence 
         let querySeq = querySequence.split(" ");
         let querySeqArray = new Array();
-        // #TODO: error checking
-        console.log(querySeq.length);
+        // #TODO: error checking for hex 
+        var hexToBinary = require('hex-to-binary');
+        let hexString;
         for (var i = 0; i < querySeq.length; i++) {
-            if (inputType === 'addresses')
-                querySeqArray.push(querySeq[i]);
-            else {
+            if (inputType === 'addresses') {
+                let hexString = querySeq[i];
+                //console.log(hexToBinary(hexString));
+
+                hexString = hexToBinary(hexString).toString();
+                //console.log(hexString);
+
+                let hexStringLen = hexString.length;
+                hexStringLen -= wordField;
+                hexString = hexString.substring(0, hexStringLen);
+                //console.log(hexString);
+
+                hexStringLen -= setField;
+                hexString = hexString.substring(hexStringLen);
+                //console.log(hexString);
+
+                querySeqArray.push(hexString);
+
+            } else {
                 if (parseInt(querySeq[i]) > memorySize)
                     return res.send({
                         memorySizeError: "Memory size less than the input ranges"
                     })
                 else
                     querySeqArray.push(parseInt(querySeq[i]));
-            }
-        }
-
-        // error checking for memory size
-        for (i = 0; i < tasks.length; i++) {
-            // check error 
-            if (parseInt(tasks[i].upperRange) > memorySize || parseInt(tasks[i].lowerRange) > memorySize) {
-                return res.send({
-                    memorySizeError: 'Memory size less than the input ranges'
-                });
             }
         }
 
