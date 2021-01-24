@@ -41,10 +41,10 @@ $('#simulateSimpleton').on("click", function() {
     if (!wordSize) {
         valid = false;
         setError('word', 'Missing input');
-    } else if (!Number.isInteger(parseInt(wordSize))) {
+    } else if (!Number.isInteger(parseInt(wordSize)) || !(parseInt(wordSize) > 0)) {
         valid = false;
-        setError('word', 'Not an integer');
-    } else if (!isPowerOf2(wordSize)) {
+        setError('word', 'Not a positive integer');
+    } else if (!isPowerOf2(parseInt(wordSize))) {
         valid = false;
         setError('word', 'Not a power of 2');
     } else {
@@ -54,10 +54,10 @@ $('#simulateSimpleton').on("click", function() {
     if (!blockSize) {
         valid = false;
         setError('block', 'Missing input');
-    } else if (!Number.isInteger(parseInt(blockSize))) {
+    } else if (!Number.isInteger(parseInt(blockSize)) || !(parseInt(blockSize) > 0)) {
         valid = false;
-        setError('block', 'Not an integer');
-    } else if (!isPowerOf2(blockSize)) {
+        setError('block', 'Not a positive integer');
+    } else if (!isPowerOf2(parseInt(blockSize))) {
         valid = false;
         setError('block', 'Not a power of 2');
     } else {
@@ -67,10 +67,10 @@ $('#simulateSimpleton').on("click", function() {
     if (!setSize) {
         valid = false;
         setError('set', 'Missing input');
-    } else if (!Number.isInteger(parseInt(setSize))) {
+    } else if (!Number.isInteger(parseInt(setSize)) || !(parseInt(setSize) > 0)) {
         valid = false;
-        setError('set', 'Not an integer');
-    } else if (!isPowerOf2(setSize)) {
+        setError('set', 'Not a positive integer');
+    } else if (!isPowerOf2(parseInt(setSize))) {
         valid = false;
         setError('set', 'Not a power of 2');
     } else {
@@ -80,10 +80,10 @@ $('#simulateSimpleton').on("click", function() {
     if (!cacheSize) {
         valid = false;
         setError('cache', 'Missing input');
-    } else if (!Number.isInteger(parseInt(cacheSize))) {
+    } else if (!Number.isInteger(parseInt(cacheSize)) || !(parseInt(cacheSize) > 0)) {
         valid = false;
-        setError('cache', 'Not an integer');
-    } else if (!isPowerOf2(cacheSize)) {
+        setError('cache', 'Not a positive integer');
+    } else if (!isPowerOf2(parseInt(cacheSize))) {
         valid = false;
         setError('cache', 'Not a power of 2');
     } else {
@@ -93,9 +93,9 @@ $('#simulateSimpleton').on("click", function() {
     if (!cacheAccessTime) {
         valid = false;
         setError('cacheTime', 'Missing input');
-    } else if (!Number.isInteger(parseInt(cacheAccessTime))) {
+    } else if (!Number.isInteger(parseInt(cacheAccessTime)) || !(parseInt(cacheAccessTime) > 0)) {
         valid = false;
-        setError('cacheTime', 'Not an integer');
+        setError('cacheTime', 'Not a positive integer');
     } else {
         clearError('cacheTime');
     }
@@ -103,10 +103,10 @@ $('#simulateSimpleton').on("click", function() {
     if (!memorySize) {
         valid = false;
         setError('memory', 'Missing input');
-    } else if (!Number.isInteger(parseInt(memorySize))) {
+    } else if (!Number.isInteger(parseInt(memorySize)) || !(parseInt(memorySize) > 0)) {
         valid = false;
-        setError('memory', 'Not an integer');
-    } else if (!isPowerOf2(memorySize)) {
+        setError('memory', 'Not a positive integer');
+    } else if (!isPowerOf2(parseInt(memorySize))) {
         valid = false;
         setError('memory', 'Not a power of 2');
     } else {
@@ -116,9 +116,9 @@ $('#simulateSimpleton').on("click", function() {
     if (!memoryAccessTime) {
         valid = false;
         setError('memoryTime', 'Missing input');
-    } else if (!Number.isInteger(parseInt(memoryAccessTime))) {
+    } else if (!Number.isInteger(parseInt(memoryAccessTime)) || !(parseInt(memoryAccessTime) > 0)) {
         valid = false;
-        setError('memoryTime', 'Not an integer');
+        setError('memoryTime', 'Not a positive integer');
     } else {
         clearError('memoryTime');
     }
