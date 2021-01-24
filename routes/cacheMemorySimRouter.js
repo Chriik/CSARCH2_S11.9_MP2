@@ -8,5 +8,6 @@ router.get('/simpleton', ctrl.viewSimpletonPage);
 router.get('/outputTextFile', ctrl.getOutputTextFile);
 
 router.post('/TwoLoops', ctrl.postTwoLoops);
+router.post('/Simpleton', ctrl.postSimpleton);
 
 module.exports = router;

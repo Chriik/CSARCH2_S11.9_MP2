@@ -2,6 +2,7 @@ const { makeCache } = require('../modules/cacheFunc');
 
 // For outputing in text file
 let total, cacheMiss, cacheHit, missPenalty, totalAccessTime, aveAccessTime, cacheMemory, numSets;
+let querySequence = [];
 
 const cacheMemorySimCtrl = {
     viewHomePage: (req, res) => res.render('HomePage'),
@@ -10,22 +11,22 @@ const cacheMemorySimCtrl = {
 
     viewSequentialPage: (req, res) => res.render('SequentialPage'),
 
-    getOutputTextFile: (req, res) => {   
+    getOutputTextFile: (req, res) => {
         try {
             // converting cache to string
             let tempCache = cacheMemory;
 
             let lengths = tempCache.map(item => item.cache);
-            
+
             tempCache = '';
-            for (i=0; i<numSets; i++)
+            for (i = 0; i < numSets; i++)
                 tempCache += `Set ${i}       ${lengths[i].join(',    ')}\n`;
 
             let string = `Cache Hits: ${cacheHit}\nCache Misses: ${cacheMiss}\nTotal Queries: ${total}\n\nMiss Penalty: ${missPenalty}\nAverage Access Time: ${aveAccessTime}\nTotal Access Time: ${totalAccessTime}\n\nSnapshot of Cache Memory:\n---------------------------------------------------\n${tempCache}`;
 
             res.setHeader('Content-type', "application/octet-stream");
             res.setHeader('Content-disposition', 'attachment; filename=output_result.txt');
-            
+
             return res.send(string);
 
         } catch (err) {
@@ -39,10 +40,10 @@ const cacheMemorySimCtrl = {
      */
     postTwoLoops: (req, res) => {
         // TODO: include other inputs
-        let { 
-            tasks, 
-            inputType, 
-            wordSize, 
+        let {
+            tasks,
+            inputType,
+            wordSize,
             blockSize,
             setSize,
             cacheSize,
@@ -50,15 +51,16 @@ const cacheMemorySimCtrl = {
             cacheAccessTime,
             memorySize,
             memorySizeDropdown,
-            memoryAccessTime } = req.body;
+            memoryAccessTime
+        } = req.body;
 
-            wordSize = parseInt(wordSize);
-            blockSize = parseInt(blockSize);
-            setSize = parseInt(setSize);
-            cacheSize = parseInt(cacheSize);
-            cacheAccessTime = parseInt(cacheAccessTime);
-            memorySize = parseInt(memorySize);
-            memoryAccessTime = parseInt(memoryAccessTime);
+        wordSize = parseInt(wordSize);
+        blockSize = parseInt(blockSize);
+        setSize = parseInt(setSize);
+        cacheSize = parseInt(cacheSize);
+        cacheAccessTime = parseInt(cacheAccessTime);
+        memorySize = parseInt(memorySize);
+        memoryAccessTime = parseInt(memoryAccessTime);
 
         // FIXME: to be removed in the future
         // 16 sets = 4blocks
@@ -79,7 +81,7 @@ const cacheMemorySimCtrl = {
 
         //converting et al
         if (cacheSizeDropdown === 'words') {
-            cacheSize = cacheSize / blockSize; 
+            cacheSize = cacheSize / blockSize;
         }
 
         if (memorySizeDropdown === 'words') {
@@ -92,11 +94,11 @@ const cacheMemorySimCtrl = {
                 // convert
                 let numberOfBlocks = (tasks[i].upperRange - tasks[i].lowerRange + 1) / blockSize; // number of blocks to ACCESS
 
-                 // update values
+                // update values
                 tasks[i].upperRange = tasks[i].lowerRange + numberOfBlocks - 1;
             }
         }
-        
+
         // error checking
         if (setSize > cacheSize) {
             return res.send({
@@ -115,7 +117,7 @@ const cacheMemorySimCtrl = {
         }
 
         // init array
-        numSets = cacheSize / setSize; 
+        numSets = cacheSize / setSize;
         cacheMemory = makeCache(numSets);
 
         // outputs
@@ -123,7 +125,7 @@ const cacheMemorySimCtrl = {
         cacheMiss = 0;
 
         for (k = 0; k < tasks.length; k++) {
-            for (j = 0; j < parseInt(tasks[k].loopCount); j++){
+            for (j = 0; j < parseInt(tasks[k].loopCount); j++) {
                 for (i = parseInt(tasks[k].lowerRange); i <= parseInt(tasks[k].upperRange); i++) {
                     let set = i % numSets;
 
@@ -151,7 +153,7 @@ const cacheMemorySimCtrl = {
         totalAccessTime = cacheHit * blockSize * cacheAccessTime + cacheMiss * blockSize * memoryAccessTime + cacheMiss * cacheAccessTime;
 
         aveAccessTime = hitRate * cacheAccessTime + missRate * missPenalty;
-       
+
         console.log(cacheMemory);
         console.log(cacheHit);
         console.log(cacheMiss);
@@ -170,7 +172,71 @@ const cacheMemorySimCtrl = {
 
     },
 
-    
+    postSimpleton: (req, res) => {
+        let {
+            inputType,
+            querySequence,
+            wordSize,
+            blockSize,
+            setSize,
+            cacheSize,
+            cacheSizeDropdown,
+            cacheAccessTime,
+            memorySize,
+            memorySizeDropdown,
+            memoryAccessTime
+        } = req.body;
+
+        wordSize = parseInt(wordSize);
+        blockSize = parseInt(blockSize);
+        setSize = parseInt(setSize);
+        cacheSize = parseInt(cacheSize);
+        cacheAccessTime = parseInt(cacheAccessTime);
+        memorySize = parseInt(memorySize);
+        memoryAccessTime = parseInt(memoryAccessTime);
+
+        console.log(querySequence);
+
+        //separate for query sequence 
+        let querySeq = querySequence.split(" ");
+        let querySeqArray = new Array();
+        // #TODO: error checking
+        console.log(querySeq.length);
+        for (var i = 0; i < querySeq.length; i++) {
+            if (inputType === 'addresses')
+                querySeqArray.push(querySeq[i]);
+            else {
+                if (parseInt(querySeq[i]) > memorySize)
+                    return res.send({
+                        memorySizeError: "Memory size less than the input ranges"
+                    })
+                else
+                    querySeqArray.push(parseInt(querySeq[i]));
+            }
+        }
+
+        // error checking for memory size
+        for (i = 0; i < tasks.length; i++) {
+            // check error 
+            if (parseInt(tasks[i].upperRange) > memorySize || parseInt(tasks[i].lowerRange) > memorySize) {
+                return res.send({
+                    memorySizeError: 'Memory size less than the input ranges'
+                });
+            }
+        }
+
+        for (var i = 0; i < querySeqArray.length; i++) {
+            console.log(querySeqArray[i]);
+        }
+
+        if (cacheSizeDropdown === 'words') {
+            cacheSize = cacheSize / blockSize;
+        }
+
+        if (memorySizeDropdown === 'words') {
+            memorySize = memorySize / blockSize;
+        }
+    }
 };
 
 module.exports = cacheMemorySimCtrl;

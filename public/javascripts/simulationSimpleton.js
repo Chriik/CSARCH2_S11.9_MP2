@@ -1,12 +1,12 @@
 let keyInput = {
-    query:          $('#querySequence'),
-    word:           $('#wordSize'),
-    block:          $('#blockSize'),
-    set:            $('#setSize'),
-    cache:          $('#cacheSize'),
-    cacheTime:      $('#cacheTime'),
-    memory:         $('#memorySize'),
-    memoryTime:     $('#memoryTime')
+    query: $('#querySequence'),
+    word: $('#wordSize'),
+    block: $('#blockSize'),
+    set: $('#setSize'),
+    cache: $('#cacheSize'),
+    cacheTime: $('#cacheTime'),
+    memory: $('#memorySize'),
+    memoryTime: $('#memoryTime')
 };
 
 // AJAX post
@@ -14,7 +14,7 @@ $('#simulateSimpleton').on("click", function() {
 
     // Get all inputs
     let inputType = $('#inputType').val().trim();
-    let querySequence = $('#querySequence').val().trim(); 
+    let querySequence = $('#querySequence').val().trim();
     let wordSize = $('#wordSize').val().trim();
     let blockSize = $('#blockSize').val().trim();
     let setSize = $('#setSize').val().trim();
@@ -125,32 +125,63 @@ $('#simulateSimpleton').on("click", function() {
 
     // TODO: simpleton back end
     if (valid) {
+        removeCacheTable();
+        $.post('/Simpleton', {
+            inputType,
+            querySequence,
+            wordSize,
+            blockSize,
+            setSize,
+            cacheSize,
+            cacheSizeDropdown,
+            cacheAccessTime,
+            memorySize,
+            memorySizeDropdown,
+            memoryAccessTime
+        }, function(data) {
+            let valid_post = true;
 
+            console.log(data);
+
+            if (data.memorySizeError) {
+                valid_post = false;
+                setError('memory', data.memorySizeError);
+            }
+
+            if (data.setSizeError) {
+                valid_post = false;
+                setError('set', data.setSizeError);
+            }
+        });
+    }
+
+    function removeCacheTable() {
+        $('#cacheTable').remove();
     }
 });
 
 // Sets the error message and change the input to red
-function setError (key, err) {
+function setError(key, err) {
     keyInput[key].addClass('is-invalid');
     $(`#${key}Error`).text(err);
 };
 
 // Clears the error message and remove the input to red class
-function clearError (key) {
+function clearError(key) {
     keyInput[key].removeClass('is-invalid');
     $(`#${key}Error`).text('');
 }
 
 // If number is power of 2, return 1, else return 0.
-function isPowerOf2 (number) {
-    if (number == 0) { 
-        return 0; 
+function isPowerOf2(number) {
+    if (number == 0) {
+        return 0;
     }
 
     while (number != 1) {
         number = number / 2;
-        if (number % 2 != 0 && number != 1) { 
-            return 0; 
+        if (number % 2 != 0 && number != 1) {
+            return 0;
         }
     }
     return 1;
