@@ -1,7 +1,6 @@
 $(document).ready(function() {
     //Disable "Save to File" Button
     $('#saveToFileButton').prop('disabled', true);
-
 });
 
 // For clearing all inputs and outputs (RESET)
@@ -37,5 +36,8 @@ $('#resetButton').on("click", function () {
 
     // TODO: reset dropdown for cache size and memory size
     // pass
+});
 
+$('#saveToFileButton').on('click', function () {
+    window.location.href = '/outputTextFile';
 });

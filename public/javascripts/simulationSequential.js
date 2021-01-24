@@ -9,12 +9,6 @@ let keyInput = {
 };
 let keyTasks;
 
-$(document).ready(function() {
-    //Disable "Save to File" Button
-    $('#saveToFileButton').prop('disabled', true);
-
-});
-
 // For adding additional tasks
 $('#addTaskButton').on("click", function() {
     let currentNumberOfTasks = $('.task-group').length;
@@ -75,16 +69,16 @@ $('#simulateButton').on("click", function() {
     let cacheSizeDropdown = 'blocks';
     let memorySizeDropdown = 'blocks';
 
-    // error checking for missing inputs, power of 2 ..
+    // error checking for missing inputs, power of 2, is a positive integer
     let valid = true;
 
     if (!wordSize) {
         valid = false;
         setError('word', 'Missing input');
-    } else if (!Number.isInteger(parseInt(wordSize))) {
+    } else if (!Number.isInteger(parseInt(wordSize)) || !(parseInt(wordSize) > 0)) {
         valid = false;
-        setError('word', 'Not an integer');
-    } else if (!isPowerOf2(wordSize)) {
+        setError('word', 'Not a positive integer');
+    } else if (!isPowerOf2(parseInt(wordSize))) {
         valid = false;
         setError('word', 'Not a power of 2');
     } else {
@@ -94,10 +88,10 @@ $('#simulateButton').on("click", function() {
     if (!blockSize) {
         valid = false;
         setError('block', 'Missing input');
-    } else if (!Number.isInteger(parseInt(blockSize))) {
+    } else if (!Number.isInteger(parseInt(blockSize)) || !(parseInt(blockSize) > 0)) {
         valid = false;
-        setError('block', 'Not an integer');
-    } else if (!isPowerOf2(blockSize)) {
+        setError('block', 'Not a positive integer');
+    } else if (!isPowerOf2(parseInt(blockSize))) {
         valid = false;
         setError('block', 'Not a power of 2');
     } else {
@@ -107,10 +101,10 @@ $('#simulateButton').on("click", function() {
     if (!setSize) {
         valid = false;
         setError('set', 'Missing input');
-    } else if (!Number.isInteger(parseInt(setSize))) {
+    } else if (!Number.isInteger(parseInt(setSize)) || !(parseInt(setSize) > 0)) {
         valid = false;
-        setError('set', 'Not an integer');
-    } else if (!isPowerOf2(setSize)) {
+        setError('set', 'Not a positive integer');
+    } else if (!isPowerOf2(parseInt(setSize))) {
         valid = false;
         setError('set', 'Not a power of 2');
     } else {
@@ -120,10 +114,10 @@ $('#simulateButton').on("click", function() {
     if (!cacheSize) {
         valid = false;
         setError('cache', 'Missing input');
-    } else if (!Number.isInteger(parseInt(cacheSize))) {
+    } else if (!Number.isInteger(parseInt(cacheSize)) || !(parseInt(cacheSize) > 0)) {
         valid = false;
-        setError('cache', 'Not an integer');
-    } else if (!isPowerOf2(cacheSize)) {
+        setError('cache', 'Not a positive integer');
+    } else if (!isPowerOf2(parseInt(cacheSize))) {
         valid = false;
         setError('cache', 'Not a power of 2');
     } else {
@@ -133,9 +127,9 @@ $('#simulateButton').on("click", function() {
     if (!cacheAccessTime) {
         valid = false;
         setError('cacheTime', 'Missing input');
-    } else if (!Number.isInteger(parseInt(cacheAccessTime))) {
+    } else if (!Number.isInteger(parseInt(cacheAccessTime)) || !(parseInt(cacheAccessTime) > 0)) {
         valid = false;
-        setError('cacheTime', 'Not an integer');
+        setError('cacheTime', 'Not a positive integer');
     } else {
         clearError('cacheTime');
     }
@@ -143,10 +137,10 @@ $('#simulateButton').on("click", function() {
     if (!memorySize) {
         valid = false;
         setError('memory', 'Missing input');
-    } else if (!Number.isInteger(parseInt(memorySize))) {
+    } else if (!Number.isInteger(parseInt(memorySize)) || !(parseInt(memorySize) > 0)) {
         valid = false;
-        setError('memory', 'Not an integer');
-    } else if (!isPowerOf2(memorySize)) {
+        setError('memory', 'Not a positive integer');
+    } else if (!isPowerOf2(parseInt(memorySize))) {
         valid = false;
         setError('memory', 'Not a power of 2');
     } else {
@@ -156,9 +150,9 @@ $('#simulateButton').on("click", function() {
     if (!memoryAccessTime) {
         valid = false;
         setError('memoryTime', 'Missing input');
-    } else if (!Number.isInteger(parseInt(memoryAccessTime))) {
+    } else if (!Number.isInteger(parseInt(memoryAccessTime)) || !(parseInt(memoryAccessTime) > 0)) {
         valid = false;
-        setError('memoryTime', 'Not an integer');
+        setError('memoryTime', 'Not a positive integer');
     } else {
         clearError('memoryTime');
     }
@@ -180,9 +174,9 @@ $('#simulateButton').on("click", function() {
         if (!lower) {
             valid = false;
             setErrorTasks('lower', 'Missing input', i);
-        } else if (!Number.isInteger(parseInt(lower))) {
+        } else if (!Number.isInteger(parseInt(lower)) || !(parseInt(lower) >= 0)) {
             valid = false;
-            setError('lower', 'Not an integer');
+            setErrorTasks('lower', 'Not a non-negative integer', i);
         } else {
             clearErrorTasks('lower', i);
         }
@@ -190,9 +184,9 @@ $('#simulateButton').on("click", function() {
         if (!upper) {
             valid = false;
             setErrorTasks('upper', 'Missing input', i);
-        } else if (!Number.isInteger(parseInt(upper))) {
+        } else if (!Number.isInteger(parseInt(upper)) || !(parseInt(upper) >= 0)) {
             valid = false;
-            setError('upper', 'Not an integer');
+            setErrorTasks('upper', 'Not a non-negative integer', i);
         } else {
             clearErrorTasks('upper', i);
         }
@@ -200,9 +194,9 @@ $('#simulateButton').on("click", function() {
         if (!loop) {
             valid = false;
             setErrorTasks('loop', 'Missing input', i);
-        } else if (!Number.isInteger(parseInt(loop))) {
+        } else if (!Number.isInteger(parseInt(loop)) || !(parseInt(loop) > 0)) {
             valid = false;
-            setError('loop', 'Not an integer');
+            setErrorTasks('loop', 'Not a positive integer', i);
         } else {
             clearErrorTasks('loop', i);
         }
@@ -214,6 +208,7 @@ $('#simulateButton').on("click", function() {
 
     // TODO: include other inputs to send to server
     if (valid) {
+        removeCacheTable();
         $.post('/TwoLoops', {
                 tasks,
                 inputType,
@@ -225,17 +220,35 @@ $('#simulateButton').on("click", function() {
                 cacheAccessTime,
                 memorySize,
                 memorySizeDropdown,
-                memoryAccessTime,
+                memoryAccessTime
             }, function(data) {
                 // Show results
-                loadCacheTable(data.cacheMemory)
-                $('#cacheMisses').val(data.cacheMiss);
-                $('#cacheHits').val(data.cacheHit);
-                $('#totalQueries').val(data.cacheHit + data.cacheMiss);
-                $('#missPenalty').val(data.missPenalty);
-                $('#averageTime').val(data.aveAccessTime);
-                $('#totalTime').val(data.totalAccessTime);
+                let valid_post = true;
 
+                console.log(data);
+
+                if (data.memorySizeError) {
+                    valid_post = false;
+                    setError('memory', data.memorySizeError);
+                }
+
+                if (data.setSizeError) {
+                    valid_post = false;
+                    setError('set', data.setSizeError);
+                }
+
+                if (valid_post) {
+                    loadCacheTable(data.cacheMemory)
+                    $('#cacheMisses').val(data.cacheMiss);
+                    $('#cacheHits').val(data.cacheHit);
+                    $('#totalQueries').val(data.cacheHit + data.cacheMiss);
+                    $('#missPenalty').val(data.missPenalty);
+                    $('#averageTime').val(data.aveAccessTime);
+                    $('#totalTime').val(data.totalAccessTime);
+
+                    $('#saveToFileButton').prop('disabled', false);
+                    scrollToCacheResults();   
+                }
             }
         );
     }
@@ -279,7 +292,6 @@ function isPowerOf2 (number) {
     }
     return 1;
 }
-
 
 // Returns array containing Task objects
 function getArrayOfTasks () {
@@ -330,5 +342,18 @@ function loadCacheTable (cacheMemory) {
     $('#tableHolder').append(table);
 }
 
+function removeCacheTable () {
+    $('#cacheTable').remove();
+}
+
+function scrollToCacheResults() {
+    var offset = $("#tableHolder").offset();
+    offset.left -= 20;
+    offset.top -= 20;
+    $('html, body').animate({
+        scrollTop: offset.top,
+        scrollLeft: offset.left
+    });
+}
 
 

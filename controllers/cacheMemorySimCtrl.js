@@ -1,10 +1,7 @@
-const fs = require('fs');
-const path = require('path');
-
 const { makeCache } = require('../modules/cacheFunc');
 
 // For outputing in text file
-let total, cacheMiss, cacheHit, missPenalty, totalAccessTime, aveAccessTime;
+let total, cacheMiss, cacheHit, missPenalty, totalAccessTime, aveAccessTime, cacheMemory, numSets;
 
 const cacheMemorySimCtrl = {
     viewHomePage: (req, res) => res.render('HomePage'),
@@ -12,6 +9,30 @@ const cacheMemorySimCtrl = {
     viewSimpletonPage: (req, res) => res.render('SimpletonPage'),
 
     viewSequentialPage: (req, res) => res.render('SequentialPage'),
+
+    getOutputTextFile: (req, res) => {   
+        try {
+            // converting cache to string
+            let tempCache = cacheMemory;
+
+            let lengths = tempCache.map(item => item.cache);
+            
+            tempCache = '';
+            for (i=0; i<numSets; i++)
+                tempCache += `Set ${i}       ${lengths[i].join(',    ')}\n`;
+
+            let string = `Cache Hits: ${cacheHit}\nCache Misses: ${cacheMiss}\nTotal Queries: ${total}\n\nMiss Penalty: ${missPenalty}\nAverage Access Time: ${aveAccessTime}\nTotal Access Time: ${totalAccessTime}\n\nSnapshot of Cache Memory:\n---------------------------------------------------\n${tempCache}`;
+
+            res.setHeader('Content-type', "application/octet-stream");
+            res.setHeader('Content-disposition', 'attachment; filename=output_result.txt');
+            
+            return res.send(string);
+
+        } catch (err) {
+            console.log(err); //FIXME: to be removed
+            return res.render('HomePage');
+        }
+    },
 
     /**
      * Letter B 
@@ -31,6 +52,14 @@ const cacheMemorySimCtrl = {
             memorySizeDropdown,
             memoryAccessTime } = req.body;
 
+            wordSize = parseInt(wordSize);
+            blockSize = parseInt(blockSize);
+            setSize = parseInt(setSize);
+            cacheSize = parseInt(cacheSize);
+            cacheAccessTime = parseInt(cacheAccessTime);
+            memorySize = parseInt(memorySize);
+            memoryAccessTime = parseInt(memoryAccessTime);
+
         // FIXME: to be removed in the future
         // 16 sets = 4blocks
         // let wordSize = 16,       // bits
@@ -48,9 +77,6 @@ const cacheMemorySimCtrl = {
         //     secondLower = 0,
         //     secondTime = 10;
 
-        console.log(tasks);
-
-
         //converting et al
         if (cacheSizeDropdown === 'words') {
             cacheSize = cacheSize / blockSize; 
@@ -62,56 +88,57 @@ const cacheMemorySimCtrl = {
 
         // if addresses convert, else blocks mean remain the same
         if (inputType === 'addresses') {
-            //for (i =0, i<)
+            for (i = 0; i < tasks.length; i++) {
+                // convert
+                let numberOfBlocks = (tasks[i].upperRange - tasks[i].lowerRange + 1) / blockSize; // number of blocks to ACCESS
 
-            // convert first loop
-            let numberOfBlocks = (firstUpper - firstLower + 1)/blockSize; // number of blocks to ACCESS
-
-            // update values
-            firstUpper = firstLower + numberOfBlocks - 1;
-
-            // convert second loop
-            numberOfBlocks = (secondUpper - secondLower + 1)/blockSize;
-
-            // update values
-            secondUpper = secondLower + numberOfBlocks - 1;
+                 // update values
+                tasks[i].upperRange = tasks[i].lowerRange + numberOfBlocks - 1;
+            }
         }
         
         // error checking
         if (setSize > cacheSize) {
-            console.log('error');
-            // TODO: render error message
+            return res.send({
+                setSizeError: 'Set size greater than cache size'
+            });
         }
 
-        if (firstUpper > memorySize || firstLower > memorySize || secondUpper > memorySize || secondLower > memorySize) {
-            console.log('error');
-            // TODO: render error message
+        // error checking for memory size
+        for (i = 0; i < tasks.length; i++) {
+            // check error 
+            if (parseInt(tasks[i].upperRange) > memorySize || parseInt(tasks[i].lowerRange) > memorySize) {
+                return res.send({
+                    memorySizeError: 'Memory size less than the input ranges'
+                });
+            }
         }
-        
+
         // init array
-        let numSets = cacheSize / setSize; 
-        var cacheMemory = makeCache(numSets);
+        numSets = cacheSize / setSize; 
+        cacheMemory = makeCache(numSets);
 
         // outputs
         cacheHit = 0;
         cacheMiss = 0;
 
-        // first loop
-        for (j=0; j<firstTime; j++){
-            for (i=firstLower; i<=firstUpper; i++) {
-                let set = i % numSets;
+        for (k = 0; k < tasks.length; k++) {
+            for (j = 0; j < parseInt(tasks[k].loopCount); j++){
+                for (i = parseInt(tasks[k].lowerRange); i <= parseInt(tasks[k].upperRange); i++) {
+                    let set = i % numSets;
 
-                let row = cacheMemory[set];
-                let length = row.cache.length;
+                    let row = cacheMemory[set];
+                    let length = row.cache.length;
 
-                //check if the array has same value
-                let find = row.cache.indexOf(i);
+                    //check if the array has same value
+                    let find = row.cache.indexOf(i);
 
-                // if find change the length to index find
-                find !== -1 ? (length = find, cacheHit++) : cacheMiss++;
+                    // if find change the length to index find
+                    find !== -1 ? (length = find, cacheHit++) : cacheMiss++;
 
-                // if less than setSize, update value and MRU, else update value only
-                length < setSize ? (row.cache[length] = i, row.MRU = length) : row.cache[row.MRU] = i;
+                    // if less than setSize, update value and MRU, else update value only
+                    length < setSize ? (row.cache[length] = i, row.MRU = length) : row.cache[row.MRU] = i;
+                }
             }
         }
 
@@ -132,33 +159,7 @@ const cacheMemorySimCtrl = {
         console.log(totalAccessTime);
         console.log(aveAccessTime);
 
-        // output text file TODO: add res.download if there is a link already
-        let filepath = path.join(__dirname, '../outputs', 'output_result.txt');
-
-        // converting cache to string
-        let tempCache = cacheMemory;
-
-        let lengths = tempCache.map(item => item.cache);
-        
-        tempCache = '';
-        for (i=0; i<numSets; i++)
-            tempCache += `Set ${i}       ${lengths[i].join(',    ')}\n`;
-
-        let stream = fs.createWriteStream(filepath);
-        stream.once('open', function(fd) {
-                stream.write(`Cache Hits: ${cacheHit}\n`);
-                stream.write(`Cache Misses: ${cacheMiss}\n`);
-                stream.write(`Total Queries: ${total}\n\n`);
-                stream.write(`Miss Penalty: ${missPenalty}\n`);
-                stream.write(`Average Access Time: ${aveAccessTime}\n`);
-                stream.write(`Total Access Time: ${totalAccessTime}\n\n`);
-                stream.write(`Snapshot of Cache Memory:\n`);
-                stream.write(`---------------------------------------------------\n`);
-                stream.write(`${tempCache}`);
-                stream.end();
-        });
-
-        res.send({
+        return res.send({
             cacheMemory: cacheMemory,
             cacheHit: cacheHit,
             cacheMiss: cacheMiss,
@@ -168,6 +169,8 @@ const cacheMemorySimCtrl = {
         });
 
     },
+
+    
 };
 
 module.exports = cacheMemorySimCtrl;
