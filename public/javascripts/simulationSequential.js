@@ -333,7 +333,7 @@ function loadCacheTable (cacheMemory) {
         let row = $(`<tr><th scope="row">${i}</th></tr>`);
 
         for (let j = 0; j < cacheMemory[0].cache.length; j++) {
-            row.append(`<td>${cacheMemory[i].cache[j]}</td>`);
+            cacheMemory[i].cache[j] === undefined ? row.append(`<td></td>`) : row.append(`<td>${cacheMemory[i].cache[j]}</td>`);
         }
         table.append(row);
     }

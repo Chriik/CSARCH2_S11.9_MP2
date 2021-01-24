@@ -148,7 +148,7 @@ const cacheMemorySimCtrl = {
             missRate = cacheMiss / total;
 
         missPenalty = cacheAccessTime + memoryAccessTime * blockSize + cacheAccessTime;
-        totalAccessTime = cacheHit * blockSize * cacheAccessTime + cacheMiss * blockSize * memoryAccessTime + cacheMiss * cacheAccessTime;
+        totalAccessTime = cacheHit * blockSize * cacheAccessTime + cacheMiss * blockSize * (memoryAccessTime + cacheAccessTime) + cacheMiss * cacheAccessTime;
 
         aveAccessTime = hitRate * cacheAccessTime + missRate * missPenalty;
        
