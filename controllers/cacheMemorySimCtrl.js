@@ -3,16 +3,13 @@ const path = require('path');
 
 const { makeCache } = require('../modules/cacheFunc');
 
-const cacheAccessTime = 1;
-const memoryAccessTime = 10;
-
 // For outputing in text file
 let total, cacheMiss, cacheHit, missPenalty, totalAccessTime, aveAccessTime;
 
 const cacheMemorySimCtrl = {
     viewHomePage: (req, res) => res.render('HomePage'),
 
-    viewSimpletonPage: (req, res) => res.render('SingletonPage'),
+    viewSimpletonPage: (req, res) => res.render('SimpletonPage'),
 
     viewSequentialPage: (req, res) => res.render('SequentialPage'),
 
@@ -20,41 +17,53 @@ const cacheMemorySimCtrl = {
      * Letter B 
      */
     postTwoLoops: (req, res) => {
-        /** 
-         * change to input from html side
-        */
+        // TODO: include other inputs
+        let { 
+            tasks, 
+            inputType, 
+            wordSize, 
+            blockSize,
+            setSize,
+            cacheSize,
+            cacheSizeDropdown,
+            cacheAccessTime,
+            memorySize,
+            memorySizeDropdown,
+            memoryAccessTime } = req.body;
 
+        // FIXME: to be removed in the future
         // 16 sets = 4blocks
-        let wordSize = 16,       // bits
-            blockSize = 128,     // words
-            setSize = 4,         // blocks 
-            cacheSize = 64,
-            cacheSizeUnit = 'block',  // block or words
-            memorySize = 128,
-            memorySizeUnit = 'block', // block or words
-            // system = 'decimal',         // hexa or decimal
-            systemInput = 'blocks',    // blocks or addresses 
-            firstUpper = 1,
-            firstLower = 1,
-            firstTime = 10,
-            secondUpper = 67,
-            secondLower = 0,
-            secondTime = 10;
+        // let wordSize = 16,       // bits
+        //     blockSize = 128,     // words
+        //     setSize = 4,         // blocks 
+        //     cacheSize = 64,
+        //     cacheSizeDropdown = 'blocks',  // block or words
+        //     memorySize = 128,
+        //     memorySizeDropdown = 'blocks', // block or words
+        //     inputType= 'blocks',    // blocks or addresses 
+        //     firstUpper = 1,
+        //     firstLower = 1,
+        //     firstTime = 10,
+        //     secondUpper = 67,
+        //     secondLower = 0,
+        //     secondTime = 10;
 
-        // TODO: first round of error checking (check if divisible by 2) (or check nlng using express validator)
-        // TODO: check also if firstUpper > firstLower
+        console.log(tasks);
+
 
         //converting et al
-        if (cacheSizeUnit === 'words') {
+        if (cacheSizeDropdown === 'words') {
             cacheSize = cacheSize / blockSize; 
         }
 
-        if (memorySizeUnit === 'words') {
+        if (memorySizeDropdown === 'words') {
             memorySize = memorySize / blockSize;
         }
 
         // if addresses convert, else blocks mean remain the same
-        if (systemInput === 'addresses') {
+        if (inputType === 'addresses') {
+            //for (i =0, i<)
+
             // convert first loop
             let numberOfBlocks = (firstUpper - firstLower + 1)/blockSize; // number of blocks to ACCESS
 
@@ -71,12 +80,12 @@ const cacheMemorySimCtrl = {
         // error checking
         if (setSize > cacheSize) {
             console.log('error');
-            // render error message
+            // TODO: render error message
         }
 
         if (firstUpper > memorySize || firstLower > memorySize || secondUpper > memorySize || secondLower > memorySize) {
             console.log('error');
-            // render error message
+            // TODO: render error message
         }
         
         // init array
@@ -90,25 +99,6 @@ const cacheMemorySimCtrl = {
         // first loop
         for (j=0; j<firstTime; j++){
             for (i=firstLower; i<=firstUpper; i++) {
-                let set = i % numSets;
-
-                let row = cacheMemory[set];
-                let length = row.cache.length;
-
-                //check if the array has same value
-                let find = row.cache.indexOf(i);
-
-                // if find change the length to index find
-                find !== -1 ? (length = find, cacheHit++) : cacheMiss++;
-
-                // if less than setSize, update value and MRU, else update value only
-                length < setSize ? (row.cache[length] = i, row.MRU = length) : row.cache[row.MRU] = i;
-            }
-        }
-
-        // second loop
-        for (j=0; j<secondTime; j++){
-            for (i=secondLower; i<=secondUpper; i++) {
                 let set = i % numSets;
 
                 let row = cacheMemory[set];
