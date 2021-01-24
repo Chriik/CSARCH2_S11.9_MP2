@@ -296,9 +296,9 @@ function isPowerOf2 (number) {
 // Returns array containing Task objects
 function getArrayOfTasks () {
     let currentNumberOfTasks = $('.task-group').length;
-    let lowerRangeArray = $('.lower-range').map(function() { return this.value; }).get();
-    let upperRangeArray = $('.upper-range').map(function() { return this.value; }).get();
-    let loopCountArray = $('.loop-count').map(function() { return this.value; }).get();
+    let lowerRangeArray = $('.lower-range').map(function() { return this.value.trim(); }).get();
+    let upperRangeArray = $('.upper-range').map(function() { return this.value.trim(); }).get();
+    let loopCountArray = $('.loop-count').map(function() { return this.value.trim(); }).get();
     let tasks = [];
 
     for (let i = 0; i < currentNumberOfTasks; i++) {
@@ -333,7 +333,7 @@ function loadCacheTable (cacheMemory) {
         let row = $(`<tr><th scope="row">${i}</th></tr>`);
 
         for (let j = 0; j < cacheMemory[0].cache.length; j++) {
-            row.append(`<td>${cacheMemory[i].cache[j]}</td>`);
+            cacheMemory[i].cache[j] === undefined ? row.append(`<td></td>`) : row.append(`<td>${cacheMemory[i].cache[j]}</td>`);
         }
         table.append(row);
     }
