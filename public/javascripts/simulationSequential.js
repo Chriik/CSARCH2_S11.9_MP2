@@ -296,9 +296,9 @@ function isPowerOf2 (number) {
 // Returns array containing Task objects
 function getArrayOfTasks () {
     let currentNumberOfTasks = $('.task-group').length;
-    let lowerRangeArray = $('.lower-range').map(function() { return this.value; }).get();
-    let upperRangeArray = $('.upper-range').map(function() { return this.value; }).get();
-    let loopCountArray = $('.loop-count').map(function() { return this.value; }).get();
+    let lowerRangeArray = $('.lower-range').map(function() { return this.value.trim(); }).get();
+    let upperRangeArray = $('.upper-range').map(function() { return this.value.trim(); }).get();
+    let loopCountArray = $('.loop-count').map(function() { return this.value.trim(); }).get();
     let tasks = [];
 
     for (let i = 0; i < currentNumberOfTasks; i++) {
