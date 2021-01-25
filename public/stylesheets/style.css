@@ -17,10 +17,12 @@ html {
 body, .modal-footer {
 	font-family: 'Nunito', sans-serif;
 	font-weight: 400;
-
-	background: rgba(197, 202, 233, 0.1);
+	background:#F8F8FB;
 }
 
+nav {
+	background: #F8F8FB;
+}
 .container {
 	background-color:white;
 	box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.2);
