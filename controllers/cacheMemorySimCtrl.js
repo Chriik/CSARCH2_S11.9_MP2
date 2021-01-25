@@ -169,7 +169,8 @@ const cacheMemorySimCtrl = {
             cacheMiss: cacheMiss,
             missPenalty: missPenalty,
             totalAccessTime: totalAccessTime,
-            aveAccessTime: aveAccessTime
+            aveAccessTime: aveAccessTime,
+            setSize: setSize
         });
 
     },
@@ -333,7 +334,8 @@ const cacheMemorySimCtrl = {
             cacheMiss: cacheMiss,
             missPenalty: missPenalty,
             totalAccessTime: totalAccessTime,
-            aveAccessTime: aveAccessTime
+            aveAccessTime: aveAccessTime,
+            setSize: setSize
         });
     }
 };

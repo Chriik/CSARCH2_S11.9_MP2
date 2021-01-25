@@ -235,7 +235,7 @@ $('#simulateButton').on("click", function() {
             }
 
             if (valid_post) {
-                loadCacheTable(data.cacheMemory);
+                loadCacheTable(data.cacheMemory, data.setSize);
                 $('#cacheMisses').val(data.cacheMiss);
                 $('#cacheHits').val(data.cacheHit);
                 $('#totalQueries').val(data.cacheHit + data.cacheMiss);
@@ -308,7 +308,7 @@ function getArrayOfTasks() {
 }
 
 // Renders Cache Memory to table
-function loadCacheTable(cacheMemory) {
+function loadCacheTable(cacheMemory, setSize) {
     // Hide the Dummy table (for reset purposes!)
     $('#dummyTable').hide();
 
@@ -317,7 +317,7 @@ function loadCacheTable(cacheMemory) {
                         <thead>
                             <tr>
                                 <th scope="col">Set</th>
-                                <th colspan="${cacheMemory[0].cache.length}"></th>
+                                <th colspan="${setSize}"></th>
                             </tr>
                         </thead>
                         <tbody id="tableBody">
@@ -327,7 +327,7 @@ function loadCacheTable(cacheMemory) {
     for (let i = 0; i < cacheMemory.length; i++) {
         let row = $(`<tr><th scope="row">${i}</th></tr>`);
 
-        for (let j = 0; j < cacheMemory[0].cache.length; j++) {
+        for (let j = 0; j < setSize; j++) {
             cacheMemory[i].cache[j] === undefined ? row.append(`<td></td>`) : row.append(`<td>${cacheMemory[i].cache[j]}</td>`);
         }
         table.append(row);
