@@ -64,10 +64,8 @@ $('#simulateButton').on("click", function() {
     let cacheAccessTime = $('#cacheTime').val().trim();
     let memorySize = $('#memorySize').val().trim();
     let memoryAccessTime = $('#memoryTime').val().trim();
-
-    //TODO: on monday
-    let cacheSizeDropdown = 'blocks';
-    let memorySizeDropdown = 'blocks';
+    let cacheSizeDropdown = $('#cacheSizeDropdown').val().trim();
+    let memorySizeDropdown = $('#memorySizeDropdown').val().trim();
 
     // error checking for missing inputs, power of 2, is a positive integer
     let valid = true;
@@ -206,7 +204,6 @@ $('#simulateButton').on("click", function() {
         }
     }
 
-    // TODO: include other inputs to send to server
     if (valid) {
         removeCacheTable();
         $.post('/TwoLoops', {

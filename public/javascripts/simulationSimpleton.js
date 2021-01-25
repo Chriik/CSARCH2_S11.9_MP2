@@ -22,10 +22,8 @@ $('#simulateSimpleton').on("click", function() {
     let cacheAccessTime = $('#cacheTime').val().trim();
     let memorySize = $('#memorySize').val().trim();
     let memoryAccessTime = $('#memoryTime').val().trim();
-
-    //TODO: on monday
-    let cacheSizeDropdown = 'blocks';
-    let memorySizeDropdown = 'blocks';
+    let cacheSizeDropdown = $('#cacheSizeDropdown').val().trim();
+    let memorySizeDropdown = $('#memorySizeDropdown').val().trim();
 
     // error checking for missing inputs, power of 2 ..
     // TODO: add error checking for syntax on query sequence
@@ -123,7 +121,6 @@ $('#simulateSimpleton').on("click", function() {
         clearError('memoryTime');
     }
 
-    // TODO: simpleton back end
     if (valid) {
         removeCacheTable();
         $.post('/Simpleton', {
@@ -167,10 +164,6 @@ $('#simulateSimpleton').on("click", function() {
                 scrollToCacheResults();
             }
         });
-    }
-
-    function removeCacheTable() {
-        $('#cacheTable').remove();
     }
 });
 
@@ -228,6 +221,10 @@ function loadCacheTable(cacheMemory) {
 
     // Append table to <div> tableHolder
     $('#tableHolder').append(table);
+}
+
+function removeCacheTable() {
+    $('#cacheTable').remove();
 }
 
 function scrollToCacheResults() {
