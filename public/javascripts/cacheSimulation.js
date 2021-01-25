@@ -2,16 +2,11 @@ $(document).ready(function() {
     //Disable "Save to File" Button
     $('#saveToFileButton').prop('disabled', true);
 
-
-
-
     // Initialize first selected value to blocks
     $('#cacheSizeDropdown').val('blocks');
     $('#cacheSizeDropdown').text('blocks');
     $('#memorySizeDropdown').val('blocks');
     $('#memorySizeDropdown').text('blocks');
-
-
 });
 
 // For clearing all inputs and outputs (RESET)
@@ -45,8 +40,10 @@ $('#resetButton').on("click", function () {
     // Show dummy table
     $('#dummyTable').show();
 
-    // TODO: reset dropdown for cache size and memory size
-    // pass
+    $('#cacheSizeDropdown').val('blocks');
+    $('#cacheSizeDropdown').text('blocks');
+    $('#memorySizeDropdown').val('blocks');
+    $('#memorySizeDropdown').text('blocks');
 });
 
 $('#saveToFileButton').on('click', function () {
