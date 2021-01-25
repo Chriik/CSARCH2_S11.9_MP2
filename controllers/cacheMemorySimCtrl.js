@@ -2,7 +2,7 @@ const { makeCache } = require('../modules/cacheFunc');
 const hexToBinary = require('hex-to-binary');
 
 // For outputing in text file
-let total, cacheMiss, cacheHit, missPenalty, totalAccessTime, aveAccessTime, cacheMemory, numSets;
+let total, cacheMiss, cacheHit, missPenalty, totalAccessTime, aveAccessTime, cacheMemory, numSets, blockNum;
 let querySequence = [];
 
 const cacheMemorySimCtrl = {
@@ -23,7 +23,11 @@ const cacheMemorySimCtrl = {
             for (i = 0; i < numSets; i++)
                 tempCache += `Set ${i}       ${lengths[i].join(',    ')}\n`;
 
-            let string = `Cache Hits: ${cacheHit}\nCache Misses: ${cacheMiss}\nTotal Queries: ${total}\n\nMiss Penalty: ${missPenalty}\nAverage Access Time: ${aveAccessTime}\nTotal Access Time: ${totalAccessTime}\n\nSnapshot of Cache Memory:\n---------------------------------------------------\n${tempCache}`;
+            blockHeader = '    ';
+            for (i = 0; i < blockNum; i++)
+                blockHeader += `Block ${i}    `;
+
+            let string = `Cache Hits: ${cacheHit}\nCache Misses: ${cacheMiss}\nTotal Queries: ${total}\n\nMiss Penalty: ${missPenalty}\nAverage Access Time: ${aveAccessTime}\nTotal Access Time: ${totalAccessTime}\n\nSnapshot of Cache Memory:\n${blockHeader}\n---------------------------------------------------------\n${tempCache}`;
 
             res.setHeader('Content-type', "application/octet-stream");
             res.setHeader('Content-disposition', 'attachment; filename=output_result.txt');
@@ -155,6 +159,8 @@ const cacheMemorySimCtrl = {
         totalAccessTime = cacheHit * blockSize * cacheAccessTime + cacheMiss * blockSize * (memoryAccessTime + cacheAccessTime) + cacheMiss * cacheAccessTime;
 
         aveAccessTime = hitRate * cacheAccessTime + missRate * missPenalty;
+
+        blockNum = setSize;
 
         console.log(cacheMemory);
         console.log(cacheHit);
@@ -318,6 +324,8 @@ const cacheMemorySimCtrl = {
         totalAccessTime = cacheHit * blockSize * cacheAccessTime + cacheMiss * blockSize * (memoryAccessTime + cacheAccessTime) + cacheMiss * cacheAccessTime;
 
         aveAccessTime = hitRate * cacheAccessTime + missRate * missPenalty;
+
+        blockNum = setSize;
 
         console.log(cacheMemory);
         console.log(cacheHit);

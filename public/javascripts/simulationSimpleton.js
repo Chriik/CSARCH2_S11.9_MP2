@@ -10,7 +10,7 @@ let keyInput = {
 };
 
 // AJAX post
-$('#simulateSimpleton').on("click", function() {
+$('#simulateButton').on("click", function() {
 
     // Get all inputs
     let inputType = $('#inputType').val().trim();
