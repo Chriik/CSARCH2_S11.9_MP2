@@ -37,7 +37,7 @@ $('#simulateButton').on("click", function() {
     if (!blockSize) {
         valid = false;
         setError('block', 'Missing input');
-    } else if (!Number.isInteger(parseInt(blockSize)) || !(parseInt(blockSize) > 0)) {
+    } else if (!isStringInteger(blockSize) || !(parseInt(blockSize) > 0)) {
         valid = false;
         setError('block', 'Not a positive integer');
     } else if (!isPowerOf2(parseInt(blockSize))) {
@@ -50,7 +50,7 @@ $('#simulateButton').on("click", function() {
     if (!setSize) {
         valid = false;
         setError('set', 'Missing input');
-    } else if (!Number.isInteger(parseInt(setSize)) || !(parseInt(setSize) > 0)) {
+    } else if (!isStringInteger(setSize) || !(parseInt(setSize) > 0)) {
         valid = false;
         setError('set', 'Not a positive integer');
     } else if (!isPowerOf2(parseInt(setSize))) {
@@ -63,7 +63,7 @@ $('#simulateButton').on("click", function() {
     if (!cacheSize) {
         valid = false;
         setError('cache', 'Missing input');
-    } else if (!Number.isInteger(parseInt(cacheSize)) || !(parseInt(cacheSize) > 0)) {
+    } else if (!isStringInteger(cacheSize) || !(parseInt(cacheSize) > 0)) {
         valid = false;
         setError('cache', 'Not a positive integer');
     } else if (!isPowerOf2(parseInt(cacheSize))) {
@@ -76,7 +76,7 @@ $('#simulateButton').on("click", function() {
     if (!cacheAccessTime) {
         valid = false;
         setError('cacheTime', 'Missing input');
-    } else if (!Number.isInteger(parseInt(cacheAccessTime)) || !(parseInt(cacheAccessTime) > 0)) {
+    } else if (!isStringInteger(cacheAccessTime) || !(parseInt(cacheAccessTime) > 0)) {
         valid = false;
         setError('cacheTime', 'Not a positive integer');
     } else {
@@ -86,7 +86,7 @@ $('#simulateButton').on("click", function() {
     if (!memorySize) {
         valid = false;
         setError('memory', 'Missing input');
-    } else if (!Number.isInteger(parseInt(memorySize)) || !(parseInt(memorySize) > 0)) {
+    } else if (!isStringInteger(memorySize) || !(parseInt(memorySize) > 0)) {
         valid = false;
         setError('memory', 'Not a positive integer');
     } else if (!isPowerOf2(parseInt(memorySize))) {
@@ -99,7 +99,7 @@ $('#simulateButton').on("click", function() {
     if (!memoryAccessTime) {
         valid = false;
         setError('memoryTime', 'Missing input');
-    } else if (!Number.isInteger(parseInt(memoryAccessTime)) || !(parseInt(memoryAccessTime) > 0)) {
+    } else if (!isStringInteger(memoryAccessTime) || !(parseInt(memoryAccessTime) > 0)) {
         valid = false;
         setError('memoryTime', 'Not a positive integer');
     } else {
@@ -212,11 +212,15 @@ function removeCacheTable() {
 }
 
 function scrollToCacheResults() {
-    var offset = $("#tableHolder").offset();
+    let offset = $("#tableHolder").offset();
     offset.left -= 20;
     offset.top -= 20;
     $('html, body').animate({
         scrollTop: offset.top,
         scrollLeft: offset.left
     });
+}
+
+function isStringInteger(str) {
+    return /^\+?(0|[1-9]\d*)$/.test(str);
 }
