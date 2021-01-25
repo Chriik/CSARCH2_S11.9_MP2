@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" style="height:100%;">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -19,15 +19,15 @@
     <title>BSA MRU</title>
 </head>
 
-<body style="height:100%;">
-  <nav class="navbar navbar-expand-lg sticky-top"> <a class="navbar-brand" href="/"><span id="navbar-brand-cache">CACHE</span><span id="navbar-brand-me">ME</span></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+<body>
+  <nav class="navbar navbar-expand-md sticky-top pl-5 pr-5 pt-3"> <a class="navbar-brand" href="/"><span id="navbar-brand-cache">CACHE</span><span id="navbar-brand-me">ME</span></a>
+    <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <a class="nav-link px-4" id="nav-link-user-guide" href="#">User guide</a>
-        <li class="nav-item dropdown"> <a class="nav-link btn btn-primary dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Simulate </a>
+        <li class="nav-item dropdown"> <a class="nav-link btn btn-primary dropdown-toggle shadow-none" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Simulate </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown"> <a class="dropdown-item" href="/simpleton">Simpleton</a> <a class="dropdown-item" href="/sequential">Sequential</a> </div>
         </li>
       </ul>
@@ -36,13 +36,13 @@
   
   <div class="container mt-5 mb-3 pl-5 pr-5">
     <div class="row pt-5 pl-2 pb-4 text-right">
-    <h2 style="color: #3F51B5; font-weight:600;">Simpleton BSA Simulator</h2> 
+    <h2 style="color: #3F51B5; font-weight:600;">Simpleton BSA-MRU Simulator</h2>
   </div>
   <div class="row pl-5 pr-5">
     <div class="col-12">
       <h4>Initialization</h4> 
     </div>
-    <div class="col-6">
+    <div class="col-lg-md-12 col-sm-6 col-xs-6">
       <div class="form-group pb-2">
         <label for="inputType">Input type</label>
         <select class="form-control" id="inputType">
@@ -92,7 +92,7 @@
         </div>
     </div>
 
-    <div class="col-6">
+    <div class="col-md-lg-12 col-sm-6 col-xs-6">
       <label for="cacheSize">Cache size</label>
         <div class="input-group pb-2">
           <input type="text" class="form-control" id="cacheSize" aria-label="cacheSize">
@@ -148,8 +148,8 @@
   
   <div class="row pt-5 pr-2 pb-5 text-right">
     <div class="col-12">
-      <button class="btn btn-secondary btn-lg" id="resetButton">Reset</button>
-      <button class="btn btn-primary btn-lg" id="simulateButton">Simulate</button>
+      <button class="btn btn-secondary" id="resetButton"><i class="fas fa-redo-alt mr-2"></i>Reset</button>
+      <button class="btn btn-primary" id="simulateButton">Simulate</button>
     </div>
   </div>
 </div> <!-- MAIN CONTAINER-->
@@ -197,29 +197,29 @@
     </div>
   </div> <!-- Table row-->
   <div class="col-12 pl-5 pr-5 pt-3 pb-3">
-    <div class="row text-muted">
-      <div class="form-group col-4">
+    <div class="row">
+      <div class="form-group col-lg-4 col-md-sm-12">
         <label for="cacheMisses">Cache misses</label>
         <input type="text" class="form-control form-control-sm" id="cacheMisses" readonly>
       </div>
 
-      <div class="form-group col-4">
+      <div class="form-group col-lg-4 col-md-sm-12">
         <label for="cacheHits">Cache hits</label>
         <input type="text" class="form-control form-control-sm" id="cacheHits" readonly>
       </div>
 
-      <div class="form-group col-4">
+      <div class="form-group col-lg-4 col-md-sm-12">
         <label for="totalQueries">Total queries</label>
         <input type="text" class="form-control form-control-sm" id="totalQueries" readonly>
       </div>
     </div>
 
-    <div class="row text-muted">
-      <div class="form-group col-4">
+    <div class="row">
+      <div class="form-group col-lg-4 col-md-sm-12">
         <label for="missPenalty">Miss penalty</label>
         <input type="text" class="form-control form-control-sm" id="missPenalty" readonly>
       </div>
-      <div class="form-group col-4">
+      <div class="form-group col-lg-4 col-md-sm-12">
         <label for="averageTime">Average access time</label>
         <div class="input-group pb-2">
           <input type="text" class="form-control form-control-sm" id="averageTime" aria-label="averageTime" readonly>
@@ -228,7 +228,7 @@
           </div>
         </div>
       </div>
-      <div class="form-group col-4">
+      <div class="form-group col-lg-4 col-md-sm-12">
         <label for="totalTime">Total access time</label>
         <div class="input-group pb-2">
           <input type="text" class="form-control form-control-sm" id="totalTime" aria-label="totalTime" readonly>
@@ -241,13 +241,14 @@
   </div>
   <div class="row pt-3 pr-2 pb-5 text-right">
       <div class="col-12">
-        <button class="btn btn-primary btn-lg" id="saveToFileButton"><span class="fa fa-save mr-2"></span>Save to file</button> 
+        <button class="btn btn-primary" id="saveToFileButton"><i class="far fa-file-alt mr-2"></i>Save as text file</button> 
       </div>
     </div>
   </div> <!-- container -->
-  <div class="row mt-5">
+  <div class="row mt-5 pl-5 pr-5">
   <div class="text-center col-lg-6 offset-lg-3">
     <p>Copyright &copy; 2020 &middot; All Rights Reserved &middot; CSARCH S11 - Group 9</p>
+  </div>
   </div>
   <script type="text/javascript" src="/javascripts/cacheSimulation.js"></script>
   <script type="text/javascript" src="/javascripts/simulationSimpleton.js"></script>
