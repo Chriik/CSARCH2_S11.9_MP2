@@ -15,26 +15,26 @@ $('#addTaskButton').on("click", function() {
 
     let taskGroup =
         `<div class="task-group">
-              <h5>Task ${nextTaskNumber}</h5>
-              <div class="row">
-                  <div class="form-group col-4">
-                      <label for="lowerRange-${nextTaskNumber}">Lower range</label>
-                      <input type="number" class="form-control form-control-sm lower-range" id="lowerRange-${nextTaskNumber}">
-                      <small id="lowerError-${nextTaskNumber}" class="text-danger input-error"></small>
-                  </div>
-
-                  <div class="form-group col-4">
-                      <label for="upperRange-${nextTaskNumber}">Upper range</label>
-                      <input type="number" class="form-control form-control-sm upper-range" id="upperRange-${nextTaskNumber}">
-                      <small id="upperError-${nextTaskNumber}" class="text-danger input-error"></small>
-                  </div>
-
-                  <div class="form-group col-4">
-                      <label for="loopCount-${nextTaskNumber}">Loop count</label>
-                      <input type="number" class="form-control form-control-sm loop-count" id="loopCount-${nextTaskNumber}">
-                      <small id="loopError-${nextTaskNumber}" class="text-danger input-error"></small>
-                  </div>
+            <h5>Task ${nextTaskNumber}</h5>
+            <div class="row">
+              <div class="form-group col-lg-4 col-md-sm-12">
+                  <label for="lowerRange-${nextTaskNumber}">Lower range</label>
+                  <input type="number" class="form-control form-control-sm lower-range" id="lowerRange-${nextTaskNumber}">
+                  <small id="lowerError-${nextTaskNumber}" class="text-danger input-error"></small>
               </div>
+
+              <div class="form-group col-lg-4 col-md-sm-12">
+                  <label for="upperRange-${nextTaskNumber}">Upper range</label>
+                  <input type="number" class="form-control form-control-sm upper-range" id="upperRange-${nextTaskNumber}">
+                  <small id="upperError-${nextTaskNumber}" class="text-danger input-error"></small>
+              </div>
+
+              <div class="form-group col-lg-4 col-md-sm-12">
+                  <label for="loopCount-${nextTaskNumber}">Loop count</label>
+                  <input type="number" class="form-control form-control-sm loop-count" id="loopCount-${nextTaskNumber}">
+                  <small id="loopError-${nextTaskNumber}" class="text-danger input-error"></small>
+              </div>
+            </div>
          </div>`;
 
     $('#taskList').append(taskGroup);
