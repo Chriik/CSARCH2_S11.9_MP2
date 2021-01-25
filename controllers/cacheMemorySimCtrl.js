@@ -1,5 +1,6 @@
 const { makeCache } = require('../modules/cacheFunc');
 const hexToBinary = require('hex-to-binary');
+const {table} = require('table');
 
 // For outputing in text file
 let total, cacheMiss, cacheHit, missPenalty, totalAccessTime, aveAccessTime, cacheMemory, numSets, blockNum;
@@ -17,17 +18,28 @@ const cacheMemorySimCtrl = {
             // converting cache to string
             let tempCache = cacheMemory;
 
-            let lengths = tempCache.map(item => item.cache);
+            let cacheArray = tempCache.map(item => item.cache);
+            // fill empty cells in cache with "" (empty string) for constructing table
+            for (let i = 0; i < numSets; i++) {
+                let j = cacheArray[i].length;
+                while (j < blockNum) {
+                    cacheArray[i].push('');
+                    j++;
+                };
+            };
 
-            tempCache = '';
-            for (i = 0; i < numSets; i++)
-                tempCache += `Set ${i}       ${lengths[i].join(',    ')}\n`;
+            for (let i = 0; i < numSets; i++)
+                cacheArray[i].unshift(`Set ${i}`)
 
-            blockHeader = '    ';
-            for (i = 0; i < blockNum; i++)
-                blockHeader += `Block ${i}    `;
+            let header = [""]
+            for (let i = 0; i < blockNum; i++)
+                header.push(`Block ${i}`)
 
-            let string = `Cache Hits: ${cacheHit}\nCache Misses: ${cacheMiss}\nTotal Queries: ${total}\n\nMiss Penalty: ${missPenalty}\nAverage Access Time: ${aveAccessTime}\nTotal Access Time: ${totalAccessTime}\n\nSnapshot of Cache Memory:\n${blockHeader}\n---------------------------------------------------------\n${tempCache}`;
+            cacheArray.unshift(header)
+
+            let cacheTable = table(cacheArray);
+
+            let string = `Cache Hits: ${cacheHit}\nCache Misses: ${cacheMiss}\nTotal Queries: ${total}\n\nMiss Penalty: ${missPenalty}\nAverage Access Time: ${aveAccessTime} ns\nTotal Access Time: ${totalAccessTime} ns\n\nSnapshot of Cache Memory:\n${cacheTable}`;
 
             res.setHeader('Content-type', "application/octet-stream");
             res.setHeader('Content-disposition', 'attachment; filename=output_result.txt');
