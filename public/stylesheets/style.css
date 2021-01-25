@@ -56,13 +56,13 @@ body, .modal-footer {
 .btn {
 	border-radius: 10px;
 }
-.btn-primary {
+.btn-primary, .btn-primary[disabled] {
 	background-color: #3F51B5;
 	border: none!important;
 	
 }
 
-.btn-primary:hover {
+.btn-primary:hover, .btn-primary[disabled]:hover {
 	background-color: #303F9F;
 	border: none!important;
 	text-decoration: none!important;
