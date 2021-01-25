@@ -40,10 +40,14 @@ $('#resetButton').on("click", function () {
     // Show dummy table
     $('#dummyTable').show();
 
+    // Reset dropdowns
     $('#cacheSizeDropdown').val('blocks');
     $('#cacheSizeDropdown').text('blocks');
     $('#memorySizeDropdown').val('blocks');
     $('#memorySizeDropdown').text('blocks');
+
+    // Disable saveToFile button
+    $('#saveToFileButton').prop('disabled', true);
 });
 
 $('#saveToFileButton').on('click', function () {
