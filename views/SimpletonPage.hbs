@@ -98,7 +98,7 @@
         <div class="input-group pb-2">
           <input type="text" class="form-control" id="cacheSize" aria-label="cacheSize">
           <div class="dropdown input-group-append">
-            <button class="btn btn-outline-secondary dropdown-toggle" id="cacheSizeDropdown" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">blocks</button>
+            <button class="btn btn-outline-secondary dropdown-toggle" id="cacheSizeDropdown" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
             <div class="dropdown-menu" id="cacheSizeOptions">
               <a class="dropdown-item" value="blocks">blocks</a>
               <a class="dropdown-item" value="words">words</a>
@@ -245,11 +245,20 @@
 <script type="text/javascript" src="/javascripts/simulationSimpleton.js"></script>
 <script>
   $(document).ready(function() {
-      $('.dropdown-toggle').dropdown();
       $('#cacheSizeDropdown').on('click', function() {
-          $('#cacheSizeOptions').html($(this).find('a').html());
+          //$('#cacheSizeOptions').html($(this).find('a').html());
+          $('#cacheSizeOptions').dropdown('toggle');
       });
+
+      // Initialize first selected value to blocks
+      $('#cacheSizeDropdown').val('blocks');
+      $('#cacheSizeDropdown').text('blocks');
   }) ;
+
+  $('#cacheSizeOptions a').on('click', function() {
+      $('#cacheSizeDropdown').val($(this).text());
+      $('#cacheSizeDropdown').text($(this).text());
+  });
 
 
 </script>
