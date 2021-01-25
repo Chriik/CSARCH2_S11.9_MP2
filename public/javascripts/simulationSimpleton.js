@@ -76,9 +76,9 @@ $('#simulateButton').on("click", function() {
     if (!cacheAccessTime) {
         valid = false;
         setError('cacheTime', 'Missing input');
-    } else if (!isStringInteger(cacheAccessTime) || !(parseInt(cacheAccessTime) > 0)) {
+    } else if (parseFloat(cacheAccessTime) <= 0) {
         valid = false;
-        setError('cacheTime', 'Not a positive integer');
+        setError('cacheTime', 'Not a non-zero positive number');
     } else {
         clearError('cacheTime');
     }
@@ -99,9 +99,9 @@ $('#simulateButton').on("click", function() {
     if (!memoryAccessTime) {
         valid = false;
         setError('memoryTime', 'Missing input');
-    } else if (!isStringInteger(memoryAccessTime) || !(parseInt(memoryAccessTime) > 0)) {
+    } else if (parseFloat(memoryAccessTime) <= 0) {
         valid = false;
-        setError('memoryTime', 'Not a positive integer');
+        setError('memoryTime', 'Not a non-zero positive number');
     } else {
         clearError('memoryTime');
     }
