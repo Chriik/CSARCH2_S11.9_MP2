@@ -34,9 +34,9 @@ body, .modal-footer {
 }
 
 
-.dropdown:hover>.dropdown-menu {
-  display: block;
-}
+/*.dropdown:hover>.dropdown-menu {*/
+/*  display: block;*/
+/*}*/
 
 .jumbotron {
 	background-color: transparent;

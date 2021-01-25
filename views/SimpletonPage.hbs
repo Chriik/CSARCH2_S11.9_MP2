@@ -245,36 +245,40 @@
 <script type="text/javascript" src="/javascripts/simulationSimpleton.js"></script>
 <script>
   $(document).ready(function() {
+
       $('#cacheSizeDropdown').on('click', function() {
-          //$('#cacheSizeOptions').html($(this).find('a').html());
-          $('#cacheSizeOptions').dropdown('toggle');
+          if ($('#cacheSizeOptions').css('display') === 'none')
+              $('#cacheSizeOptions').css('display', 'block');
+          else
+              $('#cacheSizeOptions').css('display', 'none');
+      });
+
+      $('#memorySizeDropdown').on('click', function() {
+          if ($('#memorySizeOptions').css('display') === 'none')
+              $('#memorySizeOptions').css('display', 'block');
+          else
+              $('#memorySizeOptions').css('display', 'none');
       });
 
       // Initialize first selected value to blocks
       $('#cacheSizeDropdown').val('blocks');
       $('#cacheSizeDropdown').text('blocks');
+      $('#memorySizeDropdown').val('blocks');
+      $('#memorySizeDropdown').text('blocks');
   }) ;
 
   $('#cacheSizeOptions a').on('click', function() {
       $('#cacheSizeDropdown').val($(this).text());
       $('#cacheSizeDropdown').text($(this).text());
+      $('#cacheSizeOptions').css('display', 'none');
   });
-
-  $(document).ready(function() {
-      $('#memorySizeDropdown').on('click', function() {
-          //$('#cacheSizeOptions').html($(this).find('a').html());
-          $('#memorySizeOptions').dropdown('toggle');
-      });
-
-      // Initialize first selected value to blocks
-      $('#memorySizeDropdown').val('blocks');
-      $('#memorySizeDropdown').text('blocks');
-  }) ;
 
   $('#memorySizeOptions a').on('click', function() {
       $('#memorySizeDropdown').val($(this).text());
       $('#memorySizeDropdown').text($(this).text());
+      $('#memorySizeOptions').css('display', 'none');
   });
+
 
 
 </script>
