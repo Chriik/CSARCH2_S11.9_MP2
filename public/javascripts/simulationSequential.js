@@ -1,5 +1,4 @@
 let keyInput = {
-    word: $('#wordSize'),
     block: $('#blockSize'),
     set: $('#setSize'),
     cache: $('#cacheSize'),
@@ -57,7 +56,6 @@ $('#simulateButton').on("click", function() {
     // A Task object has attributes: lowerRange, upperRange, loopCount
     let tasks = getArrayOfTasks();
     let inputType = $('#inputType').val().trim();
-    let wordSize = $('#wordSize').val().trim();
     let blockSize = $('#blockSize').val().trim();
     let setSize = $('#setSize').val().trim();
     let cacheSize = $('#cacheSize').val().trim();
@@ -69,19 +67,6 @@ $('#simulateButton').on("click", function() {
 
     // error checking for missing inputs, power of 2, is a positive integer
     let valid = true;
-
-    if (!wordSize) {
-        valid = false;
-        setError('word', 'Missing input');
-    } else if (!Number.isInteger(parseInt(wordSize)) || !(parseInt(wordSize) > 0)) {
-        valid = false;
-        setError('word', 'Not a positive integer');
-    } else if (!isPowerOf2(parseInt(wordSize))) {
-        valid = false;
-        setError('word', 'Not a power of 2');
-    } else {
-        clearError('word');
-    }
 
     if (!blockSize) {
         valid = false;
@@ -209,7 +194,6 @@ $('#simulateButton').on("click", function() {
         $.post('/TwoLoops', {
             tasks,
             inputType,
-            wordSize,
             blockSize,
             setSize,
             cacheSize,

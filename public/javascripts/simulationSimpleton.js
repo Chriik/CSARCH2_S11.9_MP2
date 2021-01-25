@@ -1,6 +1,5 @@
 let keyInput = {
     query: $('#querySequence'),
-    word: $('#wordSize'),
     block: $('#blockSize'),
     set: $('#setSize'),
     cache: $('#cacheSize'),
@@ -15,7 +14,6 @@ $('#simulateButton').on("click", function() {
     // Get all inputs
     let inputType = $('#inputType').val().trim();
     let querySequence = $('#querySequence').val().trim();
-    let wordSize = $('#wordSize').val().trim();
     let blockSize = $('#blockSize').val().trim();
     let setSize = $('#setSize').val().trim();
     let cacheSize = $('#cacheSize').val().trim();
@@ -34,19 +32,6 @@ $('#simulateButton').on("click", function() {
         setError('query', 'Missing input');
     } else {
         clearError('query');
-    }
-
-    if (!wordSize) {
-        valid = false;
-        setError('word', 'Missing input');
-    } else if (!Number.isInteger(parseInt(wordSize)) || !(parseInt(wordSize) > 0)) {
-        valid = false;
-        setError('word', 'Not a positive integer');
-    } else if (!isPowerOf2(parseInt(wordSize))) {
-        valid = false;
-        setError('word', 'Not a power of 2');
-    } else {
-        clearError('word');
     }
 
     if (!blockSize) {
@@ -126,7 +111,6 @@ $('#simulateButton').on("click", function() {
         $.post('/Simpleton', {
             inputType,
             querySequence,
-            wordSize,
             blockSize,
             setSize,
             cacheSize,

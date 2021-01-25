@@ -47,7 +47,6 @@ const cacheMemorySimCtrl = {
         let {
             tasks,
             inputType,
-            wordSize,
             blockSize,
             setSize,
             cacheSize,
@@ -58,7 +57,6 @@ const cacheMemorySimCtrl = {
             memoryAccessTime
         } = req.body;
 
-        wordSize = parseInt(wordSize);
         blockSize = parseInt(blockSize);
         setSize = parseInt(setSize);
         cacheSize = parseInt(cacheSize);
@@ -185,7 +183,6 @@ const cacheMemorySimCtrl = {
         let {
             inputType,
             querySequence,
-            wordSize,
             blockSize,
             setSize,
             cacheSize,
@@ -196,7 +193,6 @@ const cacheMemorySimCtrl = {
             memoryAccessTime
         } = req.body;
 
-        wordSize = parseInt(wordSize);
         blockSize = parseInt(blockSize);
         setSize = parseInt(setSize);
         cacheSize = parseInt(cacheSize);
