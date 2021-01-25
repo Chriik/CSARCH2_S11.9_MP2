@@ -33,10 +33,15 @@
       </ul>
     </div>
   </nav>
-
-  <div class="container-fluid p-3 h-100">
-    <h1 class="text-center">Sequential BSA Simulator</h1>
-  <div class="row p-5"> 
+  
+  <div class="container mt-3 mb-3 pl-5 pr-5">
+    <div class="row pt-5 pl-2 pb-4 text-right">
+    <h2 style="color: #3F51B5; font-weight:bold;">Sequential BSA Simulator</h2> 
+  </div>
+  <div class="row pl-5 pr-5">
+    <div class="col-12">
+      <h4>Initialization</h4> 
+    </div>
     <div class="col-6">
       <div class="form-group pb-2">
         <label for="inputType">Input type</label>
@@ -133,46 +138,58 @@
         </div>
     </div> <!-- END OF COL 2 -->
   </div> <!-- ROW -->
-  <div class="col-12 pl-5 pr-5">
-    <div class="row">
-      <button class="btn btn-outline-secondary btn-lg" id="addTaskButton">+</button>
-      <button class="btn btn-outline-secondary btn-lg" id="removeTaskButton">-</button>
+  <div class="row pt-3 pl-5 pr-5">
+    <div class="col-6 pb-2">
+      <h4>Task configuration</h4>
     </div>
-
+    <div class="col-6 text-right">
+      <button class="btn btn-danger btn-sm" id="removeTaskButton"><span class="fa fa-minus"></span></button>
+      <button class="btn btn-success btn-sm" id="addTaskButton"><span class="fa fa-plus"></span></button>
+    </div>
+  </div>
+  <div class="row pl-5 pr-5">
+    <div class="col-12">
       <div id="taskList">
           <div class="task-group">
-              <div class="row"><h3>Task 1</h3></div>
-              <div class="row">
-                  <div class="form-group col-4">
-                      <label for="lowerRange-1">Lower Range</label>
-                      <input type="number" class="form-control form-control-sm lower-range" id="lowerRange-1">
-                      <small id="lowerError-1" class="text-danger input-error"></small>
-                  </div>
-
-                  <div class="form-group col-4">
-                      <label for="upperRange-1">Upper Range</label>
-                      <input type="number" class="form-control form-control-sm upper-range" id="upperRange-1">
-                      <small id="upperError-1" class="text-danger input-error"></small>
-                  </div>
-
-                  <div class="form-group col-4">
-                      <label for="loopCount-1">Loop count</label>
-                      <input type="number" class="form-control form-control-sm loop-count" id="loopCount-1">
-                      <small id="loopError-1" class="text-danger input-error"></small>
-                  </div>
+            <h5>Task 1</h5>
+            <div class="row">
+              <div class="form-group col-4">
+                  <label for="lowerRange-1">Lower range</label>
+                  <input type="number" class="form-control form-control-sm lower-range" id="lowerRange-1">
+                  <small id="lowerError-1" class="text-danger input-error"></small>
               </div>
+
+              <div class="form-group col-4">
+                  <label for="upperRange-1">Upper range</label>
+                  <input type="number" class="form-control form-control-sm upper-range" id="upperRange-1">
+                  <small id="upperError-1" class="text-danger input-error"></small>
+              </div>
+
+              <div class="form-group col-4">
+                  <label for="loopCount-1">Loop count</label>
+                  <input type="number" class="form-control form-control-sm loop-count" id="loopCount-1">
+                  <small id="loopError-1" class="text-danger input-error"></small>
+              </div>
+            </div>
           </div>
       </div>
+    </div>
+  </div>
 
-     <div class="row">
+  <div class="row pt-5 pr-2 pb-5 text-right">
+    <div class="col-12">
       <button class="btn btn-secondary btn-lg" id="resetButton">Reset</button>
       <button class="btn btn-primary btn-lg" id="simulateButton">Simulate</button>
     </div>
   </div>
-  
+</div> <!-- MAIN CONTAINER-->
+<div class="container mt-3 mb-3 pl-5 pr-5">
+    <div class="row pt-5 pl-2 pb-4 text-right">
+    <h2 style="color: #3F51B5; font-weight:600;">Cache Results</h2> 
+  </div>
+
   <div class="row justify-content-center">
     <div class="col-12 pl-5 pr-5" id="tableHolder">
-      <h1 class="text-center">Cache Results</h1>
       <table class="table table-bordered" id="dummyTable">
         <thead>
           <tr>
@@ -255,7 +272,7 @@
       <button class="btn btn-primary btn-lg" id="saveToFileButton">Save to file</button>
     </div>
   </div>
-</div> <!-- MAIN CONTAINER-->
+
   <script type="text/javascript" src="/javascripts/cacheSimulation.js"></script>
   <script type="text/javascript" src="/javascripts/simulationSequential.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

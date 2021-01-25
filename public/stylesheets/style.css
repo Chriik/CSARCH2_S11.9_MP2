@@ -17,8 +17,15 @@ html {
 body, .modal-footer {
 	font-family: 'Nunito', sans-serif;
 	font-weight: 400;
+
+	background: rgba(197, 202, 233, 0.1);
 }
 
+.container {
+	background-color:white;
+	box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.2);
+	border-radius: 10px;
+}
 #nav-link-user-guide {
 	color: #303F9F!important;
 }
