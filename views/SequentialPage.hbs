@@ -284,44 +284,5 @@
   <script type="text/javascript" src="/javascripts/simulationSequential.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<script>
-  $(document).ready(function() {
-
-      $('#cacheSizeDropdown').on('click', function() {
-          if ($('#cacheSizeOptions').css('display') === 'none')
-              $('#cacheSizeOptions').css('display', 'block');
-          else
-              $('#cacheSizeOptions').css('display', 'none');
-      });
-
-      $('#memorySizeDropdown').on('click', function() {
-          if ($('#memorySizeOptions').css('display') === 'none')
-              $('#memorySizeOptions').css('display', 'block');
-          else
-              $('#memorySizeOptions').css('display', 'none');
-      });
-
-      // Initialize first selected value to blocks
-      $('#cacheSizeDropdown').val('blocks');
-      $('#cacheSizeDropdown').text('blocks');
-      $('#memorySizeDropdown').val('blocks');
-      $('#memorySizeDropdown').text('blocks');
-  }) ;
-
-  $('#cacheSizeOptions a').on('click', function() {
-      $('#cacheSizeDropdown').val($(this).text());
-      $('#cacheSizeDropdown').text($(this).text());
-      $('#cacheSizeOptions').css('display', 'none');
-  });
-
-  $('#memorySizeOptions a').on('click', function() {
-      $('#memorySizeDropdown').val($(this).text());
-      $('#memorySizeDropdown').text($(this).text());
-      $('#memorySizeOptions').css('display', 'none');
-  });
-
-
-
-</script>
 </body>
 </html>

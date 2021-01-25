@@ -1,6 +1,17 @@
 $(document).ready(function() {
     //Disable "Save to File" Button
     $('#saveToFileButton').prop('disabled', true);
+
+
+
+
+    // Initialize first selected value to blocks
+    $('#cacheSizeDropdown').val('blocks');
+    $('#cacheSizeDropdown').text('blocks');
+    $('#memorySizeDropdown').val('blocks');
+    $('#memorySizeDropdown').text('blocks');
+
+
 });
 
 // For clearing all inputs and outputs (RESET)
@@ -41,3 +52,28 @@ $('#resetButton').on("click", function () {
 $('#saveToFileButton').on('click', function () {
     window.location.href = '/outputTextFile';
 });
+
+// For Cache Size Dropdown Button
+$('#cacheSizeDropdown').on('click', function() {
+    if ($('#cacheSizeOptions').css('display') === 'none')
+        $('#cacheSizeOptions').css('display', 'block');
+    else
+        $('#cacheSizeOptions').css('display', 'none');
+});
+$('#cacheSizeOptions a').on('click', function() {
+    $('#cacheSizeDropdown').val($(this).text()).text($(this).text());
+    $('#cacheSizeOptions').css('display', 'none');
+});
+
+// For Memory Size Dropdown Button
+$('#memorySizeDropdown').on('click', function() {
+    if ($('#memorySizeOptions').css('display') === 'none')
+        $('#memorySizeOptions').css('display', 'block');
+    else
+        $('#memorySizeOptions').css('display', 'none');
+});
+$('#memorySizeOptions a').on('click', function() {
+    $('#memorySizeDropdown').val($(this).text()).text($(this).text());
+    $('#memorySizeOptions').css('display', 'none');
+});
+
