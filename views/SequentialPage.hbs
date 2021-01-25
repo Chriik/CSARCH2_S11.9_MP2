@@ -52,7 +52,7 @@
       </div>
         <label for="blockSize">Block size</label>
         <div class="input-group pb-2">
-          <input type="text" class="form-control" id="blockSize" aria-label="blockSize">
+          <input type="number" class="form-control" id="blockSize" aria-label="blockSize">
           <div class="input-group-append">
             <span class="input-group-text">words</span>
           </div>
@@ -63,7 +63,7 @@
 
         <label for="setSize">Set size</label>
         <div class="input-group pb-2">
-          <input type="text" class="form-control" id="setSize" aria-label="setSize">
+          <input type="number" class="form-control" id="setSize" aria-label="setSize">
           <div class="input-group-append">
             <span class="input-group-text">blocks</span>
           </div>
@@ -71,27 +71,27 @@
         <div class="row ml-2 pb-3">
           <small id="setError" class="text-danger input-error"></small>
         </div>
+
+        <label for="cacheSize">Cache size</label>
+        <div class="input-group pb-2">
+            <input type="number" class="form-control" id="cacheSize" aria-label="cacheSize">
+            <div class="dropdown input-group-append">
+                <button class="btn btn-outline-secondary dropdown-toggle" id="cacheSizeDropdown" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">blocks</button>
+                <div class="dropdown-menu" id="cacheSizeOptions">
+                    <a class="dropdown-item" value="blocks">blocks</a>
+                    <a class="dropdown-item" value="words">words</a>
+                </div>
+            </div>
+        </div>
+        <div class="row ml-2 pb-3">
+            <small id="cacheError" class="text-danger input-error"></small>
+        </div>
     </div>
 
     <div class="col-md-lg-12 col-sm-6 col-xs-6">
-      <label for="cacheSize">Cache size</label>
-        <div class="input-group pb-2">
-          <input type="text" class="form-control" id="cacheSize" aria-label="cacheSize">
-          <div class="dropdown input-group-append">
-            <button class="btn btn-outline-secondary dropdown-toggle" id="cacheSizeDropdown" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">blocks</button>
-            <div class="dropdown-menu" id="cacheSizeOptions">
-              <a class="dropdown-item" value="blocks">blocks</a>
-              <a class="dropdown-item" value="words">words</a>
-            </div>
-          </div>
-        </div>
-        <div class="row ml-2 pb-3">
-          <small id="cacheError" class="text-danger input-error"></small>
-        </div>
-
       <label for="cacheTime">Cache access time</label>
         <div class="input-group pb-2">
-          <input type="text" class="form-control" id="cacheTime" aria-label="cacheTime">
+          <input type="number" class="form-control" id="cacheTime" aria-label="cacheTime">
           <div class="input-group-append">
             <span class="input-group-text">ns</span>
           </div>
@@ -101,7 +101,7 @@
         </div>
         <label for="memorySize">Memory size</label>
         <div class="input-group pb-2">
-          <input type="text" class="form-control" id="memorySize" aria-label="memorySize">
+          <input type="number" class="form-control" id="memorySize" aria-label="memorySize">
           <div class="dropdown input-group-append">
             <button class="btn btn-outline-secondary dropdown-toggle" id="memorySizeDropdown" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">blocks</button>
             <div class="dropdown-menu" id="memorySizeOptions">
@@ -116,7 +116,7 @@
 
       <label for="memoryTime">Memory access time</label>
         <div class="input-group pb-2">
-          <input type="text" class="form-control" id="memoryTime" aria-label="memoryTime">
+          <input type="number" class="form-control" id="memoryTime" aria-label="memoryTime">
           <div class="input-group-append">
             <span class="input-group-text">ns</span>
           </div>
