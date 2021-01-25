@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" style="height:100%;">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -19,9 +19,9 @@
     <title>BSA MRU</title>
 </head>
 
-<body style="height:100%;">
-  <nav class="navbar navbar-expand-lg sticky-top"> <a class="navbar-brand" href="/"><span id="navbar-brand-cache">CACHE</span><span id="navbar-brand-me">ME</span></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+<body>
+  <nav class="navbar navbar-expand-md sticky-top pl-5 pr-5 pt-3"> <a class="navbar-brand" href="/"><span id="navbar-brand-cache">CACHE</span><span id="navbar-brand-me">ME</span></a>
+    <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
       </ul>
@@ -36,13 +36,13 @@
   
 <div class="container mt-5 mb-3 pl-5 pr-5">
     <div class="row pt-5 pl-2 pb-4 text-right">
-    <h2 style="color: #3F51B5; font-weight:600;">Sequential BSA Simulator</h2> 
+    <h2>Sequential BSA Simulator</h2> 
   </div>
   <div class="row pl-5 pr-5">
     <div class="col-12">
       <h4>Initialization</h4> 
     </div>
-    <div class="col-6">
+    <div class="col-md-lg-12 col-sm-6 col-xs-6">
       <div class="form-group pb-2">
         <label for="inputType">Input type</label>
         <select class="form-control" id="inputType">
@@ -85,7 +85,7 @@
         </div>
     </div>
 
-    <div class="col-6">
+    <div class="col-md-lg-12 col-sm-6 col-xs-6">
       <label for="cacheSize">Cache size</label>
         <div class="input-group pb-2">
           <input type="text" class="form-control" id="cacheSize" aria-label="cacheSize">
@@ -143,8 +143,8 @@
       <h4>Task configuration</h4>
     </div>
     <div class="col-6 text-right">
-      <button class="btn btn-danger btn-sm" id="removeTaskButton"><span class="fa fa-minus"></span></button>
-      <button class="btn btn-success btn-sm" id="addTaskButton"><span class="fa fa-plus"></span></button>
+      <button class="btn btn-danger btn-sm rounded-circle" id="removeTaskButton"><span class="fas fa-minus"></span></button>
+      <button class="btn btn-success btn-sm rounded-circle" id="addTaskButton"><i class="fas fa-plus"></i></button>
     </div>
   </div>
   <div class="row pl-5 pr-5">
@@ -153,19 +153,19 @@
           <div class="task-group">
             <h5>Task 1</h5>
             <div class="row">
-              <div class="form-group col-4">
+              <div class="form-group col-lg-4 col-md-sm-12">
                   <label for="lowerRange-1">Lower range</label>
                   <input type="number" class="form-control form-control-sm lower-range" id="lowerRange-1">
                   <small id="lowerError-1" class="text-danger input-error"></small>
               </div>
 
-              <div class="form-group col-4">
+              <div class="form-group col-lg-4 col-md-sm-12">
                   <label for="upperRange-1">Upper range</label>
                   <input type="number" class="form-control form-control-sm upper-range" id="upperRange-1">
                   <small id="upperError-1" class="text-danger input-error"></small>
               </div>
 
-              <div class="form-group col-4">
+              <div class="form-group col-lg-4 col-md-sm-12">
                   <label for="loopCount-1">Loop count</label>
                   <input type="number" class="form-control form-control-sm loop-count" id="loopCount-1">
                   <small id="loopError-1" class="text-danger input-error"></small>
@@ -178,8 +178,8 @@
 
   <div class="row pt-5 pr-2 pb-5 text-right">
     <div class="col-12">
-      <button class="btn btn-secondary btn-lg" id="resetButton">Reset</button>
-      <button class="btn btn-primary btn-lg" id="simulateButton">Simulate</button>
+      <button class="btn btn-secondary" id="resetButton"><i class="fas fa-redo-alt mr-2"></i>Reset</button>
+      <button class="btn btn-primary" id="simulateButton">Simulate</button>
     </div>
   </div>
 </div> <!-- MAIN CONTAINER-->
@@ -228,28 +228,28 @@
   </div> <!-- Table row-->
   <div class="col-12 pl-5 pr-5 pt-3 pb-3">
     <div class="row text-muted">
-      <div class="form-group col-4">
+      <div class="form-group col-lg-4 col-md-sm-12">
         <label for="cacheMisses">Cache misses</label>
         <input type="text" class="form-control form-control-sm" id="cacheMisses" readonly>
       </div>
 
-      <div class="form-group col-4">
+      <div class="form-group col-lg-4 col-md-sm-12">
         <label for="cacheHits">Cache hits</label>
         <input type="text" class="form-control form-control-sm" id="cacheHits" readonly>
       </div>
 
-      <div class="form-group col-4">
+      <div class="form-group col-lg-4 col-md-sm-12">
         <label for="totalQueries">Total queries</label>
         <input type="text" class="form-control form-control-sm" id="totalQueries" readonly>
       </div>
     </div>
 
     <div class="row text-muted">
-      <div class="form-group col-4">
+      <div class="form-group col-lg-4 col-md-sm-12">
         <label for="missPenalty">Miss penalty</label>
         <input type="text" class="form-control form-control-sm" id="missPenalty" readonly>
       </div>
-      <div class="form-group col-4">
+      <div class="form-group col-lg-4 col-md-sm-12">
         <label for="averageTime">Average access time</label>
         <div class="input-group pb-2">
           <input type="text" class="form-control form-control-sm" id="averageTime" aria-label="averageTime" readonly>
@@ -258,7 +258,7 @@
           </div>
         </div>
       </div>
-      <div class="form-group col-4">
+      <div class="form-group col-lg-4 col-md-sm-12">
         <label for="totalTime">Total access time</label>
         <div class="input-group pb-2">
           <input type="text" class="form-control form-control-sm" id="totalTime" aria-label="totalTime" readonly>
@@ -271,15 +271,15 @@
   </div>
     <div class="row pt-3 pr-2 pb-5 text-right">
       <div class="col-12">
-        <button class="btn btn-primary btn-lg" id="saveToFileButton"><span class="fa fa-save mr-2"></span>Save to file</button> 
+        <button class="btn btn-primary" id="saveToFileButton"><i class="far fa-file-alt mr-2"></i>Save as text file</button> 
       </div>
     </div>
   </div> <!-- container -->
-  <div class="row mt-5">
+  <div class="row mt-5 pl-5 pr-5">
   <div class="text-center col-lg-6 offset-lg-3">
     <p>Copyright &copy; 2020 &middot; All Rights Reserved &middot; CSARCH S11 - Group 9</p>
   </div>
-</div>
+  </div>
   <script type="text/javascript" src="/javascripts/cacheSimulation.js"></script>
   <script type="text/javascript" src="/javascripts/simulationSequential.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
