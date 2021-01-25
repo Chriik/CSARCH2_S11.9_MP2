@@ -16,12 +16,12 @@
     <link href="stylesheets/style.css" rel="stylesheet">
      <!-- JQuery --->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <title>CacheMe BSA Simulator</title>
+    <title>CacheMe BSA-MRU Simulator</title>
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg"> <a class="navbar-brand" href="/"><span id="navbar-brand-cache">CACHE</span><span id="navbar-brand-me">ME</span></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+<nav class="navbar navbar-expand-md sticky-top  pl-5 pr-5 pt-3"> <a class="navbar-brand" href="/"><span id="navbar-brand-cache">CACHE</span><span id="navbar-brand-me">ME</span></a>
+  <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span></button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
     </ul>
@@ -33,12 +33,14 @@
     </ul>
   </div>
 </nav>
-<div class="jumbotron jumbotron-fluid text-center">
+
+
+<div class="jumbotron jumbotron-fluid text-center pl-5 pr-5">
   <h1 class="display-4">You've been <span id="jumbotron-text-highlight">cache</span>-d</h1>
-  <p class="lead">CacheMe helps you simulate your cache using the block-set associative replacement policy.</p>
+  <p class="lead">CacheMe helps you simulate your cache using the block-set associative (most recently used) replacement policy.</p>
   <p class="lead">
     <button class="btn btn-primary btn-md" data-toggle="modal" data-target="#exampleModal">Try now</button>
-	  <button class="btn btn-secondary btn-md" href="#"><span id="jumbotron-btn">See how it works</span></button>
+	  <button class="btn btn-secondary btn-md" href="#"><span id="jumbotron-btn"><i class="far fa-eye mr-2"></i>See how it works</span></button>
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -67,11 +69,11 @@
   </div>
   </p>
 </div>
-<div class="row">
+
+<div class="row mt-5 pl-5 pr-5">
   <div class="text-center col-lg-6 offset-lg-3">
-    <p>Copyright &copy; 2020 &middot; All Rights Reserved &middot; CSARCH S11 G3</p>
+    <p>Copyright &copy; 2020 &middot; All Rights Reserved &middot; CSARCH S11 - Group 9</p>
   </div>
-</div>
 {{!-FIXME: to be deleted in the future}}
 <script type="text/javascript" src="/javascripts/cacheSimulation.js"></script>
 <script type="text/javascript" src="/javascripts/connectPage.js"></script>
@@ -82,6 +84,6 @@
 </html>
 <script>
 	$('#myModal').on('shown.bs.modal', function () {
-  $('#myInput').trigger('focus')
-});
+    $('#myInput').trigger('focus')
+  });
 </script>

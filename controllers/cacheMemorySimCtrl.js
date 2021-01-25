@@ -1,7 +1,9 @@
 const { makeCache } = require('../modules/cacheFunc');
+const hexToBinary = require('hex-to-binary');
+const {table} = require('table');
 
 // For outputing in text file
-let total, cacheMiss, cacheHit, missPenalty, totalAccessTime, aveAccessTime, cacheMemory, numSets;
+let total, cacheMiss, cacheHit, missPenalty, totalAccessTime, aveAccessTime, cacheMemory, numSets, blockNum;
 let querySequence = [];
 
 const cacheMemorySimCtrl = {
@@ -16,13 +18,28 @@ const cacheMemorySimCtrl = {
             // converting cache to string
             let tempCache = cacheMemory;
 
-            let lengths = tempCache.map(item => item.cache);
+            let cacheArray = tempCache.map(item => item.cache);
+            // fill empty cells in cache with "" (empty string) for constructing table
+            for (let i = 0; i < numSets; i++) {
+                let j = cacheArray[i].length;
+                while (j < blockNum) {
+                    cacheArray[i].push('');
+                    j++;
+                };
+            };
 
-            tempCache = '';
-            for (i = 0; i < numSets; i++)
-                tempCache += `Set ${i}       ${lengths[i].join(',    ')}\n`;
+            for (let i = 0; i < numSets; i++)
+                cacheArray[i].unshift(`Set ${i}`)
 
-            let string = `Cache Hits: ${cacheHit}\nCache Misses: ${cacheMiss}\nTotal Queries: ${total}\n\nMiss Penalty: ${missPenalty}\nAverage Access Time: ${aveAccessTime}\nTotal Access Time: ${totalAccessTime}\n\nSnapshot of Cache Memory:\n---------------------------------------------------\n${tempCache}`;
+            let header = [""]
+            for (let i = 0; i < blockNum; i++)
+                header.push(`Block ${i}`)
+
+            cacheArray.unshift(header)
+
+            let cacheTable = table(cacheArray);
+
+            let string = `Cache Hits: ${cacheHit}\nCache Misses: ${cacheMiss}\nTotal Queries: ${total}\n\nMiss Penalty: ${missPenalty}\nAverage Access Time: ${aveAccessTime} ns\nTotal Access Time: ${totalAccessTime} ns\n\nSnapshot of Cache Memory:\n${cacheTable}`;
 
             res.setHeader('Content-type', "application/octet-stream");
             res.setHeader('Content-disposition', 'attachment; filename=output_result.txt');
@@ -30,7 +47,7 @@ const cacheMemorySimCtrl = {
             return res.send(string);
 
         } catch (err) {
-            console.log(err); //FIXME: to be removed
+            // console.log(err); 
             return res.render('HomePage');
         }
     },
@@ -39,11 +56,9 @@ const cacheMemorySimCtrl = {
      * Letter B 
      */
     postTwoLoops: (req, res) => {
-        // TODO: include other inputs
         let {
             tasks,
             inputType,
-            wordSize,
             blockSize,
             setSize,
             cacheSize,
@@ -54,7 +69,6 @@ const cacheMemorySimCtrl = {
             memoryAccessTime
         } = req.body;
 
-        wordSize = parseInt(wordSize);
         blockSize = parseInt(blockSize);
         setSize = parseInt(setSize);
         cacheSize = parseInt(cacheSize);
@@ -86,6 +100,7 @@ const cacheMemorySimCtrl = {
 
         if (memorySizeDropdown === 'words') {
             memorySize = memorySize / blockSize;
+            console.log(memorySize);
         }
 
         // if addresses convert, else blocks mean remain the same
@@ -110,6 +125,7 @@ const cacheMemorySimCtrl = {
         for (i = 0; i < tasks.length; i++) {
             // check error 
             if (parseInt(tasks[i].upperRange) > memorySize || parseInt(tasks[i].lowerRange) > memorySize) {
+                console.log(tasks[i].upperRange);
                 return res.send({
                     memorySizeError: 'Memory size less than the input ranges'
                 });
@@ -154,6 +170,8 @@ const cacheMemorySimCtrl = {
 
         aveAccessTime = hitRate * cacheAccessTime + missRate * missPenalty;
 
+        blockNum = setSize;
+
         console.log(cacheMemory);
         console.log(cacheHit);
         console.log(cacheMiss);
@@ -167,7 +185,8 @@ const cacheMemorySimCtrl = {
             cacheMiss: cacheMiss,
             missPenalty: missPenalty,
             totalAccessTime: totalAccessTime,
-            aveAccessTime: aveAccessTime
+            aveAccessTime: aveAccessTime,
+            setSize: setSize
         });
 
     },
@@ -176,7 +195,6 @@ const cacheMemorySimCtrl = {
         let {
             inputType,
             querySequence,
-            wordSize,
             blockSize,
             setSize,
             cacheSize,
@@ -187,17 +205,12 @@ const cacheMemorySimCtrl = {
             memoryAccessTime
         } = req.body;
 
-        wordSize = parseInt(wordSize);
         blockSize = parseInt(blockSize);
         setSize = parseInt(setSize);
         cacheSize = parseInt(cacheSize);
         cacheAccessTime = parseInt(cacheAccessTime);
         memorySize = parseInt(memorySize);
         memoryAccessTime = parseInt(memoryAccessTime);
-
-        //#TODO: DELETE 
-        cacheSizeDropdown = 'words';
-        memorySizeDropdown = 'words';
 
         //conversion 
         if (cacheSizeDropdown === 'words') {
@@ -218,10 +231,10 @@ const cacheMemorySimCtrl = {
         //console.log(querySequence);
 
         numSets = cacheSize / setSize;
-        console.log(`cacheSize: ${cacheSize}`);
-        console.log(`setSize: ${setSize}`);
+        // console.log(`cacheSize: ${cacheSize}`);
+        // console.log(`setSize: ${setSize}`);
         //for the MRU cache thingy
-        console.log(`numSets: ${numSets}`);
+        // console.log(`numSets: ${numSets}`);
         cacheMemory = makeCache(numSets);
 
         cacheHit = 0;
@@ -237,7 +250,7 @@ const cacheMemorySimCtrl = {
         let querySeqArray = new Array();
 
         // #TODO: error checking for hex 
-        var hexToBinary = require('hex-to-binary');
+        
         let hexString, binaryString, decNum;
         for (var i = 0; i < querySeq.length; i++) {
             if (inputType === 'addresses') {
@@ -257,7 +270,6 @@ const cacheMemorySimCtrl = {
                 //console.log(hexString);
 
                 //binary
-                //#TODO: change to decimal
                 // console.log(binaryString);
                 decNum = parseInt(binaryString, 2);
                 // console.log(decNum);
@@ -279,7 +291,6 @@ const cacheMemorySimCtrl = {
             if (inputType === 'blocks')
                 set = querySeqArray[i] % numSets; // MM blocks mod set
 
-            //#TODO: change if converted to binary 
             else if (inputType === 'addresses')
                 set = querySeqArray[i]; // get the set value in the binary
 
@@ -322,6 +333,8 @@ const cacheMemorySimCtrl = {
 
         aveAccessTime = hitRate * cacheAccessTime + missRate * missPenalty;
 
+        blockNum = setSize;
+
         console.log(cacheMemory);
         console.log(cacheHit);
         console.log(cacheMiss);
@@ -329,7 +342,7 @@ const cacheMemorySimCtrl = {
         console.log(totalAccessTime);
         console.log(aveAccessTime);
 
-        console.log(`length: ${querySeqArray.length}`);
+        // console.log(`length: ${querySeqArray.length}`);
 
         return res.send({
             cacheMemory: cacheMemory,
@@ -337,7 +350,8 @@ const cacheMemorySimCtrl = {
             cacheMiss: cacheMiss,
             missPenalty: missPenalty,
             totalAccessTime: totalAccessTime,
-            aveAccessTime: aveAccessTime
+            aveAccessTime: aveAccessTime,
+            setSize: setSize
         });
     }
 };
