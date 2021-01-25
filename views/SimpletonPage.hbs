@@ -244,10 +244,14 @@
 <script type="text/javascript" src="/javascripts/cacheSimulation.js"></script>
 <script type="text/javascript" src="/javascripts/simulationSimpleton.js"></script>
 <script>
-  $('.dropdown-toggle').dropdown();
-  $('#cacheSizeDropdown').on('click', function() {
-    $('#cacheSizeOptions').html($(this).find('a').html());
-    });
+  $(document).ready(function() {
+      $('.dropdown-toggle').dropdown();
+      $('#cacheSizeDropdown').on('click', function() {
+          $('#cacheSizeOptions').html($(this).find('a').html());
+      });
+  }) ;
+
+
 </script>
 </body>
 </html>
