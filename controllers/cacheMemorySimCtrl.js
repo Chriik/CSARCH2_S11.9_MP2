@@ -208,12 +208,24 @@ const cacheMemorySimCtrl = {
             memorySize = memorySize / blockSize;
         }
 
+        //error checking 
+        if (setSize > cacheSize) {
+            return res.send({
+                setSizeError: 'Set size greater than cache size'
+            });
+        }
+
         //console.log(querySequence);
 
         numSets = cacheSize / setSize;
+        console.log(`cacheSize: ${cacheSize}`);
+        console.log(`setSize: ${setSize}`);
         //for the MRU cache thingy
+        console.log(`numSets: ${numSets}`);
         cacheMemory = makeCache(numSets);
 
+        cacheHit = 0;
+        cacheMiss = 0;
         const totalBits = Math.log2(memorySize);
         const wordField = Math.log2(blockSize);
         const setField = Math.log2(numSets);
@@ -223,12 +235,13 @@ const cacheMemorySimCtrl = {
         //separate for query sequence 
         let querySeq = querySequence.split(" ");
         let querySeqArray = new Array();
+
         // #TODO: error checking for hex 
         var hexToBinary = require('hex-to-binary');
-        let hexString;
+        let hexString, binaryString, decNum;
         for (var i = 0; i < querySeq.length; i++) {
             if (inputType === 'addresses') {
-                let hexString = querySeq[i];
+                hexString = querySeq[i];
                 //console.log(hexToBinary(hexString));
 
                 hexString = hexToBinary(hexString).toString();
@@ -240,10 +253,15 @@ const cacheMemorySimCtrl = {
                 //console.log(hexString);
 
                 hexStringLen -= setField;
-                hexString = hexString.substring(hexStringLen);
+                binaryString = hexString.substring(hexStringLen);
                 //console.log(hexString);
 
-                querySeqArray.push(hexString);
+                //binary
+                //#TODO: change to decimal
+                // console.log(binaryString);
+                decNum = parseInt(binaryString, 2);
+                // console.log(decNum);
+                querySeqArray.push(decNum);
 
             } else {
                 if (parseInt(querySeq[i]) > memorySize)
@@ -255,17 +273,72 @@ const cacheMemorySimCtrl = {
             }
         }
 
-        for (var i = 0; i < querySeqArray.length; i++) {
-            console.log(querySeqArray[i]);
+        for (i = 0; i < querySeqArray.length; i++) {
+            let set;
+
+            if (inputType === 'blocks')
+                set = querySeqArray[i] % numSets; // MM blocks mod set
+
+            //#TODO: change if converted to binary 
+            else if (inputType === 'addresses')
+                set = querySeqArray[i]; // get the set value in the binary
+
+            let row = cacheMemory[set];
+            let length = row.cache.length;
+            let find;
+            //check if the array has same value
+            if (inputType === 'blocks')
+                find = row.cache.indexOf(querySeqArray[i]);
+            else find = row.cache.indexOf(querySeq[i]);
+
+            // if find change the length to index find
+            if (find !== -1) {
+                length = find;;
+                cacheHit++;
+            } else {
+                cacheMiss++;
+            }
+
+            // if less than setSize, update value and MRU, else update value only
+            if (length < setSize) {
+                if (inputType === 'blocks')
+                    row.cache[length] = querySeqArray[i];
+                else row.cache[length] = querySeq[i];
+                row.MRU = length;
+            } else {
+                if (inputType === 'blocks')
+                    row.cache[row.MRU] = querySeqArray[i];
+                else row.cache[row.MRU] = querySeq[i];
+            }
         }
 
-        if (cacheSizeDropdown === 'words') {
-            cacheSize = cacheSize / blockSize;
-        }
+        total = cacheHit + cacheMiss;
 
-        if (memorySizeDropdown === 'words') {
-            memorySize = memorySize / blockSize;
-        }
+        let hitRate = cacheHit / total,
+            missRate = cacheMiss / total;
+
+        missPenalty = cacheAccessTime + memoryAccessTime * blockSize + cacheAccessTime;
+        totalAccessTime = cacheHit * blockSize * cacheAccessTime + cacheMiss * blockSize * (memoryAccessTime + cacheAccessTime) + cacheMiss * cacheAccessTime;
+
+        aveAccessTime = hitRate * cacheAccessTime + missRate * missPenalty;
+
+        console.log(cacheMemory);
+        console.log(cacheHit);
+        console.log(cacheMiss);
+        console.log(missPenalty);
+        console.log(totalAccessTime);
+        console.log(aveAccessTime);
+
+        console.log(`length: ${querySeqArray.length}`);
+
+        return res.send({
+            cacheMemory: cacheMemory,
+            cacheHit: cacheHit,
+            cacheMiss: cacheMiss,
+            missPenalty: missPenalty,
+            totalAccessTime: totalAccessTime,
+            aveAccessTime: aveAccessTime
+        });
     }
 };
 

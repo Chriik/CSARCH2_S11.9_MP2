@@ -1,11 +1,11 @@
 let keyInput = {
-    word:           $('#wordSize'),
-    block:          $('#blockSize'),
-    set:            $('#setSize'),
-    cache:          $('#cacheSize'),
-    cacheTime:      $('#cacheTime'),
-    memory:         $('#memorySize'),
-    memoryTime:     $('#memoryTime')
+    word: $('#wordSize'),
+    block: $('#blockSize'),
+    set: $('#setSize'),
+    cache: $('#cacheSize'),
+    cacheTime: $('#cacheTime'),
+    memory: $('#memorySize'),
+    memoryTime: $('#memoryTime')
 };
 let keyTasks;
 
@@ -160,15 +160,15 @@ $('#simulateButton').on("click", function() {
     // error check for tasks
     let currentNumberOfTasks = $('.task-group').length;
 
-    for (let i = 1 ; i <= currentNumberOfTasks; i++ ) {
+    for (let i = 1; i <= currentNumberOfTasks; i++) {
         let lower = $(`#lowerRange-${i}`).val().trim();
         let upper = $(`#upperRange-${i}`).val().trim();
         let loop = $(`#loopCount-${i}`).val().trim();
 
         keyTasks = {
-            lower:      $(`#lowerRange-${i}`),
-            upper:      $(`#upperRange-${i}`),
-            loop:       $(`#loopCount-${i}`)
+            lower: $(`#lowerRange-${i}`),
+            upper: $(`#upperRange-${i}`),
+            loop: $(`#loopCount-${i}`)
         }
 
         if (!lower) {
@@ -200,7 +200,7 @@ $('#simulateButton').on("click", function() {
         } else {
             clearErrorTasks('loop', i);
         }
-        
+
         if ((upper && lower) && parseInt(lower) > parseInt(upper)) {
             setErrorTasks('lower', 'Lower range is greater than upper range', i);
         }
@@ -210,91 +210,90 @@ $('#simulateButton').on("click", function() {
     if (valid) {
         removeCacheTable();
         $.post('/TwoLoops', {
-                tasks,
-                inputType,
-                wordSize,
-                blockSize,
-                setSize,
-                cacheSize,
-                cacheSizeDropdown,
-                cacheAccessTime,
-                memorySize,
-                memorySizeDropdown,
-                memoryAccessTime
-            }, function(data) {
-                // Show results
-                let valid_post = true;
+            tasks,
+            inputType,
+            wordSize,
+            blockSize,
+            setSize,
+            cacheSize,
+            cacheSizeDropdown,
+            cacheAccessTime,
+            memorySize,
+            memorySizeDropdown,
+            memoryAccessTime
+        }, function(data) {
+            // Show results
+            let valid_post = true;
 
-                console.log(data);
+            console.log(data);
 
-                if (data.memorySizeError) {
-                    valid_post = false;
-                    setError('memory', data.memorySizeError);
-                }
-
-                if (data.setSizeError) {
-                    valid_post = false;
-                    setError('set', data.setSizeError);
-                }
-
-                if (valid_post) {
-                    loadCacheTable(data.cacheMemory)
-                    $('#cacheMisses').val(data.cacheMiss);
-                    $('#cacheHits').val(data.cacheHit);
-                    $('#totalQueries').val(data.cacheHit + data.cacheMiss);
-                    $('#missPenalty').val(data.missPenalty);
-                    $('#averageTime').val(data.aveAccessTime);
-                    $('#totalTime').val(data.totalAccessTime);
-
-                    $('#saveToFileButton').prop('disabled', false);
-                    scrollToCacheResults();   
-                }
+            if (data.memorySizeError) {
+                valid_post = false;
+                setError('memory', data.memorySizeError);
             }
-        );
+
+            if (data.setSizeError) {
+                valid_post = false;
+                setError('set', data.setSizeError);
+            }
+
+            if (valid_post) {
+                loadCacheTable(data.cacheMemory);
+                $('#cacheMisses').val(data.cacheMiss);
+                $('#cacheHits').val(data.cacheHit);
+                $('#totalQueries').val(data.cacheHit + data.cacheMiss);
+                $('#missPenalty').val(data.missPenalty);
+                $('#averageTime').val(data.aveAccessTime);
+                $('#totalTime').val(data.totalAccessTime);
+
+                $('#saveToFileButton').prop('disabled', false);
+                scrollToCacheResults();
+            }
+        });
     }
 });
 
 // Sets the error message and change the input to red
-function setError (key, err) {
+function setError(key, err) {
     keyInput[key].addClass('is-invalid');
     $(`#${key}Error`).text(err);
 };
 
 // Clears the error message and remove the input to red class
-function clearError (key) {
+function clearError(key) {
     keyInput[key].removeClass('is-invalid');
     $(`#${key}Error`).text('');
 }
 
 // Sets the error message and change the input to red [TASKS]
-function setErrorTasks (key, err, i) {
+function setErrorTasks(key, err, i) {
     keyTasks[key].addClass('is-invalid');
     $(`#${key}Error-${i}`).text(err);
 };
 
 // Clears the error message and remove the input to red class [TASKS]
-function clearErrorTasks (key, i) {
+function clearErrorTasks(key, i) {
     keyTasks[key].removeClass('is-invalid');
     $(`#${key}Error-${i}`).text('');
 }
 
 // If number is power of 2, return 1, else return 0.
-function isPowerOf2 (number) {
-    if (number == 0) { 
-        return 0; 
+function isPowerOf2(number) {
+    if (number == 0) {
+        return 0;
     }
 
     while (number != 1) {
         number = number / 2;
-        if (number % 2 != 0 && number != 1) { 
-            return 0; 
+        if (number % 2 != 0 && number != 1) {
+            return 0;
         }
     }
     return 1;
 }
 
 // Returns array containing Task objects
-function getArrayOfTasks () {
+function getArrayOfTasks() {
     let currentNumberOfTasks = $('.task-group').length;
     let lowerRangeArray = $('.lower-range').map(function() { return this.value.trim(); }).get();
     let upperRangeArray = $('.upper-range').map(function() { return this.value.trim(); }).get();
@@ -312,7 +311,7 @@ function getArrayOfTasks () {
 }
 
 // Renders Cache Memory to table
-function loadCacheTable (cacheMemory) {
+function loadCacheTable(cacheMemory) {
     // Hide the Dummy table (for reset purposes!)
     $('#dummyTable').hide();
 
@@ -326,8 +325,7 @@ function loadCacheTable (cacheMemory) {
                         </thead>
                         <tbody id="tableBody">
                         </tbody>
-                    </table>`
-    );
+                    </table>`);
 
     for (let i = 0; i < cacheMemory.length; i++) {
         let row = $(`<tr><th scope="row">${i}</th></tr>`);
@@ -342,7 +340,7 @@ function loadCacheTable (cacheMemory) {
     $('#tableHolder').append(table);
 }
 
-function removeCacheTable () {
+function removeCacheTable() {
     $('#cacheTable').remove();
 }
 
@@ -355,5 +353,3 @@ function scrollToCacheResults() {
         scrollLeft: offset.left
     });
 }
-
-

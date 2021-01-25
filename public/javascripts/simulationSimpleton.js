@@ -139,6 +139,7 @@ $('#simulateSimpleton').on("click", function() {
             memorySizeDropdown,
             memoryAccessTime
         }, function(data) {
+
             let valid_post = true;
 
             console.log(data);
@@ -151,6 +152,19 @@ $('#simulateSimpleton').on("click", function() {
             if (data.setSizeError) {
                 valid_post = false;
                 setError('set', data.setSizeError);
+            }
+
+            if (valid_post) {
+                loadCacheTable(data.cacheMemory);
+                $('#cacheMisses').val(data.cacheMiss);
+                $('#cacheHits').val(data.cacheHit);
+                $('#totalQueries').val(data.cacheHit + data.cacheMiss);
+                $('#missPenalty').val(data.missPenalty);
+                $('#averageTime').val(data.aveAccessTime);
+                $('#totalTime').val(data.totalAccessTime);
+
+                $('#saveToFileButton').prop('disabled', false);
+                scrollToCacheResults();
             }
         });
     }
@@ -185,4 +199,43 @@ function isPowerOf2(number) {
         }
     }
     return 1;
+}
+
+function loadCacheTable(cacheMemory) {
+    // Hide the Dummy table (for reset purposes!)
+    $('#dummyTable').hide();
+
+    // Create new table showing cache memory
+    let table = $(`<table class="table table-bordered" id="cacheTable">
+                        <thead>
+                            <tr>
+                                <th scope="col">Set</th>
+                                <th colspan="${cacheMemory[0].cache.length}"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                        </tbody>
+                    </table>`);
+
+    for (let i = 0; i < cacheMemory.length; i++) {
+        let row = $(`<tr><th scope="row">${i}</th></tr>`);
+
+        for (let j = 0; j < cacheMemory[0].cache.length; j++) {
+            cacheMemory[i].cache[j] === undefined ? row.append(`<td></td>`) : row.append(`<td>${cacheMemory[i].cache[j]}</td>`);
+        }
+        table.append(row);
+    }
+
+    // Append table to <div> tableHolder
+    $('#tableHolder').append(table);
+}
+
+function scrollToCacheResults() {
+    var offset = $("#tableHolder").offset();
+    offset.left -= 20;
+    offset.top -= 20;
+    $('html, body').animate({
+        scrollTop: offset.top,
+        scrollLeft: offset.left
+    });
 }
