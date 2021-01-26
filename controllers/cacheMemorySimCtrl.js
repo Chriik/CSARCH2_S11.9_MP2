@@ -1,6 +1,6 @@
 const { makeCache } = require('../modules/cacheFunc');
 const hexToBinary = require('hex-to-binary');
-const {table} = require('table');
+const { table } = require('table');
 
 // For outputing in text file
 let total, cacheMiss, cacheHit, missPenalty, totalAccessTime, aveAccessTime, cacheMemory, numSets, blockNum;
@@ -244,7 +244,7 @@ const cacheMemorySimCtrl = {
         let querySeqArray = new Array();
 
         // #TODO: error checking for hex 
-        
+
         let hexString, binaryString, decNum;
         for (var i = 0; i < querySeq.length; i++) {
             if (inputType === 'addresses') {

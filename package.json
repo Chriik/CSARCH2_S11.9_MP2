@@ -1,30 +1,26 @@
 {
-  "name": "csarch2_s11.9_mp2",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/IvyTan29/CSARCH2_S11.9_MP2.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/IvyTan29/CSARCH2_S11.9_MP2/issues"
-  },
-  "homepage": "https://github.com/IvyTan29/CSARCH2_S11.9_MP2#readme",
-  "dependencies": {
-    "express": "^4.17.1",
-    "hbs": "^4.1.1",
-    "hex-to-binary": "^1.0.1",
-<<<<<<< HEAD
-    "morgan": "^1.10.0"
-=======
-    "morgan": "^1.10.0",
-    "table": "^6.0.7"
->>>>>>> 0c2afd50c3c864836151ab5d748a6126b0fa67be
-  }
+    "name": "csarch2_s11.9_mp2",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/IvyTan29/CSARCH2_S11.9_MP2.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/IvyTan29/CSARCH2_S11.9_MP2/issues"
+    },
+    "homepage": "https://github.com/IvyTan29/CSARCH2_S11.9_MP2#readme",
+    "dependencies": {
+        "express": "^4.17.1",
+        "hbs": "^4.1.1",
+        "hex-to-binary": "^1.0.1",
+        "morgan": "^1.10.0",
+        "table": "^6.0.7"
+    }
 }
