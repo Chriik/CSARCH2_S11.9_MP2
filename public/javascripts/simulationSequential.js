@@ -31,7 +31,7 @@ $('#addTaskButton').on("click", function() {
 
               <div class="form-group col-lg-4 col-md-sm-12">
                   <label for="loopCount-${nextTaskNumber}">Loop count</label>
-                  <input type="number" class="form-control form-control-sm loop-count" id="loopCount-${nextTaskNumber}">
+                  <input type="number" class="form-control form-control-sm loop-count" id="loopCount-${nextTaskNumber}" placeholder="Enter number of times to loop">
                   <small id="loopError-${nextTaskNumber}" class="text-danger input-error"></small>
               </div>
             </div>

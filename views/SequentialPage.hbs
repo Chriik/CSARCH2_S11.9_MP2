@@ -43,13 +43,6 @@
       <h4>Initialization</h4> 
     </div>
     <div class="col-md-lg-12 col-sm-6 col-xs-6">
-      <div class="form-group pb-2">
-        <label for="inputType">Input type</label>
-        <select class="form-control" id="inputType">
-          <option>blocks</option>
-          <option>addresses</option>
-        </select>
-      </div>
         <label for="blockSize">Block size</label>
         <div class="input-group pb-2">
           <input type="number" class="form-control" id="blockSize" aria-label="blockSize">
@@ -86,19 +79,19 @@
         <div class="row ml-2 pb-3">
             <small id="cacheError" class="text-danger input-error"></small>
         </div>
+        <label for="cacheTime">Cache access time</label>
+        <div class="input-group pb-2">
+            <input type="number" class="form-control" id="cacheTime" aria-label="cacheTime">
+            <div class="input-group-append">
+                <span class="input-group-text">ns</span>
+            </div>
+        </div>
+        <div class="row ml-2 pb-3">
+            <small id="cacheTimeError" class="text-danger input-error"></small>
+        </div>
     </div>
 
     <div class="col-md-lg-12 col-sm-6 col-xs-6">
-      <label for="cacheTime">Cache access time</label>
-        <div class="input-group pb-2">
-          <input type="number" class="form-control" id="cacheTime" aria-label="cacheTime">
-          <div class="input-group-append">
-            <span class="input-group-text">ns</span>
-          </div>
-        </div>
-        <div class="row ml-2 pb-3">
-          <small id="cacheTimeError" class="text-danger input-error"></small>
-        </div>
         <label for="memorySize">Memory size</label>
         <div class="input-group pb-2">
           <input type="number" class="form-control" id="memorySize" aria-label="memorySize">
@@ -123,6 +116,13 @@
         </div>
         <div class="row ml-2 pb-3">
           <small id="memoryTimeError" class="text-danger input-error"></small>
+        </div>
+        <div class="form-group pb-2">
+            <label for="inputType">Task Configuration Input type</label>
+            <select class="form-control" id="inputType">
+                <option>blocks</option>
+                <option>addresses</option>
+            </select>
         </div>
     </div> <!-- END OF COL 2 -->
   </div> <!-- ROW -->
@@ -155,7 +155,7 @@
 
               <div class="form-group col-lg-4 col-md-sm-12">
                   <label for="loopCount-1">Loop count</label>
-                  <input type="number" class="form-control form-control-sm loop-count" id="loopCount-1">
+                  <input type="number" class="form-control form-control-sm loop-count" id="loopCount-1" placeholder="Enter number of times to loop">
                   <small id="loopError-1" class="text-danger input-error"></small>
               </div>
             </div>
