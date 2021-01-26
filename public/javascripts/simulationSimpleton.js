@@ -82,7 +82,7 @@ $('#simulateButton').on("click", function() {
         setError('cacheTime', 'Missing input');
     } else if (parseFloat(cacheAccessTime) <= 0) {
         valid = false;
-        setError('cacheTime', 'Not a non-zero positive number');
+        setError('cacheTime', 'Not a positive number');
     } else {
         clearError('cacheTime');
     }
@@ -105,7 +105,7 @@ $('#simulateButton').on("click", function() {
         setError('memoryTime', 'Missing input');
     } else if (parseFloat(memoryAccessTime) <= 0) {
         valid = false;
-        setError('memoryTime', 'Not a non-zero positive number');
+        setError('memoryTime', 'Not a positive number');
     } else {
         clearError('memoryTime');
     }
