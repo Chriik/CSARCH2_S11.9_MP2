@@ -247,7 +247,10 @@ const cacheMemorySimCtrl = {
         let hexString, binaryString, decNum;
 
         for (var i = 0; i < querySeq.length; i++) {
-            if (inputType === 'addresses') {
+            if (inputType === 'addresses' && setField === 0) {
+                querySeqArray.push(0);
+
+            } else if (inputType === 'addresses' && setField !== 0) {
                 hexString = querySeq[i];
 
                 hexString = hexToBinary(hexString).toString();
@@ -272,77 +275,77 @@ const cacheMemorySimCtrl = {
             }
         }
 
-            for (i = 0; i < querySeqArray.length; i++) {
-                let set;
+        for (i = 0; i < querySeqArray.length; i++) {
+            let set;
 
-                if (inputType === 'blocks')
-                    set = querySeqArray[i] % numSets; // MM blocks mod set
+            if (inputType === 'blocks')
+                set = querySeqArray[i] % numSets; // MM blocks mod set
 
-                else if (inputType === 'addresses')
-                    set = querySeqArray[i]; // get the set value in the binary
+            else if (inputType === 'addresses')
+                set = querySeqArray[i]; // get the set value in the binary
+                
+            let row = cacheMemory[set];
+            let length = row.cache.length;
+            let find;
 
-                let row = cacheMemory[set];
-                let length = row.cache.length;
-                let find;
+            //check if the array has same value
+            if (inputType === 'blocks')
+                find = row.cache.indexOf(querySeqArray[i]);
+            else 
+                find = row.cache.indexOf(querySeq[i]);
 
-                //check if the array has same value
-                if (inputType === 'blocks')
-                    find = row.cache.indexOf(querySeqArray[i]);
-                else 
-                    find = row.cache.indexOf(querySeq[i]);
-
-                // if find change the length to index find
-                if (find !== -1) {
-                    length = find;;
-                    cacheHit++;
-                } else {
-                    cacheMiss++;
-                }
-
-                // if less than setSize, update value and MRU, else update value only
-                if (length < setSize) {
-                    if (inputType === 'blocks')
-                        row.cache[length] = querySeqArray[i];
-                    else 
-                        row.cache[length] = querySeq[i];
-
-                    row.MRU = length;
-                } else {
-                    if (inputType === 'blocks')
-                        row.cache[row.MRU] = querySeqArray[i];
-                    else 
-                        row.cache[row.MRU] = querySeq[i];
-                }
+            // if find change the length to index find
+            if (find !== -1) {
+                length = find;;
+                cacheHit++;
+            } else {
+                cacheMiss++;
             }
 
-            total = cacheHit + cacheMiss;
+            // if less than setSize, update value and MRU, else update value only
+            if (length < setSize) {
+                if (inputType === 'blocks')
+                    row.cache[length] = querySeqArray[i];
+                else 
+                    row.cache[length] = querySeq[i];
 
-            let hitRate = cacheHit / total,
-                missRate = cacheMiss / total;
+                row.MRU = length;
+            } else {
+                if (inputType === 'blocks')
+                    row.cache[row.MRU] = querySeqArray[i];
+                else 
+                    row.cache[row.MRU] = querySeq[i];
+            }
+        }
 
-            missPenalty = cacheAccessTime + memoryAccessTime * blockSize + cacheAccessTime;
-            totalAccessTime = cacheHit * blockSize * cacheAccessTime + cacheMiss * blockSize * (memoryAccessTime + cacheAccessTime) + cacheMiss * cacheAccessTime;
+        total = cacheHit + cacheMiss;
 
-            aveAccessTime = hitRate * cacheAccessTime + missRate * missPenalty;
+        let hitRate = cacheHit / total,
+            missRate = cacheMiss / total;
 
-            blockNum = setSize;
+        missPenalty = cacheAccessTime + memoryAccessTime * blockSize + cacheAccessTime;
+        totalAccessTime = cacheHit * blockSize * cacheAccessTime + cacheMiss * blockSize * (memoryAccessTime + cacheAccessTime) + cacheMiss * cacheAccessTime;
 
-            // console.log(cacheMemory);
-            // console.log(cacheHit);
-            // console.log(cacheMiss);
-            // console.log(missPenalty);
-            // console.log(totalAccessTime);
-            // console.log(aveAccessTime);
+        aveAccessTime = hitRate * cacheAccessTime + missRate * missPenalty;
 
-            return res.send({
-                cacheMemory: cacheMemory,
-                cacheHit: cacheHit,
-                cacheMiss: cacheMiss,
-                missPenalty: missPenalty,
-                totalAccessTime: totalAccessTime,
-                aveAccessTime: aveAccessTime,
-                setSize: setSize
-            });
+        blockNum = setSize;
+
+        // console.log(cacheMemory);
+        // console.log(cacheHit);
+        // console.log(cacheMiss);
+        // console.log(missPenalty);
+        // console.log(totalAccessTime);
+        // console.log(aveAccessTime);
+
+        return res.send({
+            cacheMemory: cacheMemory,
+            cacheHit: cacheHit,
+            cacheMiss: cacheMiss,
+            missPenalty: missPenalty,
+            totalAccessTime: totalAccessTime,
+            aveAccessTime: aveAccessTime,
+            setSize: setSize
+        });
     }
 };
 
