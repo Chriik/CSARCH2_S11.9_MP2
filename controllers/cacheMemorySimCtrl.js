@@ -212,13 +212,20 @@ const cacheMemorySimCtrl = {
         memorySize = parseInt(memorySize);
         memoryAccessTime = parseInt(memoryAccessTime);
 
-        //conversion 
+        //conversion for cacheSize and memorySize dropdowns
         if (cacheSizeDropdown === 'words') {
             cacheSize = cacheSize / blockSize;
         }
 
         if (memorySizeDropdown === 'words') {
             memorySize = memorySize / blockSize;
+        }
+
+        //error checking 
+        if (setSize > cacheSize) {
+            return res.send({
+                setSizeError: 'Set size greater than cache size'
+            });
         }
     }
 };
