@@ -286,6 +286,15 @@ const cacheMemorySimCtrl = {
                 if (inputType === 'blocks')
                     find = row.cache.indexOf(querySeqArray[i]);
                 else find = row.cache.indexOf(querySeq[i]);
+
+                // if find change the length to index find
+                if (find !== -1) {
+                    length = find;;
+                    cacheHit++;
+                } else {
+                    cacheMiss++;
+                }
+
             }
         }
     }
