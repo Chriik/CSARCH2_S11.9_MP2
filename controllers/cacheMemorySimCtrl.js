@@ -12,6 +12,8 @@ const cacheMemorySimCtrl = {
 
     viewSequentialPage: (req, res) => res.render('SequentialPage'),
 
+    viewUserGuidePage: (req, res) => res.render('UserGuide'),
+
     getOutputTextFile: (req, res) => {
         try {
             // converting cache to string

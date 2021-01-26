@@ -10,5 +10,7 @@ $(document).ready(function() {
             window.location.href = '/sequential';
     });
 
-
+    $('#howItWorksButton').on('click', function () {
+        window.location.href = '/userGuide';
+      })
 });

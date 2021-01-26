@@ -16,13 +16,13 @@ Limitation of the cache simulator includes having a permanent unit for the cache
 
 ### Features
 
-* User may view the user guide through clicking the **User guide** button on the top right corner. 
+* User may view the user guide through clicking the **User guide** button on the top right corner or clicking the **See how it works**. 
 
-* User may go back to the home page where they are in the website through clicking the **CACHEME** on the upper left corner.
+* User may go back to the home page wherever they are in the website through clicking the **CACHEME** on the upper left corner.
 
 ![TODO: INSERT PICTURE](INSERTLINK)
 
-* User may simulate simpleton or sequential version by clicking on **try now** or **Simulate** dropdown and pick the choice they want.
+* User may simulate simpleton or sequential version by clicking on **Try now** or **Simulate** dropdown and pick the choice they want.
 
 ![TODO: INSERT PICTURE](INSERTLINK)
 
@@ -52,6 +52,7 @@ Limitation of the cache simulator includes having a permanent unit for the cache
 | Memory access time (ns)       |
 
 ![TODO: INSERT PICTURE](INSERTLINK)
+
 ![TODO: INSERT PICTURE](INSERTLINK)
 
 * Upon filling up the inputs, the user may opt to erase everything by clicking the **Reset** button or simulate the cache through clicking the **Simulate** button
