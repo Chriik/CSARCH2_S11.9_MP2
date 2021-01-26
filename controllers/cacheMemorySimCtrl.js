@@ -295,6 +295,17 @@ const cacheMemorySimCtrl = {
                     cacheMiss++;
                 }
 
+                // if less than setSize, update value and MRU, else update value only
+                if (length < setSize) {
+                    if (inputType === 'blocks')
+                        row.cache[length] = querySeqArray[i];
+                    else row.cache[length] = querySeq[i];
+                    row.MRU = length;
+                } else {
+                    if (inputType === 'blocks')
+                        row.cache[row.MRU] = querySeqArray[i];
+                    else row.cache[row.MRU] = querySeq[i];
+                }
             }
         }
     }
