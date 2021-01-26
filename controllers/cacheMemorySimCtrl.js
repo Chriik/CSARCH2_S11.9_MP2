@@ -307,6 +307,35 @@ const cacheMemorySimCtrl = {
                     else row.cache[row.MRU] = querySeq[i];
                 }
             }
+
+            total = cacheHit + cacheMiss;
+
+            let hitRate = cacheHit / total,
+                missRate = cacheMiss / total;
+
+            missPenalty = cacheAccessTime + memoryAccessTime * blockSize + cacheAccessTime;
+            totalAccessTime = cacheHit * blockSize * cacheAccessTime + cacheMiss * blockSize * (memoryAccessTime + cacheAccessTime) + cacheMiss * cacheAccessTime;
+
+            aveAccessTime = hitRate * cacheAccessTime + missRate * missPenalty;
+
+            blockNum = setSize;
+
+            console.log(cacheMemory);
+            console.log(cacheHit);
+            console.log(cacheMiss);
+            console.log(missPenalty);
+            console.log(totalAccessTime);
+            console.log(aveAccessTime);
+
+            return res.send({
+                cacheMemory: cacheMemory,
+                cacheHit: cacheHit,
+                cacheMiss: cacheMiss,
+                missPenalty: missPenalty,
+                totalAccessTime: totalAccessTime,
+                aveAccessTime: aveAccessTime,
+                setSize: setSize
+            });
         }
     }
 };
