@@ -211,6 +211,15 @@ const cacheMemorySimCtrl = {
         cacheAccessTime = parseInt(cacheAccessTime);
         memorySize = parseInt(memorySize);
         memoryAccessTime = parseInt(memoryAccessTime);
+
+        //conversion 
+        if (cacheSizeDropdown === 'words') {
+            cacheSize = cacheSize / blockSize;
+        }
+
+        if (memorySizeDropdown === 'words') {
+            memorySize = memorySize / blockSize;
+        }
     }
 };
 
