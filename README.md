@@ -11,9 +11,9 @@ Although the main memory read policy can be load-through or no load-through, the
 ## Getting Started (Deployed Website)
 
 1. Open a browser and go to the link `TODO: change to deployed link`
-```
-TODO: change to deployed link
-```
+    ```
+    TODO: change to deployed link
+    ```
 
 2. The website is now running.
 
@@ -91,14 +91,14 @@ NodeJS should be installed in your PC
 1. Download the ZIP or create a clone of this repository into the PC
 
 2. Open the folder in the command line and run `npm install` to install all packages needed for the application.
-```
-npm install
-```
+    ```
+    npm install
+    ```
 3. After installation, run `node index.js` on the same command line
-```
-node index.js
-```
+    ```
+    node index.js
+    ```
 4. Open a browser and go to the link `localhost:8080`
-```
-http://localhost:8080
-```
+    ```
+    http://localhost:8080
+    ```
