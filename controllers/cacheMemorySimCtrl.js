@@ -269,6 +269,16 @@ const cacheMemorySimCtrl = {
                 else
                     querySeqArray.push(parseInt(querySeq[i]));
             }
+
+            for (i = 0; i < querySeqArray.length; i++) {
+                let set;
+
+                if (inputType === 'blocks')
+                    set = querySeqArray[i] % numSets; // MM blocks mod set
+
+                else if (inputType === 'addresses')
+                    set = querySeqArray[i]; // get the set value in the binary
+            }
         }
     }
 };
