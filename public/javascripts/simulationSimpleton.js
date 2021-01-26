@@ -24,12 +24,13 @@ $('#simulateButton').on("click", function() {
     let memorySizeDropdown = $('#memorySizeDropdown').val().trim();
 
     // error checking for missing inputs, power of 2 ..
-    // TODO: add error checking for syntax on query sequence
     let valid = true;
-
     if (!querySequence) {
         valid = false;
         setError('query', 'Missing input');
+    } else if (!isValidSyntax(querySequence)) {
+        valid = false;
+        setError('query', 'Invalid syntax');
     } else {
         clearError('query');
     }
@@ -223,4 +224,8 @@ function scrollToCacheResults() {
 
 function isStringInteger(str) {
     return /^\+?(0|[1-9]\d*)$/.test(str);
+}
+
+function isValidSyntax(str) {
+    return str.match(/^([0-9]|[A-F]|[a-f])+(?: ([0-9]|[A-F]|[a-f])+)*$/);
 }
