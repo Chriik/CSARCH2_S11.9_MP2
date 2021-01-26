@@ -227,6 +227,21 @@ const cacheMemorySimCtrl = {
                 setSizeError: 'Set size greater than cache size'
             });
         }
+
+        numSets = cacheSize / setSize;
+        cacheMemory = makeCache(numSets);
+
+        cacheHit = 0;
+        cacheMiss = 0;
+        const totalBits = Math.log2(memorySize);
+        const wordField = Math.log2(blockSize);
+        const setField = Math.log2(numSets);
+        const tagField = totalBits - wordField - setField;
+        console.log(`Tag = ${tagField}, Set = ${setField}, Word = ${wordField}`);
+
+        //separate for query sequence 
+        let querySeq = querySequence.split(" ");
+        let querySeqArray = new Array();
     }
 };
 
