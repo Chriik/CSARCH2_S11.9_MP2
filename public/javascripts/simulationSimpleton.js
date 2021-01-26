@@ -124,7 +124,7 @@ $('#simulateButton').on("click", function() {
 
             let valid_post = true;
 
-            console.log(data);
+            // console.log(data);
 
             if (data.memorySizeError) {
                 valid_post = false;

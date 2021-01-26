@@ -4,7 +4,6 @@ const { table } = require('table');
 
 // For outputing in text file
 let total, cacheMiss, cacheHit, missPenalty, totalAccessTime, aveAccessTime, cacheMemory, numSets, blockNum;
-let querySequence = [];
 
 const cacheMemorySimCtrl = {
     viewHomePage: (req, res) => res.render('HomePage'),
@@ -100,7 +99,7 @@ const cacheMemorySimCtrl = {
 
         if (memorySizeDropdown === 'words') {
             memorySize = memorySize / blockSize;
-            console.log(memorySize);
+            // console.log(memorySize);
         }
 
         // if addresses convert, else blocks mean remain the same
@@ -125,7 +124,7 @@ const cacheMemorySimCtrl = {
         for (i = 0; i < tasks.length; i++) {
             // check error 
             if (parseInt(tasks[i].upperRange) > memorySize || parseInt(tasks[i].lowerRange) > memorySize) {
-                console.log(tasks[i].upperRange);
+                // console.log(tasks[i].upperRange);
                 return res.send({
                     memorySizeError: 'Memory size less than the input ranges'
                 });
@@ -172,12 +171,12 @@ const cacheMemorySimCtrl = {
 
         blockNum = setSize;
 
-        console.log(cacheMemory);
-        console.log(cacheHit);
-        console.log(cacheMiss);
-        console.log(missPenalty);
-        console.log(totalAccessTime);
-        console.log(aveAccessTime);
+        // console.log(cacheMemory);
+        // console.log(cacheHit);
+        // console.log(cacheMiss);
+        // console.log(missPenalty);
+        // console.log(totalAccessTime);
+        // console.log(aveAccessTime);
 
         return res.send({
             cacheMemory: cacheMemory,
@@ -237,7 +236,7 @@ const cacheMemorySimCtrl = {
         const wordField = Math.log2(blockSize);
         const setField = Math.log2(numSets);
         const tagField = totalBits - wordField - setField;
-        console.log(`Tag = ${tagField}, Set = ${setField}, Word = ${wordField}`);
+        // console.log(`Tag = ${tagField}, Set = ${setField}, Word = ${wordField}`);
 
         //separate for query sequence 
         let querySeq = querySequence.split(" ");
@@ -269,6 +268,7 @@ const cacheMemorySimCtrl = {
                 else
                     querySeqArray.push(parseInt(querySeq[i]));
             }
+        }
 
             for (i = 0; i < querySeqArray.length; i++) {
                 let set;
@@ -278,6 +278,7 @@ const cacheMemorySimCtrl = {
 
                 else if (inputType === 'addresses')
                     set = querySeqArray[i]; // get the set value in the binary
+
                 let row = cacheMemory[set];
                 let length = row.cache.length;
                 let find;
@@ -285,7 +286,8 @@ const cacheMemorySimCtrl = {
                 //check if the array has same value
                 if (inputType === 'blocks')
                     find = row.cache.indexOf(querySeqArray[i]);
-                else find = row.cache.indexOf(querySeq[i]);
+                else 
+                    find = row.cache.indexOf(querySeq[i]);
 
                 // if find change the length to index find
                 if (find !== -1) {
@@ -299,12 +301,15 @@ const cacheMemorySimCtrl = {
                 if (length < setSize) {
                     if (inputType === 'blocks')
                         row.cache[length] = querySeqArray[i];
-                    else row.cache[length] = querySeq[i];
+                    else 
+                        row.cache[length] = querySeq[i];
+
                     row.MRU = length;
                 } else {
                     if (inputType === 'blocks')
                         row.cache[row.MRU] = querySeqArray[i];
-                    else row.cache[row.MRU] = querySeq[i];
+                    else 
+                        row.cache[row.MRU] = querySeq[i];
                 }
             }
 
@@ -320,12 +325,12 @@ const cacheMemorySimCtrl = {
 
             blockNum = setSize;
 
-            console.log(cacheMemory);
-            console.log(cacheHit);
-            console.log(cacheMiss);
-            console.log(missPenalty);
-            console.log(totalAccessTime);
-            console.log(aveAccessTime);
+            // console.log(cacheMemory);
+            // console.log(cacheHit);
+            // console.log(cacheMiss);
+            // console.log(missPenalty);
+            // console.log(totalAccessTime);
+            // console.log(aveAccessTime);
 
             return res.send({
                 cacheMemory: cacheMemory,
@@ -336,7 +341,6 @@ const cacheMemorySimCtrl = {
                 aveAccessTime: aveAccessTime,
                 setSize: setSize
             });
-        }
     }
 };
 

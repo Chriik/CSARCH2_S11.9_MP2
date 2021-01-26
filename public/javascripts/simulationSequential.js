@@ -191,7 +191,7 @@ $('#simulateButton').on("click", function() {
 
     if (valid) {
         removeCacheTable();
-        $.post('/TwoLoops', {
+        $.post('/Sequential', {
             tasks,
             inputType,
             blockSize,
@@ -206,7 +206,7 @@ $('#simulateButton').on("click", function() {
             // Show results
             let valid_post = true;
 
-            console.log(data);
+            // console.log(data);
 
             if (data.memorySizeError) {
                 valid_post = false;
