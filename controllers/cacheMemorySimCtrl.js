@@ -278,6 +278,14 @@ const cacheMemorySimCtrl = {
 
                 else if (inputType === 'addresses')
                     set = querySeqArray[i]; // get the set value in the binary
+                let row = cacheMemory[set];
+                let length = row.cache.length;
+                let find;
+
+                //check if the array has same value
+                if (inputType === 'blocks')
+                    find = row.cache.indexOf(querySeqArray[i]);
+                else find = row.cache.indexOf(querySeq[i]);
             }
         }
     }
