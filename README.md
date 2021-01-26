@@ -41,6 +41,7 @@ Limitation of the cache simulator includes having a permanent unit for the cache
 #### Simpleton & Sequential
 
 * Both simpleton and sequential requires the input for the following:
+
 |            Inputs             |
 | :---------------------------: |
 | Block size  (words)           |
@@ -58,6 +59,7 @@ Limitation of the cache simulator includes having a permanent unit for the cache
 ![TODO: INSERT PICTURE](INSERTLINK)
 
 * After simulating, the following outputs will be shown:
+
 |          Outputs          |
 | :------------------------:|
 | Snapshot of Cache Memory  |
