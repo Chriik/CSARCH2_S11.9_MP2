@@ -261,7 +261,14 @@ const cacheMemorySimCtrl = {
                 decNum = parseInt(binaryString, 2);
                 querySeqArray.push(decNum);
 
-            } else {}
+            } else {
+                if (parseInt(querySeq[i]) > memorySize)
+                    return res.send({
+                        memorySizeError: "Memory size less than the input ranges"
+                    })
+                else
+                    querySeqArray.push(parseInt(querySeq[i]));
+            }
         }
     }
 };
