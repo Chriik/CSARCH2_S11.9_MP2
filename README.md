@@ -11,6 +11,9 @@ Limitation of the cache simulator includes having a permanent unit for the cache
 ## Getting Started (Deployed Website)
 
 1. Open a browser and go to the link `TODO: change to deployed link`
+```
+TODO: change to deployed link
+```
 
 2. The website is now running.
 
@@ -40,7 +43,7 @@ Limitation of the cache simulator includes having a permanent unit for the cache
 
 #### Simpleton & Sequential
 
-* Both simpleton and sequential requires the input for the following:
+* Both simpleton and sequential require the input for the following:
 
 |            Inputs             |
 | :---------------------------: |

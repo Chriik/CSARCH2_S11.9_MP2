@@ -5,6 +5,7 @@ const ctrl = require('../controllers/cacheMemorySimCtrl');
 router.get('/', ctrl.viewHomePage);
 router.get('/sequential', ctrl.viewSequentialPage);
 router.get('/simpleton', ctrl.viewSimpletonPage);
+router.get('/userGuide', ctrl.viewUserGuidePage);
 router.get('/outputTextFile', ctrl.getOutputTextFile);
 
 router.post('/Sequential', ctrl.postTwoLoops);
