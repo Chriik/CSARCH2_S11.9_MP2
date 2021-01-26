@@ -228,13 +228,7 @@ const cacheMemorySimCtrl = {
             });
         }
 
-        //console.log(querySequence);
-
         numSets = cacheSize / setSize;
-        // console.log(`cacheSize: ${cacheSize}`);
-        // console.log(`setSize: ${setSize}`);
-        //for the MRU cache thingy
-        // console.log(`numSets: ${numSets}`);
         cacheMemory = makeCache(numSets);
 
         cacheHit = 0;
