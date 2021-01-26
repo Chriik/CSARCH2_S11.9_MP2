@@ -242,6 +242,27 @@ const cacheMemorySimCtrl = {
         //separate for query sequence 
         let querySeq = querySequence.split(" ");
         let querySeqArray = new Array();
+
+        let hexString, binaryString, decNum;
+
+        for (var i = 0; i < querySeq.length; i++) {
+            if (inputType === 'addresses') {
+                hexString = querySeq[i];
+
+                hexString = hexToBinary(hexString).toString();
+
+                let hexStringLen = hexString.length;
+                hexStringLen -= wordField;
+                hexString = hexString.substring(0, hexStringLen);
+
+                hexStringLen -= setField;
+                binaryString = hexString.substring(hexStringLen);
+
+                decNum = parseInt(binaryString, 2);
+                querySeqArray.push(decNum);
+
+            } else {}
+        }
     }
 };
 
