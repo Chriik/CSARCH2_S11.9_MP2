@@ -10,7 +10,7 @@ $(document).ready(function() {
 });
 
 // For clearing all inputs and outputs (RESET)
-$('#resetButton').on("click", function () {
+$('#resetButton').on("click", function() {
     // Reset input type dropdown
     let options = $('#inputType option').map(function() { return this.value; }).get();
     $('#inputType').val(options[0]);
@@ -24,9 +24,9 @@ $('#resetButton').on("click", function () {
     $('#memoryTime').val('');
 
     // Clear all Task inputs
-    $('.lower-range').each(function () { this.value = ''; });
-    $('.upper-range').each(function () { this.value = ''; });
-    $('.loop-count').each(function () { this.value = ''; });
+    $('.lower-range').each(function() { this.value = ''; });
+    $('.upper-range').each(function() { this.value = ''; });
+    $('.loop-count').each(function() { this.value = ''; });
 
     // Clear results/cache table
     $('#cacheTable').remove();
@@ -48,9 +48,13 @@ $('#resetButton').on("click", function () {
 
     // Disable saveToFile button
     $('#saveToFileButton').prop('disabled', true);
+
+    // Clear errors
+    $('input').each(function() { $(this).removeClass('is-invalid'); });
+    $('.input-error').each(function() { $(this).text(''); });
 });
 
-$('#saveToFileButton').on('click', function () {
+$('#saveToFileButton').on('click', function() {
     window.location.href = '/outputTextFile';
 });
 
@@ -77,4 +81,3 @@ $('#memorySizeOptions a').on('click', function() {
     $('#memorySizeDropdown').val($(this).text()).text($(this).text());
     $('#memorySizeOptions').css('display', 'none');
 });
-
