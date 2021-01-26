@@ -42,7 +42,7 @@ Limitation of the cache simulator includes having a permanent unit for the cache
 
 * Both simpleton and sequential requires the input for the following:
 |            Inputs             |
-| ----------------------------- |
+| :---------------------------: |
 | Block size  (words)           |
 | Set size (blocks)             |
 | Cache size (blocks/words)     |
@@ -59,7 +59,7 @@ Limitation of the cache simulator includes having a permanent unit for the cache
 
 * After simulating, the following outputs will be shown:
 |          Outputs          |
-| ------------------------- |
+| :------------------------:|
 | Snapshot of Cache Memory  |
 | Number of Cache Miss      |
 | Number of Cache Hit       |
