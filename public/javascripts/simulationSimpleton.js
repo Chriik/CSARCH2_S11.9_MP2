@@ -28,7 +28,10 @@ $('#simulateButton').on("click", function() {
     if (!querySequence) {
         valid = false;
         setError('query', 'Missing input');
-    } else if (!isValidSyntax(querySequence)) {
+    } else if (inputType === 'blocks' && !isValidSyntaxBlock(querySequence)) {
+        valid = false;
+        setError('query', 'Invalid syntax');
+    } else if (inputType === 'addresses' && !isValidSyntaxAdd(querySequence)) {
         valid = false;
         setError('query', 'Invalid syntax');
     } else {
@@ -226,6 +229,10 @@ function isStringInteger(str) {
     return /^\+?(0|[1-9]\d*)$/.test(str);
 }
 
-function isValidSyntax(str) {
+function isValidSyntaxBlock(str) {
+    return str.match(/^(\d)+(?: (\d)+)*$/);
+}
+
+function isValidSyntaxAdd(str) {
     return str.match(/^([0-9]|[A-F]|[a-f])+(?: ([0-9]|[A-F]|[a-f])+)*$/);
 }
