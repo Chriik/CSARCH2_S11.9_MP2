@@ -239,7 +239,7 @@ const cacheMemorySimCtrl = {
         const setField = Math.log2(numSets);
         const tagField = totalBits - wordField - setField;
         // console.log(`Tag = ${tagField}, Set = ${setField}, Word = ${wordField}`);
-
+        
         //separate for query sequence 
         let querySeq = querySequence.split(" ");
         let querySeqArray = new Array();
@@ -268,8 +268,8 @@ const cacheMemorySimCtrl = {
             } else {
                 if (parseInt(querySeq[i]) > memorySize)
                     return res.send({
-                        memorySizeError: "Memory size less than the input ranges"
-                    })
+                        memorySizeError: "Memory size less than the ones in the query sequence"
+                    });
                 else
                     querySeqArray.push(parseInt(querySeq[i]));
             }
@@ -283,7 +283,7 @@ const cacheMemorySimCtrl = {
 
             else if (inputType === 'addresses')
                 set = querySeqArray[i]; // get the set value in the binary
-                
+
             let row = cacheMemory[set];
             let length = row.cache.length;
             let find;
