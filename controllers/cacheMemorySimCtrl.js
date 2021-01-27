@@ -206,6 +206,8 @@ const cacheMemorySimCtrl = {
             memoryAccessTime
         } = req.body;
 
+        let memoryWord;
+
         blockSize = parseInt(blockSize);
         setSize = parseInt(setSize);
         cacheSize = parseInt(cacheSize);
@@ -219,7 +221,12 @@ const cacheMemorySimCtrl = {
         }
 
         if (memorySizeDropdown === 'words') {
+            memoryWord = memorySize;
             memorySize = memorySize / blockSize;
+        }
+
+        if (memorySizeDropdown === 'blocks') {
+            memoryWord = memorySize * blockSize;
         }
 
         //error checking 
@@ -239,31 +246,41 @@ const cacheMemorySimCtrl = {
         const setField = Math.log2(numSets);
         const tagField = totalBits - wordField - setField;
         // console.log(`Tag = ${tagField}, Set = ${setField}, Word = ${wordField}`);
-        
+
         //separate for query sequence 
         let querySeq = querySequence.split(" ");
         let querySeqArray = new Array();
 
-        let hexString, binaryString, decNum;
+        let hexString, binaryString, setDecNum, decimalNumber;
 
         for (var i = 0; i < querySeq.length; i++) {
-            if (inputType === 'addresses' && setField === 0) {
-                querySeqArray.push(0);
-
-            } else if (inputType === 'addresses' && setField !== 0) {
+            if (inputType === 'addresses') {
                 hexString = querySeq[i];
 
                 hexString = hexToBinary(hexString).toString();
+                hexString = hexString.replace(/^0+/, ''); // remove leading zeros
 
                 let hexStringLen = hexString.length;
-                hexStringLen -= wordField;
-                hexString = hexString.substring(0, hexStringLen);
 
-                hexStringLen -= setField;
-                binaryString = hexString.substring(hexStringLen);
+                decimalNumber = parseInt(hexString, 2);
 
-                decNum = parseInt(binaryString, 2);
-                querySeqArray.push(decNum);
+                if (decimalNumber > memoryWord)
+                    return res.send({
+                        memorySizeError: "Memory size less than the ones in the query sequence"
+                    });
+
+                if (setField === 0) {
+                    querySeqArray.push(0);
+                } else {
+                    hexStringLen -= wordField;
+                    hexString = hexString.substring(0, hexStringLen);
+
+                    hexStringLen -= setField;
+                    binaryString = hexString.substring(hexStringLen);
+
+                    setDecNum = parseInt(binaryString, 2);
+                    querySeqArray.push(setDecNum);
+                }
 
             } else {
                 if (parseInt(querySeq[i]) > memorySize)
