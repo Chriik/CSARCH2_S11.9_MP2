@@ -14,7 +14,8 @@ morgan = require('morgan');
 
 // GLOBAL VARIABLES
 const HOST = 'localhost';
-const PORT = 8080;
+//const PORT = 8080;
+process.env.PORT || 8080;
 
 //set view engine
 app.set('views', path.join(__dirname, 'views'));
