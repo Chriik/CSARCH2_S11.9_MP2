@@ -7,6 +7,9 @@ $(document).ready(function() {
     $('#cacheSizeDropdown').text('blocks');
     $('#memorySizeDropdown').val('blocks');
     $('#memorySizeDropdown').text('blocks');
+
+    // Hide Cache result container
+    $('#cacheResultContainer').hide();
 });
 
 // For clearing all inputs and outputs (RESET)
@@ -36,6 +39,9 @@ $('#resetButton').on("click", function() {
     $('#missPenalty').val('');
     $('#averageTime').val('');
     $('#totalTime').val('');
+
+    // Hide cache result container
+    $('#cacheResultContainer').hide();
 
     // Reset dropdowns
     $('#cacheSizeDropdown').val('blocks');

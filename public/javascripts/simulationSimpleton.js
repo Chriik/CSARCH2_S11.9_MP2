@@ -148,6 +148,9 @@ $('#simulateButton').on("click", function() {
                 $('#averageTime').val(data.aveAccessTime);
                 $('#totalTime').val(data.totalAccessTime);
 
+                // Show cache result container
+                $('#cacheResultContainer').show();
+
                 $('#saveToFileButton').prop('disabled', false);
                 scrollToCacheResults();
             }
