@@ -48,23 +48,24 @@ For simplicity purposes, the unit of access time inputs is fixed to nanoseconds.
 
 * User may go back to the home page wherever they are in the website through clicking the **CACHEME** on the upper left corner.
 
-![TODO: INSERT PICTURE](INSERTLINK)
+![HOME_PAGE](https://user-images.githubusercontent.com/49770088/106138095-a7a4e880-61a6-11eb-93f0-1a468284ab2e.png)
 
 * User may simulate simpleton or sequential version by clicking on **Try now** or **Simulate** dropdown and pick the choice they want.
 
-![TODO: INSERT PICTURE](INSERTLINK)
+![Try now button](https://user-images.githubusercontent.com/49770088/106138394-0e2a0680-61a7-11eb-91b7-eafdf0d4853f.png)
+
+<br>
+
+![Simulate dropdown](https://user-images.githubusercontent.com/49770088/106138408-11bd8d80-61a7-11eb-8efa-88d7fa4ac6c6.png)
 
 #### Simpleton
 
 * For simpleton, users are allowed to input a query sequence in terms of memory block or memory address. These has to be separted with spaces.
 
-![TODO: INSERT PICTURE](INSERTLINK)
 
 #### Sequential
 
 * For sequential, users can add tasks/varying loops through clicking the **+** icon while delete tasks/varying loops through the **-** icon. 
-
-![TODO: INSERT PICTURE](INSERTLINK)
 
 #### Simpleton & Sequential
 
@@ -79,13 +80,17 @@ For simplicity purposes, the unit of access time inputs is fixed to nanoseconds.
 | Memory size (blocks/words)    |
 | Memory access time (ns)       |
 
-![TODO: INSERT PICTURE](INSERTLINK)
+<br>
 
-![TODO: INSERT PICTURE](INSERTLINK)
+![Simpleton](https://user-images.githubusercontent.com/49770088/106139180-15054900-61a8-11eb-9f72-8e176e2ede50.png)
+
+<br>
+
+![Sequential](https://user-images.githubusercontent.com/49770088/106139118-fd2dc500-61a7-11eb-9c26-d46054cacd1f.png)
 
 * Upon filling up the inputs, the user may opt to erase everything by clicking the **Reset** button or simulate the cache through clicking the **Simulate** button
 
-![TODO: INSERT PICTURE](INSERTLINK)
+![Reset And Simulate](https://user-images.githubusercontent.com/49770088/106139403-585fb780-61a8-11eb-974a-8949bcde7b6d.png)
 
 * After simulating, the following outputs will be shown:
 
@@ -99,11 +104,13 @@ For simplicity purposes, the unit of access time inputs is fixed to nanoseconds.
 | Average Access Time       |
 | Total Access Time         |
 
-![TODO: INSERT PICTURE](INSERTLINK)
+<br> 
+
+![Outputs](https://user-images.githubusercontent.com/49770088/106140187-64984480-61a9-11eb-94e8-4de7e2630657.png)
 
 * User may choose to store these outputs in a text file that will be downloaded once clicking the **Save as text file** button
 
-![TODO: INSERT PICTURE](INSERTLINK)
+![Save File](https://user-images.githubusercontent.com/49770088/106140246-7aa60500-61a9-11eb-973d-398b0f1b6ad6.png)
 
 ## To Run locally
 
