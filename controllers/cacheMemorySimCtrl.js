@@ -107,11 +107,18 @@ const cacheMemorySimCtrl = {
         // if addresses convert, else blocks mean remain the same
         if (inputType === 'addresses') {
             for (i = 0; i < tasks.length; i++) {
-                // convert
-                let numberOfBlocks = (tasks[i].upperRange - tasks[i].lowerRange + 1) / blockSize; // number of blocks to ACCESS
-
+                // convert string to int
+                tasks[i].upperRange = parseInt(tasks[i].upperRange);
+                tasks[i].lowerRange = parseInt(tasks[i].lowerRange);
+            
                 // update values
-                tasks[i].upperRange = tasks[i].lowerRange + numberOfBlocks - 1;
+                // from isser
+                tasks[i].upperRange = Math.ceil((tasks[i].upperRange + 1) / blockSize) - 1;
+                
+                tasks[i].lowerRange = Math.ceil((tasks[i].lowerRange + 1) / blockSize) - 1;
+
+                // console.log(tasks[i].upperRange);
+                // console.log(tasks[i].lowerRange);
             }
         }
 
