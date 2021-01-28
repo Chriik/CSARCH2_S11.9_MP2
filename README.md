@@ -37,7 +37,7 @@ For simplicity purposes, the unit of access time inputs is fixed to nanoseconds.
 
 1. Open a browser and go to the link `TODO: change to deployed link`
     ```
-    TODO: change to deployed link
+     change to deployed link
     ```
 
 2. The website is now running.
