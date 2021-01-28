@@ -25,6 +25,7 @@ $('#resetButton').on("click", function() {
     $('#cacheTime').val('');
     $('#memorySize').val('');
     $('#memoryTime').val('');
+    $('#querySequence').val('');
 
     // Clear all Task inputs
     $('.lower-range').each(function() { this.value = ''; });
