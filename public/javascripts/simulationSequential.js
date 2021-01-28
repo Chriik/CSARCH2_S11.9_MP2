@@ -293,8 +293,6 @@ function getArrayOfTasks() {
 
 // Renders Cache Memory to table
 function loadCacheTable(cacheMemory, setSize) {
-    // Hide the Dummy table (for reset purposes!)
-    $('#dummyTable').hide();
 
     // Create new table showing cache memory
     let table = $(`<table class="table table-bordered" id="cacheTable">

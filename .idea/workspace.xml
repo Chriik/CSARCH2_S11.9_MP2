@@ -22,6 +22,8 @@
     <list default="true" id="8546e7df-f129-400e-8521-a92785939f6c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/javascripts/cacheSimulation.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/javascripts/cacheSimulation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/javascripts/simulationSequential.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/javascripts/simulationSequential.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/javascripts/simulationSimpleton.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/javascripts/simulationSimpleton.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/SequentialPage.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/SequentialPage.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/SimpletonPage.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/SimpletonPage.hbs" afterDir="false" />
     </list>
@@ -48,7 +50,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../stsweng-pahiram-services" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -74,7 +76,13 @@
       <workItem from="1611540650461" duration="3646000" />
       <workItem from="1611545679891" duration="1360000" />
       <workItem from="1611547684332" duration="350000" />
-      <workItem from="1611580132298" duration="1244000" />
+      <workItem from="1611580132298" duration="10394000" />
+      <workItem from="1611590911307" duration="69000" />
+      <workItem from="1611667978067" duration="5572000" />
+      <workItem from="1611675912351" duration="149000" />
+      <workItem from="1611725449244" duration="3609000" />
+      <workItem from="1611732224764" duration="618000" />
+      <workItem from="1611828823917" duration="122000" />
     </task>
     <servers />
   </component>
@@ -94,10 +102,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1611547045338">
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1611732245558">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1611547045338" />
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1611732245558" />
     <state x="431" y="145" key="search.everywhere.popup" timestamp="1611158156106">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

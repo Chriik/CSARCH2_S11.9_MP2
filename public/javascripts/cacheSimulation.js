@@ -37,9 +37,6 @@ $('#resetButton').on("click", function() {
     $('#averageTime').val('');
     $('#totalTime').val('');
 
-    // Show dummy table
-    $('#dummyTable').show();
-
     // Reset dropdowns
     $('#cacheSizeDropdown').val('blocks');
     $('#cacheSizeDropdown').text('blocks');
