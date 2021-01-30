@@ -149,21 +149,43 @@ const cacheMemorySimCtrl = {
         cacheMiss = 0;
 
         for (k = 0; k < tasks.length; k++) {
-            for (j = 0; j < parseInt(tasks[k].loopCount); j++) {
-                for (i = parseInt(tasks[k].lowerRange); i <= parseInt(tasks[k].upperRange); i++) {
-                    let set = i % numSets;
 
-                    let row = cacheMemory[set];
-                    let length = row.cache.length;
+            if (parseInt(tasks[k].upperRange) >= parseInt(tasks[k].lowerRange)) {
+                for (j = 0; j < parseInt(tasks[k].loopCount); j++) {
+                    for (i = parseInt(tasks[k].lowerRange); i <= parseInt(tasks[k].upperRange); i++) {
+                        let set = i % numSets;
 
-                    //check if the array has same value
-                    let find = row.cache.indexOf(i);
+                        let row = cacheMemory[set];
+                        let length = row.cache.length;
 
-                    // if find change the length to index find
-                    find !== -1 ? (length = find, cacheHit++) : cacheMiss++;
+                        //check if the array has same value
+                        let find = row.cache.indexOf(i);
 
-                    // if less than setSize, update value and MRU, else update value only
-                    length < setSize ? (row.cache[length] = i, row.MRU = length) : row.cache[row.MRU] = i;
+                        // if find change the length to index find
+                        find !== -1 ? (length = find, cacheHit++) : cacheMiss++;
+
+                        // if less than setSize, update value and MRU, else update value only
+                        length < setSize ? (row.cache[length] = i, row.MRU = length) : row.cache[row.MRU] = i;
+                    }
+                }
+            }
+            else {
+                for (j = 0; j < parseInt(tasks[k].loopCount); j++) {
+                    for (i = parseInt(tasks[k].upperRange); i >= parseInt(tasks[k].lowerRange); i--) {
+                        let set = i % numSets;
+
+                        let row = cacheMemory[set];
+                        let length = row.cache.length;
+
+                        //check if the array has same value
+                        let find = row.cache.indexOf(i);
+
+                        // if find change the length to index find
+                        find !== -1 ? (length = find, cacheHit++) : cacheMiss++;
+
+                        // if less than setSize, update value and MRU, else update value only
+                        length < setSize ? (row.cache[length] = i, row.MRU = length) : row.cache[row.MRU] = i;
+                    }
                 }
             }
         }
