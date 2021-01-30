@@ -300,7 +300,6 @@ const cacheMemorySimCtrl = {
                 hexString = querySeq[i];
 
                 hexString = hexToBinary(hexString).toString();
-                hexString = hexString.replace(/^0+/, ''); // remove leading zeros
 
                 let hexStringLen = hexString.length;
 
