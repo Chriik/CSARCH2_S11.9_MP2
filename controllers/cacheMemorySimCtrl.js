@@ -171,7 +171,7 @@ const cacheMemorySimCtrl = {
             }
             else {
                 for (j = 0; j < parseInt(tasks[k].loopCount); j++) {
-                    for (i = parseInt(tasks[k].upperRange); i >= parseInt(tasks[k].lowerRange); i--) {
+                    for (i = parseInt(tasks[k].lowerRange); i >= parseInt(tasks[k].upperRange); i--) {
                         let set = i % numSets;
 
                         let row = cacheMemory[set];
