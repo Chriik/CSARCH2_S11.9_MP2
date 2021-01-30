@@ -86,7 +86,7 @@ For simplicity purposes, the unit of access time inputs is fixed to nanoseconds.
 
 <br>
 
-![Sequential](https://user-images.githubusercontent.com/49770088/106139118-fd2dc500-61a7-11eb-9c26-d46054cacd1f.png)
+![Sequential](https://user-images.githubusercontent.com/49770088/106360097-9a782d00-6351-11eb-9198-325255366330.png)
 
 * Upon filling up the inputs, the user may opt to erase everything by clicking the **Reset** button or simulate the cache through clicking the **Simulate** button
 
