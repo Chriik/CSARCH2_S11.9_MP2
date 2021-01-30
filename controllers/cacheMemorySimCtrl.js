@@ -104,17 +104,30 @@ const cacheMemorySimCtrl = {
             // console.log(memorySize);
         }
 
+
+
         // if addresses convert, else blocks mean remain the same
         if (inputType === 'addresses') {
+
+            // error checking for memory size using addresses if input type is address
+            for (i = 0; i < tasks.length; i++) {
+                const memorySizeInWords = memorySize * blockSize;
+                // check error
+                if (parseInt(tasks[i].upperRange) >= memorySizeInWords || parseInt(tasks[i].lowerRange) >= memorySizeInWords) {
+                    // console.log(tasks[i].upperRange);
+                    return res.send({
+                        memorySizeError: 'Memory size less than the input ranges'
+                    });
+                }
+            }
+
             for (i = 0; i < tasks.length; i++) {
                 // convert string to int
                 tasks[i].upperRange = parseInt(tasks[i].upperRange);
                 tasks[i].lowerRange = parseInt(tasks[i].lowerRange);
             
                 // update values
-                // from isser
                 tasks[i].upperRange = Math.ceil((tasks[i].upperRange + 1) / blockSize) - 1;
-                
                 tasks[i].lowerRange = Math.ceil((tasks[i].lowerRange + 1) / blockSize) - 1;
 
                 // console.log(tasks[i].upperRange);
@@ -129,9 +142,9 @@ const cacheMemorySimCtrl = {
             });
         }
 
-        // error checking for memory size
+        // error checking for memory size using blocks
         for (i = 0; i < tasks.length; i++) {
-            // check error 
+            // check error
             if (parseInt(tasks[i].upperRange) > memorySize || parseInt(tasks[i].lowerRange) > memorySize) {
                 // console.log(tasks[i].upperRange);
                 return res.send({
