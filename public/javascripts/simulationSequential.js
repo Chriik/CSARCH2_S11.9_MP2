@@ -18,13 +18,13 @@ $('#addTaskButton').on("click", function() {
             <h5>Task ${nextTaskNumber}</h5>
             <div class="row">
               <div class="form-group col-lg-4 col-md-sm-12">
-                  <label for="lowerRange-${nextTaskNumber}">Lower range</label>
+                  <label for="lowerRange-${nextTaskNumber}">From</label>
                   <input type="number" class="form-control form-control-sm lower-range" id="lowerRange-${nextTaskNumber}">
                   <small id="lowerError-${nextTaskNumber}" class="text-danger input-error"></small>
               </div>
 
               <div class="form-group col-lg-4 col-md-sm-12">
-                  <label for="upperRange-${nextTaskNumber}">Upper range</label>
+                  <label for="upperRange-${nextTaskNumber}">To</label>
                   <input type="number" class="form-control form-control-sm upper-range" id="upperRange-${nextTaskNumber}">
                   <small id="upperError-${nextTaskNumber}" class="text-danger input-error"></small>
               </div>
@@ -182,10 +182,6 @@ $('#simulateButton').on("click", function() {
             setErrorTasks('loop', 'Not a positive integer', i);
         } else {
             clearErrorTasks('loop', i);
-        }
-
-        if ((upper && lower) && parseInt(lower) > parseInt(upper)) {
-            setErrorTasks('lower', 'Lower range is greater than upper range', i);
         }
     }
 
