@@ -145,8 +145,7 @@ const cacheMemorySimCtrl = {
         // error checking for memory size using blocks
         for (i = 0; i < tasks.length; i++) {
             // check error
-            if (parseInt(tasks[i].upperRange) > memorySize || parseInt(tasks[i].lowerRange) > memorySize) {
-                // console.log(tasks[i].upperRange);
+            if (parseInt(tasks[i].upperRange) >= memorySize || parseInt(tasks[i].lowerRange) >= memorySize) {
                 return res.send({
                     memorySizeError: 'Memory size less than the input ranges'
                 });
@@ -305,7 +304,7 @@ const cacheMemorySimCtrl = {
 
                 decimalNumber = parseInt(hexString, 2);
 
-                if (decimalNumber > memoryWord)
+                if (decimalNumber >= memoryWord)
                     return res.send({
                         memorySizeError: "Memory size less than the ones in the query sequence"
                     });
@@ -324,7 +323,7 @@ const cacheMemorySimCtrl = {
                 }
 
             } else {
-                if (parseInt(querySeq[i]) > memorySize)
+                if (parseInt(querySeq[i]) >= memorySize)
                     return res.send({
                         memorySizeError: "Memory size less than the ones in the query sequence"
                     });
