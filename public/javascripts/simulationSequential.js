@@ -190,7 +190,7 @@ $('#simulateButton').on("click", function() {
         // Show and scroll to Loading
         $('#loading').show();
         scrollTo('#loading');
-        
+
         $.post('/Sequential', {
             tasks,
             inputType,
@@ -231,7 +231,7 @@ $('#simulateButton').on("click", function() {
                 $('#cacheResultContainer').show();
 
                 $('#saveToFileButton').prop('disabled', false);
-                scrollTo("#tableHolder");
+                scrollTo("#cacheResultContainer");
 
                 // Hide Loading
                 $('#loading').hide();

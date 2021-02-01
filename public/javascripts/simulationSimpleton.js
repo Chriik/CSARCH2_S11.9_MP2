@@ -156,7 +156,7 @@ $('#simulateButton').on("click", function() {
                 $('#cacheResultContainer').show();
 
                 $('#saveToFileButton').prop('disabled', false);
-                scrollTo('#tableHolder');
+                scrollTo('#cacheResultContainer');
 
                 // Hide Loading
                 $('#loading').hide();
