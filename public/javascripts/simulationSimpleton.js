@@ -153,10 +153,10 @@ $('#simulateButton').on("click", function() {
                 $('#totalTime').val(data.totalAccessTime);
 
                 // Show cache result container
+                scrollTo('#cacheResultContainer');
                 $('#cacheResultContainer').show();
 
                 $('#saveToFileButton').prop('disabled', false);
-                scrollTo('#cacheResultContainer');
 
                 // Hide Loading
                 $('#loading').hide();

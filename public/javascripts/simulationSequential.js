@@ -229,10 +229,10 @@ $('#simulateButton').on("click", function() {
 
                 // Show cache result container
                 $('#cacheResultContainer').show();
-
-                $('#saveToFileButton').prop('disabled', false);
                 scrollTo("#cacheResultContainer");
 
+                $('#saveToFileButton').prop('disabled', false);
+            
                 // Hide Loading
                 $('#loading').hide();
             }
