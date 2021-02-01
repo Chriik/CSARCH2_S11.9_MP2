@@ -116,6 +116,9 @@ $('#simulateButton').on("click", function() {
         $('#loading').show();
         scrollTo('#loading');
 
+        // Hide Table 
+        $('#cacheResultContainer').show();
+
         $.post('/Simpleton', {
             inputType,
             querySequence,
