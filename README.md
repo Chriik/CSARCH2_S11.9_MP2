@@ -35,9 +35,9 @@ For simplicity purposes, the unit of access time inputs is fixed to nanoseconds.
 
 ## Getting Started (Deployed Website)
 
-1. Open a browser and go to the link `TODO: change to deployed link`
+1. Open a browser and go to the link
     ```
-     change to deployed link
+     http://cacheme-simulator.herokuapp.com/
     ```
 
 2. The website is now running.
