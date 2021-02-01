@@ -83,8 +83,6 @@ h2 {
 	padding-right: 1rem;
 	padding-top: .5rem;
 	padding-bottom: .5rem;
-	
-	
 }
 
 .btn-secondary:hover {
@@ -157,4 +155,9 @@ a:not(.btn .nav-link):hover{
 }
 .form-control[readonly] {
 	background-color: inherit;
+}
+
+.loading {
+	color: #3F51B5;
+	font-weight: 800;
 }

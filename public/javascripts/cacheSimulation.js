@@ -10,6 +10,9 @@ $(document).ready(function() {
 
     // Hide Cache result container
     $('#cacheResultContainer').hide();
+
+    // Hide Loading
+    $('#loading').hide();
 });
 
 // For clearing all inputs and outputs (RESET)

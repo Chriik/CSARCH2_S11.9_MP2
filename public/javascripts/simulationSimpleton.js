@@ -112,6 +112,10 @@ $('#simulateButton').on("click", function() {
 
     if (valid) {
         removeCacheTable();
+        // Show and scroll to Loading
+        $('#loading').show();
+        scrollTo('#loading');
+
         $.post('/Simpleton', {
             inputType,
             querySequence,
@@ -152,7 +156,10 @@ $('#simulateButton').on("click", function() {
                 $('#cacheResultContainer').show();
 
                 $('#saveToFileButton').prop('disabled', false);
-                scrollToCacheResults();
+                scrollTo('#tableHolder');
+
+                // Hide Loading
+                $('#loading').hide();
             }
         });
     }
@@ -216,8 +223,8 @@ function removeCacheTable() {
     $('#cacheTable').remove();
 }
 
-function scrollToCacheResults() {
-    let offset = $("#tableHolder").offset();
+function scrollTo(area) {
+    let offset = $(`${area}`).offset();
     offset.left -= 20;
     offset.top -= 20;
     $('html, body').animate({
