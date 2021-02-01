@@ -214,11 +214,13 @@ $('#simulateButton').on("click", function() {
             if (data.memorySizeError) {
                 valid_post = false;
                 setError('memory', data.memorySizeError);
+                scrollTo('#memorySize');
             }
 
             if (data.setSizeError) {
                 valid_post = false;
                 setError('set', data.setSizeError);
+                scrollTo('#setSize');
             }
 
             if (valid_post) {
