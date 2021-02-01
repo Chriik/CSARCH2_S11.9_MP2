@@ -192,7 +192,7 @@ $('#simulateButton').on("click", function() {
         scrollTo('#loading');
 
         // Hide Table 
-        $('#cacheResultContainer').show();
+        $('#cacheResultContainer').hide();
 
         $.post('/Sequential', {
             tasks,
@@ -235,10 +235,10 @@ $('#simulateButton').on("click", function() {
                 scrollTo("#cacheResultContainer");
 
                 $('#saveToFileButton').prop('disabled', false);
-            
-                // Hide Loading
-                $('#loading').hide();
             }
+
+            // Hide Loading
+            $('#loading').hide();
         });
     }
 });

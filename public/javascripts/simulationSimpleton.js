@@ -117,7 +117,7 @@ $('#simulateButton').on("click", function() {
         scrollTo('#loading');
 
         // Hide Table 
-        $('#cacheResultContainer').show();
+        $('#cacheResultContainer').hide();
 
         $.post('/Simpleton', {
             inputType,
@@ -156,14 +156,14 @@ $('#simulateButton').on("click", function() {
                 $('#totalTime').val(data.totalAccessTime);
 
                 // Show cache result container
-                scrollTo('#cacheResultContainer');
                 $('#cacheResultContainer').show();
-
+                scrollTo('#cacheResultContainer');
+                
                 $('#saveToFileButton').prop('disabled', false);
-
-                // Hide Loading
-                $('#loading').hide();
             }
+
+            // Hide Loading
+            $('#loading').hide();
         });
     }
 });
