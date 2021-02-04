@@ -2,7 +2,7 @@ const { makeCache } = require('../modules/cacheFunc');
 const hexToBinary = require('hex-to-binary');
 const { table } = require('table');
 
-// For outputing in text file
+// For outputting in text file
 let total, cacheMiss, cacheHit, missPenalty, totalAccessTime, aveAccessTime, cacheMemory, numSets, blockNum;
 
 const cacheMemorySimCtrl = {
@@ -77,23 +77,6 @@ const cacheMemorySimCtrl = {
         memorySize = parseInt(memorySize);
         memoryAccessTime = parseInt(memoryAccessTime);
 
-        // FIXME: to be removed in the future
-        // 16 sets = 4blocks
-        // let wordSize = 16,       // bits
-        //     blockSize = 128,     // words
-        //     setSize = 4,         // blocks 
-        //     cacheSize = 64,
-        //     cacheSizeDropdown = 'blocks',  // block or words
-        //     memorySize = 128,
-        //     memorySizeDropdown = 'blocks', // block or words
-        //     inputType= 'blocks',    // blocks or addresses 
-        //     firstUpper = 1,
-        //     firstLower = 1,
-        //     firstTime = 10,
-        //     secondUpper = 67,
-        //     secondLower = 0,
-        //     secondTime = 10;
-
         //converting et al
         if (cacheSizeDropdown === 'words') {
             cacheSize = cacheSize / blockSize;
@@ -101,10 +84,7 @@ const cacheMemorySimCtrl = {
 
         if (memorySizeDropdown === 'words') {
             memorySize = memorySize / blockSize;
-            // console.log(memorySize);
         }
-
-
 
         // if addresses convert, else blocks mean remain the same
         if (inputType === 'addresses') {
@@ -129,9 +109,6 @@ const cacheMemorySimCtrl = {
                 // update values
                 tasks[i].upperRange = Math.ceil((tasks[i].upperRange + 1) / blockSize) - 1;
                 tasks[i].lowerRange = Math.ceil((tasks[i].lowerRange + 1) / blockSize) - 1;
-
-                // console.log(tasks[i].upperRange);
-                // console.log(tasks[i].lowerRange);
             }
         }
 
@@ -214,13 +191,6 @@ const cacheMemorySimCtrl = {
 
         blockNum = setSize;
 
-        // console.log(cacheMemory);
-        // console.log(cacheHit);
-        // console.log(cacheMiss);
-        // console.log(missPenalty);
-        // console.log(totalAccessTime);
-        // console.log(aveAccessTime);
-
         return res.send({
             cacheMemory: cacheMemory,
             cacheHit: cacheHit,
@@ -282,11 +252,6 @@ const cacheMemorySimCtrl = {
 
         cacheHit = 0;
         cacheMiss = 0;
-        const totalBits = Math.log2(memorySize);
-        const wordField = Math.log2(blockSize);
-        const setField = Math.log2(numSets);
-        const tagField = totalBits - wordField - setField;
-        // console.log(`Tag = ${tagField}, Set = ${setField}, Word = ${wordField}`);
 
         //separate for query sequence 
         let querySeq = querySequence.split(" ");
@@ -299,28 +264,14 @@ const cacheMemorySimCtrl = {
                 hexString = querySeq[i];
 
                 hexString = hexToBinary(hexString).toString();
-
-                let hexStringLen = hexString.length;
-
                 decimalNumber = parseInt(hexString, 2);
 
                 if (decimalNumber >= memoryWord)
                     return res.send({
                         memorySizeError: "Memory size less than the ones in the query sequence"
                     });
-
-                if (setField === 0) {
-                    querySeqArray.push(0);
-                } else {
-                    hexStringLen -= wordField;
-                    hexString = hexString.substring(0, hexStringLen);
-
-                    hexStringLen -= setField;
-                    binaryString = hexString.substring(hexStringLen);
-
-                    setDecNum = parseInt(binaryString, 2);
-                    querySeqArray.push(setDecNum);
-                }
+                else //convert address to block then push to querySeqArray
+                    querySeqArray.push(Math.ceil((decimalNumber + 1) / blockSize) - 1);
 
             } else {
                 if (parseInt(querySeq[i]) >= memorySize)
@@ -335,21 +286,14 @@ const cacheMemorySimCtrl = {
         for (i = 0; i < querySeqArray.length; i++) {
             let set;
 
-            if (inputType === 'blocks')
-                set = querySeqArray[i] % numSets; // MM blocks mod set
-
-            else if (inputType === 'addresses')
-                set = querySeqArray[i]; // get the set value in the binary
+            set = querySeqArray[i] % numSets; // MM blocks mod set
 
             let row = cacheMemory[set];
             let length = row.cache.length;
             let find;
 
             //check if the array has same value
-            if (inputType === 'blocks')
-                find = row.cache.indexOf(querySeqArray[i]);
-            else 
-                find = row.cache.indexOf(querySeq[i]);
+            find = row.cache.indexOf(querySeqArray[i]);
 
             // if find change the length to index find
             if (find !== -1) {
@@ -361,17 +305,10 @@ const cacheMemorySimCtrl = {
 
             // if less than setSize, update value and MRU, else update value only
             if (length < setSize) {
-                if (inputType === 'blocks')
-                    row.cache[length] = querySeqArray[i];
-                else 
-                    row.cache[length] = querySeq[i];
-
+                row.cache[length] = querySeqArray[i];
                 row.MRU = length;
             } else {
-                if (inputType === 'blocks')
-                    row.cache[row.MRU] = querySeqArray[i];
-                else 
-                    row.cache[row.MRU] = querySeq[i];
+                row.cache[row.MRU] = querySeqArray[i];
             }
         }
 
@@ -386,13 +323,6 @@ const cacheMemorySimCtrl = {
         aveAccessTime = hitRate * cacheAccessTime + missRate * missPenalty;
 
         blockNum = setSize;
-
-        // console.log(cacheMemory);
-        // console.log(cacheHit);
-        // console.log(cacheMiss);
-        // console.log(missPenalty);
-        // console.log(totalAccessTime);
-        // console.log(aveAccessTime);
 
         return res.send({
             cacheMemory: cacheMemory,
